@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Sign-in Page (Index)</title>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="custom.css" />
+<!--<link rel="stylesheet" type="text/css" href="font-awesome.min.css" />-->
+</head>
+<body>
+<div class="navigation">
+  <div class="container"> <a href="index.html"><img src="images/white_logo.png" alt="OSRF logo" height="50" width="217" /></a> 
+    <!-- Once a user has signed in, they should be taken to the main page/index -->
+    <div class="dropdown login">
+      <div class="username_dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="#"> Log in | Sign up </a>
+        <div class="dropdown-menu" role="menu" >
+          <form action="Login.php" method="post" accept-charset="UTF-8" role="menuitem" >
+            <input id="user_username" type="text" placeholder="Username" name="user[username]" size="30" />
+            <input id="user_password" type="password" placeholder="Password" name="user[password]" size="30" />
+            <input id="user_remember_me" type="checkbox" name="user[remember_me]" value="1" />
+            <label class="string optional"> Remember me </label>
+            <input class="signin_button btn btn-primary" type="submit" name="commit" value="Sign In" />
+          </form>
+          <div role="menuitem">
+            <div id="signup_option"> Or, sign up! </div>
+            <a class="signup_button btn btn-primary"  role="button" data-toggle="modal"  href="#signup_modal"> Create an account </a> </div>
+        </div>
+      </div>
+    </div>
+    <ul class="nav nav-pills">
+      <li><a href="index.html">Find</a></li>
+      <li><a href="upload1.html">Upload</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </div>
+</div>
+<div class="container">
+  <div class="headline search">
+    <h1>Search for a model</h1>
+    <form class="form-search">
+      <input type="text" class="input-xlarge search-query" placeholder="Enter a search item...">
+      <select>
+        <option selected="selected">All Categories</option>
+        <option>Category 1</option>
+        <option>Category 2</option>
+        <option>Category 3</option>
+        <option>Category 4</option>
+      </select>
+      <button type="submit" class="btn">Search</button>
+    </form>
+  </div>
+  <div class="categories">
+    <div class="headline">
+      <h1>Browse by Category</h1>
+      <br />
+    </div>
+    <ul class="thumbnails">
+      <li class="span3"> <a href="#" class="thumbnail"> <img src="images/wall-e.jpg" alt="Wall-e robot"> </a> Robots </li>
+      <li class="span3"> <a href="#" class="thumbnail"> <img src="images/wall-e.jpg" alt="Wall-e robot"> </a> People/Animals </li>
+      <li class="span3"> <a href="#" class="thumbnail"> <img src="images/wall-e.jpg" alt="Wall-e robot"> </a> Buildings </li>
+      <li class="span3"> <a href="#" class="thumbnail"> <img src="images/wall-e.jpg" alt="Wall-e robot"> </a> Tools </li>
+      <li class="span3"> <a href="#" class="thumbnail"> <img src="images/wall-e.jpg" alt="Wall-e robot"> </a> Vehicles </li>
+    </ul>
+  </div>
+</div>
+<!--This is the modal for signing up-->
+<div id="signup_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Create an account!</h3>
+  </div>
+  <div class="modal-body">
+    <form>
+      <fieldset>
+        <label>Username*</label>
+        <input type="text" placeholder="Pick a username...">
+        <label>Password*</label>
+        <input type="text" placeholder="Pick a password...">
+        <label>Re-type password*</label>
+        <input type="text" placeholder="Type it again...">
+        <br />
+        <div class="signup-buttons pull-right">
+          <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+          <button class="btn btn-primary">Create Account</button>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>
+<script src="http://code.jquery.com/jquery.js"></script> 
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>

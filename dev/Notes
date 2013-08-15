@@ -1,0 +1,73 @@
+=== Model Details Page ===
+For images, we can use the bootstrap Carousel (Javascript): http://twitter.github.io/bootstrap/javascript.html#carousel
+
+Make header (and footer) into its own file!
+
+Image gallery: http://css-tricks.com/creating-a-slick-auto-playing-featured-content-slider/
+
+Bottom-align tags
+
+We need a login/sign up button in the top right of Nav. When logged in, the username drop down should appear in its place
+
+Change color of Download button
+
+Make Other Models thumbnail background/border change on hover
+
+Vertically center images under "other models by…" 
+
+Check lighter font on other browsers. May be hard to read. 
+
+Add Flag and Heart icons at the top
+
+=== Landing Page ===
+
+
+=== Header ===
+Nate: On sign-up, we need a notification if the user picks an already-taken username
+
+
+=== Upload ===
+Increase square bullet size 
+
+In Nav bar, make it so that the correct tab is highlighted (Upload)
+
+Evenly space the buttons at the bottom
+
+Is progress bar centered properly?
+
+Next button is not completely right-aligned
+
+Clicking OSRF logo once any of the upload fields have been filled in, does NOT take the user to index.html
+
+
+
+=== Models I Like ===
+Models are not left-aligned
+
+Get the heart icon to appear in the top right of each thumbnail. When the clicked, the heart should "break" and the thumbnail should become slightly greyed out. On refresh or page revisit, the thumbnail should no longer be there
+
+Rows of models are too close together
+
+Add heart image in front of headline
+
+=== My Downloads ===
+
+
+=== Models I Made ===
+Thumbnails should left-align
+
+
+=== Edit Model I Made ===
+Textarea should not have placeholder text. It should be the real text added previously
+
+Make pop-ups for Delete confirmation and for when a new file has the same name as an existing file
+
+
+
+=== Extra ===
+
+Last breadcrumb option (on all pages) should not be clickable
+
+When user is on the page of a model they uploaded, there should be an Edit button that takes them to the Edit Model page
+
+

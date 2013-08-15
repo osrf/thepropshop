@@ -1,0 +1,182 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Models I Made: Edit</title>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="custom.css" />
+<!--<link rel="stylesheet" type="text/css" href="font-awesome.min.css" />-->
+</head>
+<body>
+<div class="navigation">
+  <div class="container"> <a href="index.html"><img src="images/white_logo.png" alt="OSRF logo" height="50" width="217" /></a>
+    <div class="dropdown login">
+      <div class="username_dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="#">Username </a>
+        <ul class="dropdown-menu">
+          <li><a href="ModelsLike.html">Models I Like <i class="icon-heart"></i></a></li>
+          <li><a href="ModelDownloads.html">My Downloads</a></li>
+          <li><a href="models_i_made.html">Models I Made</a></li>
+          <li><a href="#">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+    <ul class="nav nav-pills">
+      <li><a href="index.html">Find</a></li>
+      <li><a href="upload.html">Upload</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </div>
+</div>
+<div class="container">
+  <ul class="breadcrumb">
+    <li><a href="index.html">Home</a></li>
+    <li><span class="divider">/</span></li>
+    <li><a href="ModelsMade.html">Models I Made</a></li>
+    <li><span class="divider">/</span></li>
+    <li><a href="#">Model Name Appears Here</a></li>
+  </ul>
+  <div class="models_made_details">
+    <div class="headline">
+      <h1>Edit Model Details</h1>
+    </div>
+    <form>
+      <div class="row">
+        <div class="span6">
+          <div class="name_description">
+            <div class="mini_header">Name</div>
+            <!--The text fields should be filled in with the model info. The text should not be "placeholder" text because it will cause the text to disappear once the user makes an edit -->
+            <input type="text" class="input-xlarge" placeholder="Name should appear here as regular text"/>
+            <div class="mini_header">Description</div>
+            <textarea class="field span5" id="textarea" rows="6" placeholder="Description should appear here as regular text (not as gray placeholder text)"></textarea>
+          </div>
+        </div>
+        <div class="span6">
+          <div class="model_category"> 
+            <!--The previously-selected checkboxes should be ticked (up to 3). If a user tries to tick a 4th box, it doesn't work until they untick one of the ticked boxes. Users can suggest a category. That info needs to get sent to us somehow.-->
+            <div class="mini_header">Categories</div>
+            <div class="subtext">Maximum of 3.</div>
+            <div class="row">
+              <div class="span2">
+                <label class="checkbox">
+                  <input type="checkbox" name="categories[]" value="accessories">
+                  Accessories </label>
+                <label class="checkbox">
+                  <input type="checkbox" name="categories[]" value="animals">
+                  Animals </label>
+                <label class="checkbox">
+                  <input type="checkbox" name="categories[]" value="appliances">
+                  Appliances </label>
+                <label class="checkbox">
+                  <input type="checkbox" name="categories[]" value="buildings">
+                  Buildings </label>
+                <label class="checkbox">
+                  <input type="checkbox" name="categories[]" value="clothing">
+                  Clothing </label>
+                <label class="checkbox">
+                  <input type="checkbox" name="categories[]" value="food">
+                  Food </label>
+                <label class="checkbox">
+                  <input type="checkbox" name="categories[]" value="furnishings">
+                  Furnishings </label>
+              </div>
+              <div class="span2">
+                <label class="checkbox">
+                  <input type="checkbox" name="categories[]" value="miscobjects">
+                  Misc. Objects </label>
+                <label class="checkbox">
+                  <input type="checkbox" name="categories[]" value="people">
+                  People </label>
+                <label class="checkbox">
+                  <input type="checkbox" name="categories[]" value="plants">
+                  Plants </label>
+                <label class="checkbox">
+                  <input type="checkbox" name="categories[]" value="robots">
+                  Robots </label>
+                <label class="checkbox">
+                  <input type="checkbox" name="categories[]" value="scenes_worlds">
+                  Scenes/Worlds </label>
+                <label class="checkbox">
+                  <input type="checkbox" name="categories[]" value="textures">
+                  Textures </label>
+                <label class="checkbox">
+                  <input type="checkbox" name="categories[]" value="tools">
+                  Tools </label>
+                <!--<input type="text" class="input-medium" placeholder="Suggest a category...">
+                <button class="btn btn-small">Add/Submit</button>--> 
+              </div>
+            </div>
+          </div>
+          <br />
+          <div class="mini_header">Tags</div>
+          <div class="subtext">Separate tags with commas.</div>
+          <input type="text" class="input-xlarge" placeholder="Existing tags should appear here.">
+        </div>
+      </div>
+      <div class="full-page_divider">
+        <hr style="border: 1px solid #E6E6E6;" />
+      </div>
+      <div class="row">
+        <div class="span4">
+          <div class="mini_header">Edit Source Files</div>
+          <div class="subtext">Select a file to delete or replace.</div>
+          <br />
+          <div class="edit_source_files">
+            <label class="radio">
+              <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+              modelname.sdf </label>
+            <label class="radio">
+              <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+              mesh1.png </label>
+            <label class="radio">
+              <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">
+              mesh2.png </label>
+            <label class="radio">
+              <input type="radio" name="optionsRadios" id="optionsRadios4" value="option4">
+              mesh3.png </label>
+            <hr style="border: 1px solid #E6E6E6;" />
+            <button class="btn btn-mini edit_file" type="button">Delete</button>
+            <!-- Clicking Replace opens a file browser. Once a file is selected, the old file is replaced with the new -->
+            <button class="btn btn-mini edit_file pull-right" type="button">Replace</button>
+          </div>
+        </div>
+        <div class="span6 offset2">
+          <div class="mini_header">Add Source Files</div>
+          <div class="subtext">Upload new source files. Older versions will be overwritten if you use the same file names.</div>
+          <br />
+          <div class="add_source_files">
+            <div class="another_header">Upload SDF file </div>
+            <span class="subtext"> Accepted: .sdf, .urdf </span> <br />
+            <!-- This will need to be replaced by an actual jquery widget, I presume. Once a file is chosen, the button says Upload. -->
+            <div class="input-append">
+              <input class="span3" id="appendedInputButton1" type="text">
+              <button class="btn" type="button">Choose</button>
+            </div>
+            <br />
+            <!-- Once a file is uploaded, it appears below, and is removeable. Once a file is uploaded,it also appears in the list to the left (Edit Source Files list). --> 
+            <span class="subtext"> Uploaded: FileUploaded.ext <a href="#">(remove)</a></span> </div>
+          <br />
+          <div class="another_header">Upload media files</div>
+          <div class="another_header">Textures </div>
+          <span class="subtext"> Accepted: .png, .tiff, .jpg </span> <br />
+          <div class="input-append">
+            <input class="span3" id="appendedInputButton2" type="text">
+            <button class="btn" type="button">Choose</button>
+          </div>
+          <br />
+          <div class="another_header"> Meshes </div>
+          <span class="subtext"> Accepted: .png, .tiff, .jpg </span> <br />
+          <div class="input-append">
+            <input class="span3" id="appendedInputButton3" type="text">
+            <button class="btn" type="button">Choose</button>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-small pull-left" type="button">Cancel</button>
+      <button class="btn btn-small btn-primary pull-right" type="button">Save Changes</button>
+    </form>
+  </div>
+</div>
+<script src="http://code.jquery.com/jquery.js"></script> 
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>
