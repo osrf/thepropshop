@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Upload Step 2</title>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="custom.css" />
+<!--<link rel="stylesheet" type="text/css" href="font-awesome.min.css" />-->
+</head>
+<body>
+<div class="navigation">
+  <div class="container"> <a href="index.html"><img src="images/white_logo.png" alt="OSRF logo" height="50" width="217" /></a>
+    <div class="dropdown login">
+      <div class="username_dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="#"> Username </a>
+        <ul class="dropdown-menu">
+          <li><a href="ModelsLike.html">Models I Like <i class="icon-heart"></i></a></li>
+          <li><a href="ModelDownloads.html">My Downloads</a></li>
+          <li><a href="models_i_made.html">Models I Made</a></li>
+          <li><a href="#">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+    <ul class="nav nav-pills">
+      <li><a href="index.html">Find</a></li>
+      <li><a href="upload1.html">Upload</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </div>
+</div>
+<div class="container">
+  <div class="headline">
+    <h1>Upload a Model: Details</h1>
+  </div>
+  <br />
+  <div class="upload_progress">
+    <div class="span12 progressbar"> <img src="images/progressbar_details.png" alt="Progress Bar, on Upload step" width="550"> </div>
+  </div>
+  <div class="guidelines row">
+    <div class="span12">
+      <h2> Name & Description </h2>
+      <span> <strong>Name </strong></span> <br />
+      <form>
+        <fieldset>
+          <input type="text" class="input-xlarge" placeholder="Type model name here...">
+        </fieldset>
+      </form>
+      <span> <strong>Description </strong></span> <br />
+      <textarea class="field span6" id="textarea" rows="6" placeholder="Add a brief description of your model..."></textarea>
+    </div>
+  </div>
+  <!-- If we change the category options, we also need to change them in edit_models_i_made.html -->
+  <div class="upload_category row">
+    <div class="span12">
+      <h2> Category </h2>
+      <span> <strong>Pick up to 3 categories.</strong></span><br />
+      <span> <strong>If you don't see a category you would like to use, include it as a tag.</strong></span></div>
+    <div class="category_checkboxes">
+      <div class="span3">
+        <label class="checkbox">
+          <input type="checkbox" value="">
+          Accessories </label>
+        <label class="checkbox">
+          <input type="checkbox" value="">
+          Animals </label>
+        <label class="checkbox">
+          <input type="checkbox" value="">
+          Appliances </label>
+        <label class="checkbox">
+          <input type="checkbox" value="">
+          Buildings </label>
+        <label class="checkbox">
+          <input type="checkbox" value="">
+          Clothing </label>
+      </div>
+      <div class="span3">
+        <label class="checkbox">
+          <input type="checkbox" value="">
+          Food </label>
+        <label class="checkbox">
+          <input type="checkbox" value="">
+          Furnishings </label>
+        <label class="checkbox">
+          <input type="checkbox" value="">
+          Misc. Objects </label>
+        <label class="checkbox">
+          <input type="checkbox" value="">
+          People </label>
+        <label class="checkbox">
+          <input type="checkbox" value="">
+          Plants </label>
+      </div>
+      <div class="span4">
+        <label class="checkbox">
+          <input type="checkbox" value="">
+          Robots </label>
+        <label class="checkbox">
+          <input type="checkbox" value="">
+          Scenes/Worlds </label>
+        <label class="checkbox">
+          <input type="checkbox" value="">
+          Textures </label>
+        <label class="checkbox">
+          <input type="checkbox" value="">
+          Tools </label>
+        <!--<form class="form-search">
+          <input type="text" class="input-medium" placeholder="Suggest a category...">
+          <button type="submit" class="btn btn-small">Submit</button>
+        </form>-->
+      </div>
+    </div>
+  </div>
+  <div class="upload_tags row">
+    <div class="span12">
+      <h2> Tags </h2>
+      <span> <strong>Separate tags with commas.</strong></span> </div>
+    <div class="span6">
+      <form>
+        <fieldset>
+          <input type="text" class="input-xxlarge" placeholder="ex) humanoid, bipedal, mobile manipulator">
+        </fieldset>
+      </form>
+    </div>
+  </div>
+  <hr style="border: 1px solid #E6E6E6;" />
+  <div class="span12"></div>
+  <!--Upload/Cancel/Next buttons -->
+  <div class="upload_buttons row">
+    <div class="span6"> <a class="btn" href="upload1.html">Back</a> 
+      <!-- Clicking Cancel button should pop up a confirmation window stating: "Are you sure you want to cancel? Your model will not be uploaded to the model database" --> 
+      <a class="btn" href="">Cancel</a> </div>
+    <div class="span6 next_button"> 
+      <!-- If the Next button is clicked but not all mandatory fields have been entered, show a pop-up prompting the user to fill in that missing info (eg The following fields are required: Description, Tags) --> 
+      <a class="upload_buttons btn btn-primary" href="upload3.html">Next</a> </div>
+  </div>
+</div>
+<br />
+<br />
+<br />
+<script src="http://code.jquery.com/jquery.js"></script> 
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Upload Step 1</title>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="custom.css" />
+<!--<link rel="stylesheet" type="text/css" href="font-awesome.min.css" />-->
+</head>
+<body>
+<div class="navigation">
+  <div class="container"> <a href="index.html"><img src="images/white_logo.png" alt="OSRF logo" height="50" width="217" /></a>
+    <div class="dropdown login">
+      <div class="username_dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="#">Username</a>
+        <ul class="dropdown-menu">
+          <li><a href="ModelsLike.html">Models I Like <i class="icon-heart"></i></a></li>
+          <li><a href="ModelDownloads.html">My Downloads</a></li>
+          <li><a href="models_i_made.html">Models I Made</a></li>
+          <li><a href="#">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+    <ul class="nav nav-pills">
+      <li><a href="index.html">Find</a></li>
+      <li><a href="upload1.html">Upload</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </div>
+</div>
+<div class="container">
+  <div class="headline">
+    <h1>Upload a Model: Files</h1>
+  </div>
+  <br />
+  <div class="upload_progress">
+    <div class="span12 progressbar"> <img src="images/progressbar_upload.png" alt="Progress Bar, on Upload step" width="550"> </div>
+  </div>
+  <div class="guidelines row">
+    <div class="span12">
+      <h2> Guidelines </h2>
+    </div>
+    <div class="span6">
+      <ul class="guidelines">
+        <li> Guideline #1 goes here. </li>
+        <li> Guideline #2 will be here and it's a little bit longer. </li>
+        <li> This is a third guideline for users to follow. </li>
+      </ul>
+    </div>
+    <div class="span6">
+      <ul class="guidelines">
+        <li> Even more guidelines can go here. </li>
+        <li> Whoa, more guidelines? </li>
+        <li> Heavens to Betsy, do we need this many guidelines? </li>
+      </ul>
+    </div>
+  </div>
+  <hr style="border: 1px solid #E6E6E6;" />
+  <div class="upload_files row">
+    <div class="span12">
+      <h2> Upload Files </h2>
+    </div>
+    <div class="span6"> <span> <strong>Upload SDF file (required) </strong></span> <br />
+      <span class="subtext"> Accepted: .sdf, .urdf </span> <br />
+      <!-- This will need to be replaced by an actual jquery widget, I presume. Once a file is chosen, the button says Upload. -->
+      <div class="input-append">
+        <input class="span3" id="appendedInputButton4" type="text">
+        <button class="btn" type="button">Choose</button>
+      </div>
+      <br />
+      <!-- Not sure what the right programming approach is here. Once a file is uploaded, it appears below, and is removeable --> 
+      <span class="subtext"> Uploaded: FileUploaded.ext <a href="#">(remove)</a></span> </div>
+    <div class="span6"> <span> <strong>Upload media files (optional) </strong></span> <br />
+      <br />
+      <div class="textures"> <span> <strong> Textures </strong></span> <br />
+        <span class="subtext"> Accepted: .png, .tiff, .jpg </span> <br />
+        <div class="input-append">
+          <input class="span3" id="appendedInputButton5" type="text">
+          <button class="btn" type="button">Choose</button>
+        </div>
+        <br />
+        <span class="subtext"> Uploaded: FileUploaded.ext <a href="#">(remove)</a></span> <br />
+        <span class="subtext"> Uploaded: FileUploaded.ext <a href="#">(remove)</a></span> </div>
+      <br />
+      <div class="meshes"> <span> <strong> Meshes </strong></span> <br />
+        <span class="subtext"> Accepted: .png, .tiff, .jpg </span> <br />
+        <div class="input-append">
+          <input class="span3" id="appendedInputButton6" type="text">
+          <button class="btn" type="button">Choose</button>
+        </div>
+        <br />
+        <span class="subtext"> Uploaded: FileUploaded.ext <a href="#">(remove)</a></span> <br />
+        <br />
+      </div>
+    </div>
+    <hr style="border: 1px solid #E6E6E6;" />
+    <div class="span12"></div>
+    <!--Upload/Cancel/Next buttons -->
+    <div class="upload_buttons row">
+      <div class="span6"> 
+        <!-- No Back button required for the first step
+    <a class="btn" href="#">Back</a> --> 
+        <!-- Clicking Cancel button should pop up a confirmation window stating: "Are you sure you want to cancel? Your model will not be uploaded to the model database" --> 
+        <a class="btn" href="">Cancel</a> </div>
+      <div class="span6 next_button"> 
+        <!-- If the Next button is clicked but not all mandatory fields have been entered, show a pop-up prompting the user to fill in that missing info (eg Please upload the SDF file) --> 
+        <a class="upload_buttons btn btn-primary" href="upload2.html">Next</a> </div>
+    </div>
+  </div>
+</div>
+<br />
+<br />
+<script src="http://code.jquery.com/jquery.js"></script> 
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>
