@@ -1,0 +1,38 @@
+@charset "UTF-8";
+/* CSS Document */
+
+.btn-custom-spin.active {
+  color: rgba(255, 255, 255, 0.75);
+}
+.btn-custom-spin {
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #58a5c6;
+  background-image: -moz-linear-gradient(top, #58acc6, #589ac6);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#58acc6), to(#589ac6));
+  background-image: -webkit-linear-gradient(top, #58acc6, #589ac6);
+  background-image: -o-linear-gradient(top, #58acc6, #589ac6);
+  background-image: linear-gradient(to bottom, #58acc6, #589ac6);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff58acc6', endColorstr='#ff589ac6', GradientType=0);
+  border-color: #589ac6 #589ac6 #35739c;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  *background-color: #589ac6;
+  /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+.btn-custom-spin:hover,
+.btn-custom-spin:focus,
+.btn-custom-spin:active,
+.btn-custom-spin.active,
+.btn-custom-spin.disabled,
+.btn-custom-spin[disabled] {
+  color: #ffffff;
+  background-color: #589ac6;
+  *background-color: #458ec0;
+}
+.btn-custom-spin:active,
+.btn-custom-spin.active {
+  background-color: #3c81af ;
+}
