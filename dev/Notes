@@ -8,7 +8,8 @@ Vertically center images under "other models by…"
 
 Check lighter font on other browsers. May be hard to read. 
 
-Add Flag and Heart icons at the top!!!!!!!!!!!!!!!!!!
+When user is on the Model Details page of a model they uploaded, there should be an Edit button that takes them to the Edit Model page (use Boostrap "btn btn-mini" with Edit as the label). The button can appear next to the Model Name, or below the "Uploaded by" line if that's easier.
+
 
 === Landing Page ===
 
@@ -18,28 +19,15 @@ Add Flag and Heart icons at the top!!!!!!!!!!!!!!!!!!
 
 === Upload ===
 
-Evenly space the buttons at the bottom
-
 Is progress bar centered properly?
-
-Next button is not completely right-aligned
 
 
 === Models I Like ===
-Models should be evenly spaced across entire width
-
-Get the heart icon to appear in the top right of each thumbnail. When the clicked, the heart should "break" (broken_heart.svg) and the thumbnail should disappear after a few seconds
+Get the heart icon to appear in the top right of each thumbnail. When clicked, the heart should "break" (like_heart_broken.png) and the thumbnail should become greyed out. If the page is reloaded, that thumbnail is gone. (If that's too hard, on clicking the heart icon, the thumbnail disappears after a few seconds)
 
 Center heart image in front of headline
 
-== Search Results ==
-Thumbnails should span entire page
-
-=== My Downloads ===
-Grid pages: thumbnails should span the width of the page
-
-=== Models I Made ===
-Thumbnails should left-align
+Change to My Favorites (in all drop downs and on Models I Like Page)
 
 
 === Edit Model I Made ===
@@ -49,20 +37,43 @@ Make pop-ups for Delete confirmation and for when a new file has the same name a
 ===Footer===
 Make one!
 
-=== Extra ===
-
-Last breadcrumb option (on all pages) should not be clickable
-
-When user is on the page of a model they uploaded, there should be an Edit button that takes them to the Edit Model page
-
-Consider making username into a link that displays all of that user's models
+=== Other ===
 
 === Colors ===
 #0192b5
 
+
+Nate: When user "Favorites" a model, the button should maintain the red heart icon, and the model should be added to the user's My Favorites page
+
+Nate: Star ratings on Model Details page should be as described in the comments in that file (like Netflix)
+
 Nate: Make header (and footer) into its own file!
+
 Nate: On sign-up, we need a notification if the user picks an already-taken username
+
 Nate: Clicking OSRF logo once any of the upload fields have been filled in, does NOT take the user to index.html
+
 Nate: On edit_models-I_made, Textarea should not have placeholder text. It should be the real text added previously
+
 Nate: For images, we could use the bootstrap Carousel (Javascript): http://twitter.github.io/bootstrap/javascript.html#carousel
+
 Nate: Image gallery option: http://css-tricks.com/creating-a-slick-auto-playing-featured-content-slider/
+
+
+== LATER Search Results ==
+Thumbnails should span entire page
+
+=== LATER My Downloads ===
+Thumbnails should span entire page
+
+=== LATER Models I Made ===
+Thumbnails should span entire page
+
+=== LATER Models I Like ===
+Models should be evenly spaced across entire width
+
+===LATER Model Details ===
+Add Flag drop down to let users flag models
+
+=== LATER Other ==
+Consider making username into a link that displays all of that user's models
