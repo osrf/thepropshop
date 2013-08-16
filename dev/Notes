@@ -8,7 +8,7 @@ Vertically center images under "other models by…"
 
 Check lighter font on other browsers. May be hard to read. 
 
-Add Flag and Heart icons at the top
+Add Flag and Heart icons at the top!!!!!!!!!!!!!!!!!!
 
 === Landing Page ===
 
@@ -17,7 +17,6 @@ Add Flag and Heart icons at the top
 
 
 === Upload ===
-Increase square bullet size….make custom square!
 
 Evenly space the buttons at the bottom
 
@@ -27,13 +26,11 @@ Next button is not completely right-aligned
 
 
 === Models I Like ===
-Models are not left-aligned
+Models should be evenly spaced across entire width
 
-Get the heart icon to appear in the top right of each thumbnail. When the clicked, the heart should "break" and the thumbnail should become slightly greyed out. On refresh or page revisit, the thumbnail should no longer be there
+Get the heart icon to appear in the top right of each thumbnail. When the clicked, the heart should "break" (broken_heart.svg) and the thumbnail should disappear after a few seconds
 
-Rows of models are too close together
-
-Add heart image in front of headline
+Center heart image in front of headline
 
 == Search Results ==
 Thumbnails should span entire page
@@ -47,18 +44,16 @@ Thumbnails should left-align
 
 === Edit Model I Made ===
 
-
 Make pop-ups for Delete confirmation and for when a new file has the same name as an existing file
 
-
+===Footer===
+Make one!
 
 === Extra ===
 
 Last breadcrumb option (on all pages) should not be clickable
 
 When user is on the page of a model they uploaded, there should be an Edit button that takes them to the Edit Model page
-
-Make a Footer
 
 Consider making username into a link that displays all of that user's models
 

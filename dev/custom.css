@@ -156,6 +156,8 @@ a.dropdown-toggle {
 .signup_button {
 	display: block;
 }
+
+
 /* HEADLINE */
 
 /* Main section headers */
@@ -250,6 +252,7 @@ a.dropdown-toggle {
 .model_details .rating .stars > span:hover, .rating .stars > span:hover ~ span {
 	color: transparent;
 }
+
 /*star rating: sets hover color to gold, and some other stuff...  */
 .rating .stars > span:hover:before, .rating .stars > span:hover ~ span:before {
 	color: #FFAE14;
@@ -275,6 +278,10 @@ a.dropdown-toggle {
 .table td.download_link {
 	text-align: right;
 }
+
+/* Like and flag buttons */
+
+
 /* Tags */
 
 
@@ -366,7 +373,7 @@ and dynamically fill as the cursor moves. Clicking on a star assigns that rating
 .guidelines li {
 	padding-bottom: 5px;
 	font-weight: normal;
-	list-style-type: square
+	list-style-type: square;
 }
 .subtext {
 	font-size: 14px;
