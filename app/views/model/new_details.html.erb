@@ -98,12 +98,19 @@
   <div class="span12"></div>
   <!--Upload/Cancel/Next buttons -->
   <div class="upload_buttons row">
-    <div class="span6"> <a class="btn" href="upload1.html">Back</a> 
+    <div class="span6"> 
+      <%= link_to "Back",
+          {:controller => "model", :action => "new", :step => "1"},
+          {:class=>("btn")} %>
       <!-- Clicking Cancel button should pop up a confirmation window stating: "Are you sure you want to cancel? Your model will not be uploaded to the model database" --> 
-      <a class="btn" href="">Cancel</a> </div>
+    <%= link_to "Cancel", root_path, {:class=>("btn")} %>
+    </div>
     <div class="span6 next_button"> 
       <!-- If the Next button is clicked but not all mandatory fields have been entered, show a pop-up prompting the user to fill in that missing info (eg The following fields are required: Description, Tags) --> 
-      <a class="upload_buttons btn btn-primary" href="upload3.html">Next</a> </div>
+      <%= link_to "Next",
+        {:controller => "model", :action => "new", :step => "3"},
+        {:class=>("upload_buttons btn btn-primary")} %>
+    </div>
   </div>
 </div>
 <br />

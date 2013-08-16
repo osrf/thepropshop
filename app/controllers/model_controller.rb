@@ -1,17 +1,25 @@
 class ModelController < ApplicationController
   def index
+    @post = params
   end
 
   def new
     @post = params
-    # if @post[:step] == "2"
-    #   self.render("new_details")
-    # else
-    #   self.render('new')
-    # end
+    case @post[:step] 
+    when "2"
+      self.render("new_details")
+    when "3"
+      self.render("new_finish")
+    else
+      self.render('new')
+    end
   end
 
   def new_details
+    @post = params
+  end
+
+  def new_finish
     @post = params
   end
 

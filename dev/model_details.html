@@ -39,13 +39,24 @@
     <!--We display the uploader's user name and the date of the most recent upload (if there are multiple revisions) -->
     <h1>Model Name </h1>
     
-    <p><button class="like btn btn-mini" type="button"><input type="image" src="../dev/images/like_heart_grey.svg" alt="Like button" style="width:18px" onMouseOver="this.src='../dev/images/like_heart.svg'" alt="Like button" style="width:18px" onMouseOut="this.src='../dev/images/like_heart_grey.svg'" alt="Like button" style="width:18px"> Favorite</button></p>
-    
     <h2>Uploaded by: Steffi Paepcke (Aug. 15, 2013)</h2>
   </div>
-  <div class="model_details row">
-    <div class="span8">
-      <div class="hero-unit"> <img src="images/pr2.png" alt="CAD model of the PR2 robot"> </div>
+
+  <div class="model_details row" style="position:relative;clear: left; float: left; width:100%; display:block">
+
+      <div class="span8" style="float: left; position: relative; overflow:hidden;">
+      <div style="margin:5px; border: 1px solid #e6e6e6; position:relative">
+
+        <div style="position: absolute; top:10px; right: 10px;">
+          <button type="submit" style="border: 0px; background: transparent"
+            onMouseOver="this.getElementsByTagName('img')[0].src='../dev/images/like_heart.svg'"
+            onMouseOut="this.getElementsByTagName('img')[0].src='../dev/images/like_heart_grey.svg'">
+            <img src="images/like_heart_grey.svg" width="18px"/>
+          </button>
+        </div>
+        <img src="images/pr2.png" alt="CAD model of the PR2 robot"/>
+      </div>
+
       <div> 
         <!--The # should be replaced with a link that causes the thumbnail to replace the big hero image when the thumbnail is clicked. Hovering over a thumnbnail should cause it to temporarily replace the hero image. We create a max of 5 images of the model. -->
         <ul class="thumbnails">
@@ -56,17 +67,39 @@
         </ul>
       </div>
     </div>
-    <div class="span4"> 
+
+    <!--<div class="span4" style="float:left; position:relative; overflow:hidden"> 
+      -->
+    <div class="span4" style="bottom:0; right:0; position:absolute; display: block; min-height: 100%"> 
+
       <!-- The model rating system should be like the Netflix system. The stars should be blue (#0971B3 or #08c (I need to play around with it)) and display the average star rating, with the number of reviews in parentheses after the stars (the numeral, not written out as it is now). When hovering over the stars, they should  highlight in yellow (#FFAE14) as the mouse moves over the stars. The stars that are not being hovered over should be transparent. Clicking a star locks in the user's rating. -->
-      <div class="rating"> Ratings: <span class="stars"> <span class="active">☆</span> <span class="active">☆</span> <span class="active">☆</span> <span>☆</span> <span>☆</span> </span> <span>(seven)</span> </div>
+      <div class="rating">
+        Ratings:
+        <span style="display: inline-block">
+          <span class="stars">
+            <span class="active">☆</span>
+            <span class="active">☆</span>
+            <span class="active">☆</span>
+            <span>☆</span>
+            <span>☆</span>
+          </span>
+        </span>
+        <span>(70)</span>
+      </div>
+
       <div class="download">
         <a class="btn btn-large btn-primary" href="#">Download Model</a>
       </div>
-      <div class="tags span4"><span><strong>Tags</strong></span> 
+      <div class="tags span4" style="position: absolute; left: 10px; bottom:28px">
+        <span><strong>Tags</strong></span> 
         <!-- Clicking on a tag should link the user to a search page displaying only results containing that tag. # is replaced with a link to the page --> 
-        <span> <a href="#" class="label label-info">Tag 1</a></span> <span> <a href="#" class="label label-info">Tag 2</a></span> <span> <a href="#" class="label label-info">Tag 3 is longer</a></span> <span> <a href="#" class="label label-info">Tag 4 also a tag</a></span> <span> <a href="#" class="label label-info">Tag 5</a></span> <span> <a href="#" class="label label-info">Tag 6</a></span> <span> <a href="#" class="label label-info">Tag 7</a></span> </div>
+        <span>
+
+          <a href="#" class="label label-info">Tag 1</a></span> <span> <a href="#" class="label label-info">Tag 2</a></span> <span> <a href="#" class="label label-info">Tag 3 is longer</a></span> <span> <a href="#" class="label label-info">Tag 4 also a tag</a></span> <span> <a href="#" class="label label-info">Tag 5</a></span> <span> <a href="#" class="label label-info">Tag 6</a></span> <span> <a href="#" class="label label-info">Tag 7</a>
+      </span> </div>
     </div>
   </div>
+
   <div class="model_details row">
     <div class="span8 description">
       <div class="headline">
@@ -92,6 +125,8 @@
         </tr>
       </table>
     </div>
+
+
     <div class="span4">
       <div class="headline">
         <h1>Other models by <i> username </i></h1>
