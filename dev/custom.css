@@ -2,7 +2,7 @@
 
 /* Background image is from http://subtlepatterns.com. We need to acknowledge them somewhere in the code.  */
 body {
-  background-image: url(fancy_deboss.png);
+  background-image: url(images/fancy_deboss.png);
   background-repeat: repeat;
   color: #555;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
