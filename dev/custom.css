@@ -1,25 +1,31 @@
 @charset "UTF-8";
 
+@font-face {
+  font-family: "my_arial";
+  src: url(css/arial.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* Background image is from http://subtlepatterns.com. We need to acknowledge them somewhere in the code.  */
 body {
   background-image: url(images/fancy_deboss.png);
   background-repeat: repeat;
   color: #555;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "my_arial", Helvetica, sans-serif;
   font-size: 14px;/*font-weight: lighter; */
 }
 
 h1 {
   color: #555;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "my_arial", Helvetica, sans-serif;
   font-size: 24px;
 }
 
 h2 {
 	color: #555;
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: "my_arial", Helvetica, sans-serif;
 	font-size: 20px;
-
 }
 
 .btn {
@@ -30,15 +36,17 @@ h2 {
 a {
   color: #555;
 }
+
 a:hover {
-  color: #555;
+  /*color: #555;*/
+  color: #0074d9;
 }
 
 /* NAVIGATION */
 
 .navigation {
   background-color: #404853;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "my_arial", Helvetica, sans-serif;
   letter-spacing: 1px;
   margin-bottom: 50px;
 }
@@ -177,11 +185,10 @@ a.dropdown-toggle {
 
 
 /* HEADLINE */
-
 /* Main section headers */
 .headline h1 {
   color: #555;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "my_arial", Helvetica, sans-serif;
   font-weight: lighter;
   font-size: 24px;
   line-height: inherit;
@@ -220,7 +227,7 @@ a.dropdown-toggle {
 }
 .categories {
   color: #555;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "my_arial",  Helvetica, sans-serif;
   font-size: 24px;
   padding: 30px 0;
 }
@@ -233,9 +240,11 @@ a.dropdown-toggle {
 }
 
 
-.thumbnails li a:hover {
+.thumbnails li a:hover,
+img.thumbnail:hover {
   border-color: #404853;
 }
+
 /* MODEL DETAILS */
 
 .breadcrumb {
@@ -246,7 +255,7 @@ a.dropdown-toggle {
   text-color: #555;
 }
 .breadcrumb li a:hover {
-  color: #0192b5;
+  color: #0074d9;
 }
 .hero-unit {
   margin-bottom: 15px;
@@ -322,7 +331,7 @@ margin-left: 0;
   margin-top: 7px;
 }
 .other_models .thumbnails {
-  padding: 10px 0 10px 13px;
+  padding: 10px 0 0px 13px;
 }
 .other_models .thumbnails>li {
   margin-bottom: 0px;
@@ -333,7 +342,7 @@ margin-left: 0;
 }
 .other_models li {
   color: #555;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "my_arial", Helvetica, sans-serif;
   font-size: 14px;
   line-height: 100%;
   display: inline-block;
@@ -356,11 +365,19 @@ margin-left: 0;
   padding: 4px;
 }
 
+a.label:hover {
+  background-color: #0074d9;
+}
 
 
 .download_link {
   text-decoration: underline;
 }
+
+.download_link a:hover {
+  color: #0074d9;
+}
+
 /* This button takes up a lot of room. We can show the star rating, and when a user hovers over the stars, they become transparent
 and dynamically fill as the cursor moves. Clicking on a star assigns that rating.
 .modeldetails_stats .button_rating {
@@ -372,7 +389,7 @@ padding-top:10px;
 /*Model description text goes here */
 .description p {
   color: #555;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "my_arial", Helvetica, sans-serif;
   font-size: 14px;
   padding-left: 10px;
   margin-top: 7px;
@@ -389,6 +406,33 @@ padding-top:10px;
 .progressbar {
   text-align: center;
 }
+
+.progressbar img 
+{
+  margin-left: -8px;
+}
+
+#footer
+{
+  background-color: #404853;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  color: #eee;
+}
+
+#footer a
+{
+  color: #eee;
+  text-decoration: underline;
+}
+
+#footer a:hover
+{
+  color: #0074d9;
+}
+
 /* Formatting the space between the guideline list items */
 .guidelines li {
   padding-bottom: 5px;
