@@ -1,53 +1,23 @@
 === Model Details Page ===
 
-Bottom-align tags
-
-Make Other Models thumbnail background/border change on hover
-
-Vertically center images under "other models by…" 
-
-Check lighter font on other browsers. May be hard to read. 
-
-When user is on the Model Details page of a model they uploaded, there should be an Edit button that takes them to the Edit Model page (use Boostrap "btn btn-mini" with Edit as the label). The button can appear next to the Model Name, or below the "Uploaded by" line if that's easier.
-
-
 === Landing Page ===
-
 
 === Header ===
 
-
 === Upload ===
 
-Is progress bar centered properly?
-
-
 === Models I Like ===
-Get the heart icon to appear in the top right of each thumbnail. When clicked, the heart should "break" (like_heart_broken.png) and the thumbnail should become greyed out. If the page is reloaded, that thumbnail is gone. (If that's too hard, on clicking the heart icon, the thumbnail disappears after a few seconds)
-
-Center heart image in front of headline
-
-Change to My Favorites (in all drop downs and on Models I Like Page)
-
 
 === Edit Model I Made ===
 
-Make pop-ups for Delete confirmation and for when a new file has the same name as an existing file
-
 ===Footer===
-Make one!
-
-=== Other ===
-
-=== Colors ===
-#0192b5
 
 
-Nate: When user "Favorites" a model, the button should maintain the red heart icon, and the model should be added to the user's My Favorites page
+Nate: When user "Likes" a model, the button should maintain the red heart icon, and the model should be added to the user's Models I Like page
 
 Nate: Star ratings on Model Details page should be as described in the comments in that file (like Netflix)
 
-Nate: Make header (and footer) into its own file!
+Nate: Make header (and footer) into its own file
 
 Nate: On sign-up, we need a notification if the user picks an already-taken username
 
@@ -59,21 +29,10 @@ Nate: For images, we could use the bootstrap Carousel (Javascript): http://twitt
 
 Nate: Image gallery option: http://css-tricks.com/creating-a-slick-auto-playing-featured-content-slider/
 
+Nate: Re: the heart icon in the top right of each thumbnail (on the Models I like page and the Model Details Page). When clicked, the heart should "break" and the thumbnail should become greyed out. If the page is reloaded, that thumbnail is gone. (If that's too hard, on clicking the heart icon, the thumbnail disappears after a few seconds). On the Model Details page, "unliking" should just return the heart to the grey color. 
 
-== LATER Search Results ==
-Thumbnails should span entire page
+Nate: On Edit Model I Made page, make pop-ups for Delete confirmation and for when a new file has the same name as an existing file
 
-=== LATER My Downloads ===
-Thumbnails should span entire page
 
-=== LATER Models I Made ===
-Thumbnails should span entire page
 
-=== LATER Models I Like ===
-Models should be evenly spaced across entire width
 
-===LATER Model Details ===
-Add Flag drop down to let users flag models
-
-=== LATER Other ==
-Consider making username into a link that displays all of that user's models
