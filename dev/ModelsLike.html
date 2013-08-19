@@ -27,18 +27,51 @@
     </ul>
   </div>
 </div>
+
 <div class="container">
   <div class="headline models_like">
-    <h1><img src="../dev/images/like_heart.svg"" alt="OSRF logo" style="width:25px" /> Models I Like</h1>
+    <h1>
+      <img src="../dev/images/like_heart.svg" alt="OSRF logo" style="width:22px; margin-bottom: 6px" /> Models I Like</h1>
   </div>
   <div class="row categories">
     <ul class="thumbnails_preferences thumbnail_margin_bottom">
+      <!-- Make sure the heart/broken-heart is for all models -->
       <!-- # should be replaced by a link to the model details page --> 
       <!-- Model name should not be allowed to extend past one line -->
-      <li class="span2"> <a href="#" class="thumbnail"> <img src="images/wall-e.jpg" alt="Wall-e robot"> </a><div class="line_height"><a href="model_details.html">Wall-e</a></div>
-        <span class="subtext">By: Username </span></li>
-      <li class="span2"> <a href="#" class="thumbnail"> <img src="images/wall-e.jpg" alt="Wall-e robot"> </a> <div class="line_height"><a href="#">Another Wall-e </a></div>
-        <span class="subtext">By: Username </span> </li>
+      <li class="span2">
+        <div style="position: relative">
+          <a href="#" class="thumbnail">
+            <div style="position: absolute; top:10px; right: 10px;">
+              <button type="submit" style="border: 0px; background: transparent"
+                onMouseOver="this.getElementsByTagName('img')[0].src='../dev/images/broken_heart.svg'"
+                onMouseOut="this.getElementsByTagName('img')[0].src='../dev/images/like_heart.svg'">
+                <img src="images/like_heart.svg" width="18px"/>
+              </button>
+            </div>
+            <img src="images/wall-e.jpg" alt="Wall-e robot">
+          </a>
+        </div>
+        <div class="line_height"><a href="model_details.html">Wall-e</a></div>
+        <span class="subtext">By: Username </span>
+      </li>
+
+      <li class="span2">
+        <div style="position: relative">
+          <a href="#" class="thumbnail">
+            <div style="position: absolute; top:10px; right: 10px;">
+              <button type="submit" style="border: 0px; background: transparent"
+                onMouseOver="this.getElementsByTagName('img')[0].src='../dev/images/broken_heart.svg'"
+                onMouseOut="this.getElementsByTagName('img')[0].src='../dev/images/like_heart.svg'">
+                <img src="images/like_heart.svg" width="18px"/>
+              </button>
+            </div>
+            <img src="images/wall-e.jpg" alt="Wall-e robot"/>
+          </a>
+        </div>
+        <div class="line_height"><a href="#">Another Wall-e </a></div>
+        <span class="subtext">By: Username </span>
+      </li>
+
       <li class="span2"> <a href="#" class="thumbnail"> <img src="images/wall-e.jpg" alt="Wall-e robot"> </a><div class="line_height"><a href="#">More Wall-e </a></div>
         <span class="subtext">By: Username </span> </li>
       <li class="span2"> <a href="#" class="thumbnail"> <img src="images/wall-e.jpg" alt="Wall-e robot"> </a><div class="line_height"><a href="#"> Wall-e</a></div>
@@ -54,6 +87,12 @@
     </ul>
   </div>
 </div>
+
+<footer id="footer">
+ Except where otherwise noted, the WhatEverThisWebPageIs.org web pages are licensed under <a href="http://creativecommons.org/licenses/by/3.0/"> Creative Commons Attribution 3.0</a>
+</footer>
+
+
 <script src="http://code.jquery.com/jquery.js"></script> 
 <script src="js/bootstrap.min.js"></script>
 </body>
