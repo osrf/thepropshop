@@ -420,6 +420,8 @@ padding-top:10px;
   width: 100%;
   text-align: center;
   color: #eee;
+  font-size: small;
+  font-weight: normal;
 }
 
 #footer a
