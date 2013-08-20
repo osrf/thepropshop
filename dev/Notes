@@ -1,37 +1,16 @@
 === Model Details Page ===
 Ratings stars are very small on Firefox
 
-Possible to left-align the Description text?
-
 Thumbnails should not extend past the hero unit on the right side
 
 "Tags" isn't bold
 
 
-=== Landing Page ===
-Make hover of Categories not change color, just underline
-
-=== Models I Made ===
-Link shouldn't be blue
-
-=== Upload ===
-
-=== Models I Like ===
-Just to be sure, click on the thumbnail (but not on the heart), should take you to that Model Details page
-
-Link shouldn't be blue 
-
 === Edit Model I Made ===
 On Chrome, section headers are not bold. Font seems different.
 
-=== My Downloads ===
-Category links should just underline, not be different color
-
-=== Search Results ===
-Links shouldn't be blue
 
 === Tag Search Results ==
-Links should not be blue
 (7) is no longer properly aligned, in Chrome
 
 === Drop down ===
@@ -40,16 +19,13 @@ Can we put the red heart in place of black?
 === Upload 1-3 ==
 Small headers aren't bold. Font looks different, in Chrome
 
-Upload 2: Add a line break before Category checkboxes
-
-"If you don't see 'the' category…"??
-
-Upload 3: add link to Apache 2 license (if that's what we'll use)
 
 
 
 
 
+
+Nate: Just to be sure, on the Models I Like page, clicking on the thumbnail (but not on the heart), should take you to that Model Details page
 
 Nate: On sign-in.html, use only the header drop down code. The contents on the bottom part of the page are outdated.
 

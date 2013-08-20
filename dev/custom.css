@@ -38,9 +38,10 @@ a {
 }
 
 a:hover {
-  /*color: #555;*/
-  color: #0074d9;
+  color: #555;
 }
+
+
 
 /* NAVIGATION */
 
@@ -255,7 +256,7 @@ img.thumbnail:hover {
   text-color: #555;
 }
 .breadcrumb li a:hover {
-  color: #0074d9;
+  color: #49728C;
 }
 .hero-unit {
   margin-bottom: 15px;
@@ -366,7 +367,7 @@ margin-left: 0;
 }
 
 a.label:hover {
-  background-color: #0074d9;
+  background-color: #49728C;
 }
 
 
@@ -391,7 +392,7 @@ padding-top:10px;
   color: #555;
   font-family: "my_arial", Helvetica, sans-serif;
   font-size: 14px;
-  padding-left: 10px;
+  padding-left: 0px;
   margin-top: 7px;
 }
 .model_details .table {
@@ -448,13 +449,18 @@ padding-top:10px;
   text-align: right;
 }
 .next_button {
-	text-align:right;
+  text-align:right;
   float: right;
 }
 .agreement li {
   padding: .5em;
   list-style-type: square;
 }
+
+.agreement li a {
+	text-decoration: underline;
+}
+
 /*MY DOWNLOADS */
 /*Removed bullet from thumbnail list*/
 .thumbnails_preferences li {
@@ -479,7 +485,7 @@ padding-top:10px;
 /*restricts textarea to only resize vertically. I set the height manually to align with the tags field. This height should be changed if the second column changes in height */
 textarea {
   resize: vertical;
-  height: 215px;
+  height: 235px;
 }
 /* For Name, Description, Categories, etc. section headers */
 .mini_header {
@@ -522,6 +528,7 @@ hr {
 .tag_search .label {
   background-color: #404853;
 }
+
 
 
 /*.modeldetails_stats table tr td:not(:first-child) {
