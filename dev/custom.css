@@ -1,12 +1,5 @@
 @charset "UTF-8";
 
-/*@font-face {
-  font-family: Arial;
-  src: url(css/arial.ttf) format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}*/
-
 /* Background image is from http://subtlepatterns.com. We need to acknowledge them somewhere in the code.  */
 body {
   background-image: url(images/fancy_deboss.png);
