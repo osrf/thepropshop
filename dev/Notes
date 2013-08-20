@@ -20,37 +20,3 @@ Can we put the red heart in place of black?
 Small headers aren't bold. Font looks different, in Chrome
 
 
-
-
-
-
-
-Nate: Just to be sure, on the Models I Like page, clicking on the thumbnail (but not on the heart), should take you to that Model Details page
-
-Nate: On sign-in.html, use only the header drop down code. The contents on the bottom part of the page are outdated.
-
-Nate: When user "Likes" a model, the button should maintain the red heart icon, and the model should be added to the user's Models I Like page
-
-Nate: Star ratings on Model Details page should be as described in the comments in that file (like Netflix)
-
-Nate: Make header (and footer) into its own file
-
-Nate: On sign-up, we need a notification if the user picks an already-taken username
-
-Nate: Clicking OSRF logo once any of the upload fields have been filled in, does NOT take the user to index.html
-
-Nate: On edit_models-I_made, Textarea should not have placeholder text. It should be the real text added previously
-
-Nate: For images, we could use the bootstrap Carousel (Javascript): http://twitter.github.io/bootstrap/javascript.html#carousel
-
-Nate: Image gallery option: http://css-tricks.com/creating-a-slick-auto-playing-featured-content-slider/
-
-Nate: Re: the heart icon in the top right of each thumbnail (on the Models I like page and the Model Details Page). When clicked, the heart should "break" and the thumbnail should become greyed out. If the page is reloaded, that thumbnail is gone. (If that's too hard, on clicking the heart icon, the thumbnail disappears after a few seconds). On the Model Details page, "unliking" should just return the heart to the grey color. 
-
-Nate: On Edit Model I Made page, make pop-ups for Delete confirmation and for when a new file has the same name as an existing file
-
-Nate: When user is uploading a model, or editing one they have previously added, they are only allowed to select three categories. 
-
-
-
-
