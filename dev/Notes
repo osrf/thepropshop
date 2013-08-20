@@ -1,17 +1,57 @@
 === Model Details Page ===
+Ratings stars are very small on Firefox
+
+Possible to left-align the Description text?
+
+Thumbnails should not extend past the hero unit on the right side
+
+"Tags" isn't bold
+
 
 === Landing Page ===
+Make hover of Categories not change color, just underline
 
-=== Header ===
+=== Models I Made ===
+Link shouldn't be blue
 
 === Upload ===
 
 === Models I Like ===
+Just to be sure, click on the thumbnail (but not on the heart), should take you to that Model Details page
+
+Link shouldn't be blue 
 
 === Edit Model I Made ===
+On Chrome, section headers are not bold. Font seems different.
 
-===Footer===
+=== My Downloads ===
+Category links should just underline, not be different color
 
+=== Search Results ===
+Links shouldn't be blue
+
+=== Tag Search Results ==
+Links should not be blue
+(7) is no longer properly aligned, in Chrome
+
+=== Drop down ===
+Can we put the red heart in place of black?
+
+=== Upload 1-3 ==
+Small headers aren't bold. Font looks different, in Chrome
+
+Upload 2: Add a line break before Category checkboxes
+
+"If you don't see 'the' category…"??
+
+Upload 3: add link to Apache 2 license (if that's what we'll use)
+
+
+
+
+
+
+Nate: On sign-in.html, use only the header drop down code. The contents on the bottom part of the page are outdated.
 
 Nate: When user "Likes" a model, the button should maintain the red heart icon, and the model should be added to the user's Models I Like page
 
@@ -32,6 +72,8 @@ Nate: Image gallery option: http://css-tricks.com/creating-a-slick-auto-playing-
 Nate: Re: the heart icon in the top right of each thumbnail (on the Models I like page and the Model Details Page). When clicked, the heart should "break" and the thumbnail should become greyed out. If the page is reloaded, that thumbnail is gone. (If that's too hard, on clicking the heart icon, the thumbnail disappears after a few seconds). On the Model Details page, "unliking" should just return the heart to the grey color. 
 
 Nate: On Edit Model I Made page, make pop-ups for Delete confirmation and for when a new file has the same name as an existing file
+
+Nate: When user is uploading a model, or editing one they have previously added, they are only allowed to select three categories. 
 
 
 
