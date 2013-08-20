@@ -278,7 +278,7 @@ img.thumbnail:hover {
 
 /*star rating: sets hover color to gold, and some other stuff...  */
 .rating .stars > span:hover:before, .rating .stars > span:hover ~ span:before {
-  color: #FFAE14;
+  color: #E8B107;
   content: "\2605";
   left: 0;
   position: absolute;
