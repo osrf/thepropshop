@@ -522,7 +522,64 @@ hr {
   background-color: #404853;
 }
 
+/* ABOUT PAGE */
+.about_intro {
+	margin-top: 35px;
+}
 
+.osrf_mission {
+	padding-top:15px;
+	padding-bottom: 25px;
+}
+
+.osrf_mission p {
+	font-size: 18px;
+	margin-left: 70px;
+}
+
+#mission_headline {
+	font-size: 18px;
+	margin-left: 70px;
+	font-weight: bold;
+}
+
+
+
+.about_intro {
+	border: 2px solid #E6E6E6;
+	border-radius: 4px;
+
+	margin-bottom: 20px;
+}
+
+.about_intro img {
+	padding-left: 25px;
+}
+	
+.top_spacing {
+	padding-top: 30px;
+}
+
+.creative_commons {
+	border: 2px solid #E6E6E6;
+	border-radius: 4px;
+	padding: 10px;
+	padding-bottom:75px;
+	margin-bottom: 20px;
+}
+
+.creative_commons a, a:hover {
+	text-decoration: underline;
+}
+
+.contributing {
+	border: 2px solid #E6E6E6;
+	border-radius: 4px;
+	padding: 10px;
+	padding-right: 40px;
+	margin-bottom: 20px;
+	border-
+}
 
 /*.modeldetails_stats table tr td:not(:first-child) {
 border-left: 1px solid #c3c3c3;
