@@ -1,302 +1,281 @@
 @charset "UTF-8";
-
 /* Background image is from http://subtlepatterns.com. We need to acknowledge them somewhere in the code.  */
 body {
-  background-image: url(fancy_deboss.png);
-  background-repeat: repeat;
-  color: #555;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 14px;/*font-weight: lighter; */
+	background-image: url(fancy_deboss.png);
+	background-repeat: repeat;
+	color: #555;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;/*font-weight: lighter; */
 }
-
 h1 {
-  color: #555;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 24px;
+	color: #555;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 24px;
 }
-
 h2 {
 	color: #555;
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 	font-size: 20px;
-
 }
-
 .btn {
-	letter-spacing:1px;
-	font-size:13px;
+	letter-spacing: 1px;
+	font-size: 13px;
 }
-
 a {
-  color: #555;
+	color: #555;
 }
 a:hover {
-  color: #555;
+	color: #555;
 }
-
 /* NAVIGATION */
 
 .navigation {
-  background-color: #404853;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  letter-spacing: 1px;
-  margin-bottom: 50px;
+	background-color: #404853;
+	font-family: Arial, Helvetica, sans-serif;
+	letter-spacing: 1px;
+	margin-bottom: 50px;
 }
-
 .navigation img {
-  float: left;
-  margin: 20px 120px 20px 0;
+	float: left;
+	margin: 20px 120px 20px 0;
 }
-
 /* This will need to be a Sign in/Sign up link at first, and then the dropdown menu for user-specific settings */
 .navigation .login {
-  float: right;
-  padding-top: 51px;
-  font-size: 16px;
-  color: #eee;
+	float: right;
+	padding-top: 51px;
+	font-size: 16px;
+	color: #eee;
 }
-
 /* List that makes up the nav options */
 ul.nav-pills {
-  padding-top: 43px;
-  margin-bottom: 0;
+	padding-top: 43px;
+	margin-bottom: 0;
 }
-
 /* Links for nav options */
 .nav-pills a {
-  color: #eee;
-  font-size: 20px;
-  line-height: 30px;
-  margin: 0 10px;
+	color: #eee;
+	font-size: 20px;
+	line-height: 30px;
+	margin: 0 10px;
 }
-
 /* Hover behavior for links for nav options */
 .nav-pills li a:hover {
-  background-color: #eee;
-  color: #404853;
+	background-color: #eee;
+	color: #404853;
 }
-
 .nav-pills li.active a, .nav-pills li.active a:hover {
-  background-color: #eee;
-  color: #404853;
+	background-color: #eee;
+	color: #404853;
 }
-
 .navigation .dropdown-menu {
-  left: auto;
-  right: 0px;
+	left: auto;
+	right: 0px;
 }
 /*Background color of dropdown menus */
 .dropdown-menu {
-  background-color: #FFFFFF;
-  font-size: 14px;
-  border: thick;
+	background-color: #FFFFFF;
+	font-size: 14px;
+	border: thick;
 }
 /*Adds the little up arrow to the dropdown menu for user*/
 .dropdown-menu::after {
-  position: absolute;
-  top: -6px;
-  right: 9px;
-  display: inline-block;
-  border-right: 6px solid transparent;
-  border-bottom: 6px solid white;
-  border-left: 6px solid transparent;
-  content: '';
+	position: absolute;
+	top: -6px;
+	right: 9px;
+	display: inline-block;
+	border-right: 6px solid transparent;
+	border-bottom: 6px solid white;
+	border-left: 6px solid transparent;
+	content: '';
 }
 /* Styles the border at the bottom of the username drop down menu */
 .dropdown-menu li:nth-child(3) {
-  border-bottom: 2px solid #eee;
+	border-bottom: 2px solid #eee;
 }
 /* Gets rid of weird outline around dropdown that stays behind if you double-click on the text and then mouse away */
 a.dropdown-toggle {
-  outline: none;
+	outline: none;
 }
 .dropdown-menu li > a:hover {
-  background-color: #404853;
-  background-image: none;
+	background-color: #404853;
+	background-image: none;
 }
 /*Color of the Username text in nav bar */
 .dropdown-toggle {
-  color: #eee;
+	color: #eee;
 }
 /*Adds the little downward arrow after Username */
 .dropdown-toggle::after {
-  width: 0;
-  height: 0;
-  display: inline-block;
-  content: "&darr;";
-  text-indent: -99999px;
-  vertical-align: top;
-  margin-top: 8px;
-  margin-left: -1px;
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-top: 4px solid #eee;
-  filter: alpha(opacity=50);
-  -khtml-opacity: 0.5;
-  -moz-opacity: 0.5;
-  opacity: 1.0;
+	width: 0;
+	height: 0;
+	display: inline-block;
+	content: "&darr;";
+	text-indent: -99999px;
+	vertical-align: top;
+	margin-top: 8px;
+	margin-left: -1px;
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+	border-top: 4px solid #eee;
+	filter: alpha(opacity=50);
+	-khtml-opacity: 0.5;
+	-moz-opacity: 0.5;
+	opacity: 1.0;
 }
 .username_dropdown a:hover, a:focus {
-  color: #eee;
-  text-decoration: none;
+	color: #eee;
+	text-decoration: none;
 }
 /*Styling for Login/Signup drop down */	
 .dropdown-menu form {
-  padding: 15px;
+	padding: 15px;
 }
 /*Padding for Create Account part of drop down */
 .create_account {
-  padding-right: 15px;
-  padding-left: 15px;
-  padding-bottom: 15px;
+	padding-right: 15px;
+	padding-left: 15px;
+	padding-bottom: 15px;
 }
 #user_remember_me {
-  float: left;
-  margin-right: 10px;
+	float: left;
+	margin-right: 10px;
 }
 /*Styles color of Remember Me text in sign in drop down */
 .username_dropdown {
-  color: #999;
+	color: #999;
 }
 .login .dropdown-menu {
-  padding: 5px 3px 5px 3px;
+	padding: 5px 3px 5px 3px;
 }
 .login form {
-  border-bottom: 2px solid #eee;
-  padding-bottom: 10px;
-  margin-bottom: 10px;
+	border-bottom: 2px solid #eee;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
 }
 /* Sign up option in Login/Signup drop down */
 #signup_option {
-  color: #999;
-  margin-bottom: 5px;
+	color: #999;
+	margin-bottom: 5px;
 }
 .signup_button {
-  display: block;
+	display: block;
 }
-
-
 /* HEADLINE */
-
 /* Main section headers */
 .headline h1 {
-  color: #555;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: lighter;
-  font-size: 24px;
-  line-height: inherit;
-  padding-bottom: 4px;
-  margin: 0;
+	color: #555;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: lighter;
+	font-size: 24px;
+	line-height: inherit;
+	padding-bottom: 4px;
+	margin: 0;
 }
 .headline h1 i.like {
-  /*background-image: url('..');*/
+/*background-image: url('..');*/
 }
 .headline h1 i.like:hover {
-  /*background-image: url('..');*/
-  background-position: -192px 0;
+	/*background-image: url('..');*/
+	background-position: -192px 0;
 }
 /* Smaller section headers */
 .headline h2 {
-  font-size: inherit;
-  font-weight: inherit;
-  line-height: inherit;
-  margin: 0 0 10px 0;
+	font-size: inherit;
+	font-weight: inherit;
+	line-height: inherit;
+	margin: 0 0 10px 0;
 }
 /* LANDING PAGE */
 
 /*  */
 .search {
-  border-top-style: solid;
-  border-bottom-style: solid;
-  border-color: #ccc;
-  border-width: 1px;
-  color: #555;
-  padding: 30px 0;
+	border-top-style: solid;
+	border-bottom-style: solid;
+	border-color: #ccc;
+	border-width: 1px;
+	color: #555;
+	padding: 30px 0;
 }
 .search form {
-  margin: 15px 0;
-  text-align: center;
+	margin: 15px 0;
+	text-align: center;
 }
 .categories {
-  color: #555;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 24px;
-  padding: 30px 0;
+	color: #555;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 24px;
+	padding: 30px 0;
 }
 /* Landing page THUMBNAILS */
 
 .thumbnails li {
-  font-size: 20px;
-  text-align: center;
-  line-height: 30px;
+	font-size: 20px;
+	text-align: center;
+	line-height: 30px;
 }
-
-
-.thumbnails li a:hover {
-  border-color: #404853;
+.thumbnails li a:hover, img.thumbnail:hover {
+	border-color: #404853;
 }
 /* MODEL DETAILS */
 
 .breadcrumb {
-  background-color: inherit;
-  padding-left: 0;
+	background-color: inherit;
+	padding-left: 0;
 }
 .breadcrumb li {
-  text-color: #555;
+	text-color: #555;
 }
 .breadcrumb li a:hover {
-  color: #0192b5;
+	color: #49728C;
 }
 .hero-unit {
-  margin-bottom: 15px;
+	margin-bottom: 15px;
 }
 /*star rating found here: http://css-tricks.com/star-ratings/ */
 .model_details .rating {
-  font-size: 1.1em;
-  margin-bottom: 30px;
-  text-align: center;
+	font-size: 1.1em;
+	margin-bottom: 30px;
+	text-align: center;
 }
 .model_details .rating .stars {
-  direction: rtl;
-  unicode-bidi: bidi-override;
+	direction: rtl;
+	unicode-bidi: bidi-override;
 }
 .model_details .rating .stars > span {
-  color: #ccc;
-  display: inline-block;
-  position: relative;
-  width: 1.1em;
+	color: #ccc;
+	display: inline-block;
+	position: relative;
+	width: 1.1em;
 }
 /*star rating: removed outline of underlying star on hover */
 .model_details .rating .stars > span:hover, .rating .stars > span:hover ~ span {
-  color: transparent;
+	color: transparent;
 }
-
 /*star rating: sets hover color to gold, and some other stuff...  */
 .rating .stars > span:hover:before, .rating .stars > span:hover ~ span:before {
-  color: #FFAE14;
-  content: "\2605";
-  left: 0;
-  position: absolute;
+	color: #E8B107;
+	content: "\2605";
+	left: 0;
+	position: absolute;
 }
 .model_details .download {
-  text-align: center;
-  padding-bottom: 22px;
+	text-align: center;
+	padding-bottom: 22px;
 }
 .model_details .download button {
-  /*background-color: #ff6dcc;
+	/*background-color: #ff6dcc;
   background-image: linear-gradient(to bottom, #f8c, #f4c);*/
-padding-top: 8px;
-margin-bottom: 10px;
-text-align: center;
+	padding-top: 8px;
+	margin-bottom: 10px;
+	text-align: center;
 }
 /* right aligns Download links in Older Versions table */
 .description .table td {
-  border-top: 0;
+	border-top: 0;
 }
 .table td.download_link {
-  text-align: right;
+	text-align: right;
 }
-
 /* Like and flag buttons */
 
 
@@ -304,60 +283,63 @@ text-align: center;
 
 
 .tags {
-  /* leaving out for now. This makes tags stick to bottom of column, but they move when window is resized
+	/* leaving out for now. This makes tags stick to bottom of column, but they move when window is resized
   bottom: 0;
   position: absolute;
    */
-margin-left: 0;
+	margin-left: 0;
 }
 /* other models by the same user */
 
 .other_models {
-  border-style: solid;
-  border-color: #CCC;
-  border-width: 1px;
-  border-radius: 2px;
-  margin-top: 7px;
+	border-style: solid;
+	border-color: #CCC;
+	border-width: 1px;
+	border-radius: 2px;
+	margin-top: 7px;
 }
 .other_models .thumbnails {
-  padding: 10px 0 10px 13px;
+	padding: 10px 0 0px 13px;
 }
 .other_models .thumbnails>li {
-  margin-bottom: 0px;
-  line-height:20px;
+	margin-bottom: 0px;
+	line-height: 20px;
 }
 .other_models .thumbnails>li a:hover {
-  margin-bottom: 0px;
+	margin-bottom: 0px;
 }
 .other_models li {
-  color: #555;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  line-height: 100%;
-  display: inline-block;
-  width: 74px;
+	color: #555;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	line-height: 100%;
+	display: inline-block;
+	width: 74px;
 }
 .other_models .thumbnails li a {
-  color: #555;
+	color: #555;
 }
 .other_models .thumbnails li a:hover {
-  color: #404853;
-  text-decoration: underline;
+	color: #404853;
+	text-decoration: underline;
 }
 .other_models li a:hover {
-  border-color: red;
+	border-color: red;
 }
 .model_details .label {
-  margin-right: 10px;
-  margin-bottom: 6px;
-  background-color: #404853;
-  padding: 4px;
+	margin-right: 10px;
+	margin-bottom: 6px;
+	background-color: #404853;
+	padding: 4px;
 }
-
-
-
+a.label:hover {
+	background-color: #49728C;
+}
 .download_link {
-  text-decoration: underline;
+	text-decoration: underline;
+}
+.download_link a:hover {
+	color: #0074d9;
 }
 /* This button takes up a lot of room. We can show the star rating, and when a user hovers over the stars, they become transparent
 and dynamically fill as the cursor moves. Clicking on a star assigns that rating.
@@ -369,115 +351,197 @@ padding-top:10px;
 
 /*Model description text goes here */
 .description p {
-  color: #555;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  padding-left: 10px;
-  margin-top: 7px;
+	color: #555;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	padding-left: 0px;
+	margin-top: 7px;
 }
 .model_details .table {
-  margin-top: 7px;
+	margin-top: 7px;
 }
 /*CATEGORY PAGE */
 .thumbnails_preferences li a:hover {
-  border-color: #404853;
+	border-color: #404853;
 }
 /* UPLOAD PAGES */
 
 .progressbar {
-  text-align: center;
+	text-align: center;
+}
+.progressbar img {
+	margin-left: -8px;
+}
+#footer {
+	background-color: #404853;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	text-align: center;
+	color: #eee;
+	font-size: small;
+	font-weight: normal;
+}
+#footer a {
+	color: #eee;
+	text-decoration: underline;
+}
+#footer a:hover {
+	color: #0074d9;
 }
 /* Formatting the space between the guideline list items */
 .guidelines li {
-  padding-bottom: 5px;
-  font-weight: normal;
-  list-style-type: square;
+	padding-bottom: 5px;
+	font-weight: normal;
+	list-style-type: square;
 }
 .subtext {
-  font-size: 14px;
+	font-size: 14px;
 }
 .upload_buttons btn-primary {
-  text-align: right;
+	text-align: right;
 }
 .next_button {
-	text-align:right;
-  float: right;
+	text-align: right;
+	float: right;
 }
 .agreement li {
-  padding: .5em;
-  list-style-type: square;
+	padding: .5em;
+	list-style-type: square;
+}
+.agreement li a {
+	text-decoration: underline;
 }
 /*MY DOWNLOADS */
 /*Removed bullet from thumbnail list*/
 .thumbnails_preferences li {
-  list-style-type: none;
-
+	list-style-type: none;
 }
-
 /*Adds some space to the top of the text that sits below a thumbnail*/
 .line_height {
-  margin-top:10px;
+	margin-top: 10px;
 }
-
 /* MODELS I LIKE */
 
 .thumbnails_preferences li {
-  font-size: 18px;
-  text-align: left;/*font-weight:normal; */
-
+	font-size: 18px;
+	text-align: left;/*font-weight:normal; */
 }
 /* MODELS I MADE */
 .thumbnail_margin_bottom li {
-  margin-bottom: 40px;
+	margin-bottom: 40px;
 }
 /*restricts textarea to only resize vertically. I set the height manually to align with the tags field. This height should be changed if the second column changes in height */
-textarea {
-  resize: vertical;
-  height: 215px;
+textarea.upload {
+	resize: vertical;
+	height: 100px;
 }
+
+input[type=text].model_text
+{
+  width: 446px;
+}
+
 /* For Name, Description, Categories, etc. section headers */
 .mini_header {
-  font-weight: bold;
+	font-weight: bold;
 }
 /* Moves delete/replace buttons closer to line */
 .btn .btn-mini .edit_file {
-  padding-top: 5px;
+	padding-top: 5px;
 }
 /* Sets margin for divider line under source files */
 hr {
-  margin: 10px 0;
+	margin: 10px 0;
 }
 /* sets bottom margin for page divider that goes across entire page. Can't figure out how to increase the top margin... */
 .full-page_divider hr {
-  margin-bottom: 20px;
+	margin-bottom: 20px;
 }
 .another_header {
-  font-size: 14px;
-  font-weight: bold;
+	font-size: 14px;
+	font-weight: bold;
 }
 /* SEARCH RESULTS */
 
 .search_restrictions {
-  font-size: 20px;
-  list-style-type: none;
-  margin-left: 0;
-  display: inline-block;
+	font-size: 20px;
+	list-style-type: none;
+	margin-left: 0;
+	display: inline-block;
 }
 .search_restrictions span {
-  font-size: 16px;
-  color: #999;
+	font-size: 16px;
+	color: #999;
 }
 .category_username {
-  font-size: 12px;
-  color: #999;
+	font-size: 12px;
+	color: #999;
 }
-
 /* TAG SEARCH RESULTS */
 .tag_search .label {
-  background-color: #404853;
+	background-color: #404853;
+}
+/* ABOUT PAGE */
+.about_intro {
+	margin-top: 35px;
 }
 
+.about_intro {
+	margin-bottom: 40px;
+}
+.about_intro img {
+	padding-left: 25px;
+}
+.top_spacing {
+	padding-top: 30px;
+}
+.about_columns {
+	margin-bottom: 20px;
+}
+
+/* Change the height here and below if you add more text, otherwise the text won't appear properly! The height value sets the height for the two columns. */
+.creative_commons, .contributing {
+	height: 200px;
+}
+
+/* Change the height here if you add more text, otherwise the text won't appear properly! */
+.cc_row, .contributing_row {
+	height: 170px;
+}
+.cc_row {
+	border: 2px solid #E6E6E6;
+	border-radius: 4px;
+	padding: 10px;
+}
+.creative_commons a, .creative_commons a:hover {
+	text-decoration: underline;
+}
+.contributing_row {
+	border: 2px solid #E6E6E6;
+	border-radius: 4px;
+	padding: 10px;
+	padding-right: 40px;
+}
 
 /*.modeldetails_stats table tr td:not(:first-child) {
 border-left: 1px solid #c3c3c3;
 }*/
+
+
+.fileinput-button {
+  position: relative;
+  overflow: hidden;
+}
+.fileinput-button input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  transform: translate(-300px, 0) scale(4);
+  font-size: 23px;
+  direction: ltr;
+  cursor: pointer;
+}

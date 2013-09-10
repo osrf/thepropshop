@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Props Database</title>
+  <meta charset="UTF-8" />
+  <title>The Prop Shop</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
@@ -32,7 +33,7 @@
       <% end %>
       <%= link_to "Find", root_path%></li>
 
-      <% if @post[:controller] == "upload" %>
+      <% if @post[:controller] == "model" and @post[:action] == "new" %>
         <li class='active'>
       <% else %>
         <li>
@@ -49,13 +50,6 @@
     </ul>
   </div>
 </div>
-
-<!--
-<%= debug @post %>
-<p>
-  <b>Title:</b><%= @post %>
-</p>
--->
 
 <%= yield %>
 

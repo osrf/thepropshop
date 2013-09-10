@@ -1,109 +1,144 @@
 <div class="container">
+
   <div class="headline">
-    <h1>Upload a Model: Files</h1>
+    <h1>Upload a Model</h1>
   </div>
-  <br />
-  <div class="upload_progress">
-    <div class="span12 progressbar">
-      <%= image_tag("progressbar_upload.png",
-      alt:"Progress Bar, on Upload step", width:"550") %>
-    </div>
-  </div>
+
   <div class="guidelines row">
     <div class="span12">
       <h2> Guidelines </h2>
     </div>
     <div class="span6">
       <ul class="guidelines">
-        <li> Guideline #1 goes here. </li>
-        <li> Guideline #2 will be here and it's a little bit longer. </li>
-        <li> This is a third guideline for users to follow. </li>
+        <li> A model name and description are required. </li>
+        <li> At least one SDF file is required. </li>
+        <li> Select appropriated tags and categories. </li>
       </ul>
     </div>
     <div class="span6">
       <ul class="guidelines">
-        <li> Even more guidelines can go here. </li>
-        <li> Whoa, more guidelines? </li>
-        <li> Heavens to Betsy, do we need this many guidelines? </li>
+        <li> None of the files uploaded can contain copyrighted material. </li>
+        <li> All materials will be licensed under <a href="http://creativecommons.org/licenses/by/3.0/" target="_blank">Creative Commons Attribution 3.0.</a></li>
       </ul>
     </div>
   </div>
 
-  <hr style="border: 1px solid #E6E6E6;" />
-  <div class="upload_files row">
-    <div class="span12">
+  <%= form_for :model, :url => {:action => :create} do |f| %>
+
+  <div class="guidelines row">
+    <div class="span6">
+      <h2> Name & Description </h2>
+      <span><strong>Name</strong></span>
+      <br/>
+      <%= f.text_field :name,
+        {:class=>"model_text", :placeholder=>"Type model name here..."} %>
+      <br/>
+
+      <span><strong>Description</strong></span>
+      <br/>
+      <%= f.text_area :description,
+        {:class=>"field span6 upload",
+         :placeholder=>"Add a brief description of your model..."} %>
+
+      <br/>
+      <span><strong>Tags</strong></span> 
+
+      <%= f.text_field :tags,
+      {:class=>"model_text",
+       :placeholder=>"ex) humanoid, bipedal, mobile manipulator"} %>
+
+      <br/>
+
+      <span> <strong>Categories:</strong> Pick up to 3</span>
+      <br/>
+
+      <div class="category_checkboxes row">
+        <% catCount=0 %>
+        <% rowLimit=5 %>
+        <% @categories.each do |cat| %>
+          <% if catCount % rowLimit == 0 %>
+            <div class="span3">
+          <%end%>
+
+          <%= f.label cat.name, {:class=>"checkbox"} do%>
+            <%= f.check_box :name=>"cat.name"%>
+          <%= cat.name %>
+          <%end%>
+
+          <% if (catCount+1) % rowLimit == 0 %>
+            </div>
+          <%end%>
+          <% catCount += 1 %>
+        <%end%>
+
+        <% if catCount % rowLimit != 0 %>
+          </div>
+        <%end%>
+      </div>
+    </div>
+
+    <div class="span6">
       <h2> Upload Files </h2>
-    </div>
-    <div class="span6"> <span> <strong>Upload SDF file (required) </strong></span> <br />
-      <span class="subtext"> Accepted: .sdf, .urdf </span> <br />
-      <!-- This will need to be replaced by an actual jquery widget, I presume. Once a file is chosen, the button says Upload. -->
-      <div class="input-append">
-        <input class="span3" id="appendedInputButton4" type="text">
-        <button class="btn" type="button">Choose</button>
-      </div>
-      <br />
-      <!-- Not sure what the right programming approach is here. Once a file is uploaded, it appears below, and is removeable --> 
-      <span class="subtext">
-        Uploaded: FileUploaded.ext <a href="#">(remove)</a>
-    </span>
-  </div>
+      <span>Select model resources: SDF (.sdf, .urdf), textures (.png, .jpg) and meshes (.dae, .stl).</span>
+      <br/>
 
-  <div class="span6">
-    <span>
-      <strong>Upload media files (optional) </strong>
-    </span>
-    <br />
-    <br />
-    <div class="textures"> <span> <strong> Textures </strong></span> <br />
-      <span class="subtext"> Accepted: .png, .tiff, .jpg </span> <br />
-      <div class="input-append">
-        <input class="span3" id="appendedInputButton5" type="text">
-        <button class="btn" type="button">Choose</button>
-      </div>
-      <br />
-      <span class="subtext">
-        Uploaded: FileUploaded.ext <a href="#">(remove)</a></span> <br />
-      <span class="subtext">
-        Uploaded: FileUploaded.ext <a href="#">(remove)</a></span>
-    </div>
-    <br />
-    <div class="meshes"> <span> <strong> Meshes </strong></span> <br />
-      <span class="subtext"> Accepted: .png, .tiff, .jpg </span> <br />
-      <div class="input-append">
-        <input class="span3" id="appendedInputButton6" type="text">
-        <button class="btn" type="button">Choose</button>
-      </div>
-      <br />
-      <span class="subtext">
-        Uploaded: FileUploaded.ext <a href="#">(remove)</a>
+      <span class="btn btn-success fileinput-button">
+        <i class="icon-white icon-plus"></i>
+        <span>Add (.sdf, .urdf)</span>
+        <input type="file" id="select_files" name="select_files[]" multiple/>
       </span>
-      <br />
-      <br />
-    </div>
+      <div style="margin-top: 5px">
+        <table role="presentation" class="table table-striped">
+          <tbody id="list"></tbody>
+        </table>
+      </div>
+     </div>
   </div>
 
-  <div class="span12"></div>
   <hr style="border: 1px solid #E6E6E6;" />
-
 
   <!--Upload/Cancel/Next buttons -->
   <div class="upload_buttons row">
     <div class="span6"> 
-      <!-- No Back button required for the first step
-      <a class="btn" href="#">Back</a> --> 
       <!-- Clicking Cancel button should pop up a confirmation window stating: "Are you sure you want to cancel? Your model will not be uploaded to the model database" --> 
       <%= link_to "Cancel", root_path,
         {:class=>("btn")} %>
       </div>
       <div class="span6 next_button"> 
         <!-- If the Next button is clicked but not all mandatory fields have been entered, show a pop-up prompting the user to fill in that missing info (eg Please upload the SDF file) --> 
-        <%= link_to "Next",
-          {:controller => "model", :action => "new", :step => "2"},
-          {:class=>("upload_buttons btn btn-primary")} %>
+          <%= f.submit "Submit",:class => "upload_buttons btn btn-primary" %>
         </div>
       </div>
     </div>
   </div>
-  <br />
-  <br />
-  <br />
+
+<% end %>
+
+<script>
+
+  function validateForm()
+  {
+  }
+
+  function cancelFile(_id)
+  {
+    var elem = document.getElementById(_id);
+    elem.parentNode.removeChild(elem);
+  }
+
+  function handleFileSelect(evt) {
+    // FileList object
+    var files = evt.target.files;
+    var offset = document.getElementById('list').childNodes.length;
+
+    // files is a FileList of File objects. List some properties.
+    var output = [];
+    for (var i = 0, f; f = files[i]; i++)
+    {
+      output.push('<tr class="fade in" id="file',i+offset,'"><td><span class="preview"</span></td><td><p>', escape(f.name), '</p></td><td>', (f.size / 1024).toFixed(2), ' KB </td><td><button class="btn btn-warning" onclick="cancelFile(\'file',i+offset,'\')"><i class="icon-white icon-ban-circle"></i></button> <input type="hidden" name="file',i+offset,'" value="', escape(f.name),'"/></td></tr>');
+    }
+    document.getElementById('list').innerHTML += output.join('');
+  }
+
+  document.getElementById('select_files').addEventListener('change', handleFileSelect, false);
+</script>

@@ -7,6 +7,10 @@ class PagesController < ApplicationController
     @post = params
   end
 
+  def category
+    @post = params
+  end
+
   #def upload
   #  @post = params
   #end

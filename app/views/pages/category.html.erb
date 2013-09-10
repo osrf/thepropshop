@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="headline models_downloaded">
+    <!-- Category Name -->
+    <h1><%= params[:category].capitalize %></h1>
+  </div>
+  <div class="categories">
+    <ul class="thumbnails_preferences thumbnail_margin_bottom">
+      <!-- # should be replaced by a link to the model details page -->
+      <!-- Model name should not be allowed to extend past one line -->
+      <li class="span2">
+        <%= link_to image_tag("wall-e.jpg", alt: "wall-e robot"),
+        {controller: "model", action: "show", id: "0"},
+        {:class=>"thumbnail"} %>
+        <div class="line_height"><a href="model_details.html">Wall-e</a></div>
+        <span class="subtext">By: Username </span> <br />
+      </li>
+
+      <li class="span2">
+        <%= link_to image_tag("wall-e.jpg", alt: "wall-e robot"),
+        {controller: "model", action: "show", id: "0"},
+        {:class=>"thumbnail"} %>
+        <div class="line_height"><a href="model_details.html">Wall-e</a></div>
+        <span class="subtext">By: Username </span> <br />
+      </li>
+
+
+      <li class="span2"> <a href="#" class="thumbnail"> <img src="wall-e.jpg" alt="Wall-e robot"> </a><div class="line_height"><a href="#"> More Wall-e</a></div>
+        <span class="subtext">By: Username </span><br />
+        </li>
+      <li class="span2"> <a href="#" class="thumbnail"> <img src="wall-e.jpg" alt="Wall-e robot"> </a><div class="line_height"><a href="#">Wall-e </a></div>
+        <span class="subtext">By: Username </span><br />
+         </li>
+      <li class="span2"> <a href="#" class="thumbnail"> <img src="wall-e.jpg" alt="Wall-e robot"> </a><div class="line_height"><a href="#">Last Wall-e</a></div>
+        <span class="subtext">By: Username </span><br />
+        </li>
+    </ul>
+    <ul class="thumbnails_preferences">
+      <li class="span2"> <a href="#" class="thumbnail"> <img src="wall-e.jpg" alt="Wall-e robot"> </a><div class="line_height"><a href="#">Wall-e</a></div>
+        <span class="subtext">By: Username </span><br />
+        </li>
+      <li class="span2"> <a href="#" class="thumbnail"> <img src="wall-e.jpg" alt="Wall-e robot"> </a><div class="line_height"><a href="#">Another Wall-e</a></div>
+        <span class="subtext">By: Username </span><br />
+        </li>
+    </ul>
+  </div>
+</div>
+

@@ -1,3 +1,5 @@
+<%= form_for :model, :url => {:action => :new_details} do |f| %>
+
 <div class="container">
   <div class="headline">
     <h1>Upload a Model: Details</h1>
@@ -9,17 +11,21 @@
       alt:"Progress Bar, on Upload step", width:"550") %>
     </div>
   </div>
+
+
   <div class="guidelines row">
     <div class="span12">
       <h2> Name & Description </h2>
-      <span> <strong>Name </strong></span> <br />
-      <form>
-        <fieldset>
-          <input type="text" class="input-xlarge" placeholder="Type model name here...">
-        </fieldset>
-      </form>
-      <span> <strong>Description </strong></span> <br />
-      <textarea class="field span6" id="textarea" rows="6" placeholder="Add a brief description of your model..."></textarea>
+      <span><strong>Name </strong></span>
+      <br/>
+      <input type="text" name="model_name" class="input-xlarge"
+             placeholder="Type model name here..."/>
+      <br/>
+
+      <span><strong>Description </strong></span>
+      <br/>
+      <textarea class="field span6" name="description" id="textarea" rows="6"
+        placeholder="Add a brief description of your model..."></textarea>
     </div>
   </div>
   <!-- If we change the category options, we also need to change them in edit_models_i_made.html -->
@@ -30,68 +36,67 @@
     <div class="category_checkboxes">
       <div class="span3">
         <label class="checkbox">
-          <input type="checkbox" value="">
+          <input type="checkbox" name="cat_accessories" value=""/>
           Accessories </label>
         <label class="checkbox">
-          <input type="checkbox" value="">
+          <input type="checkbox" name="cat_animals" value=""/>
           Animals </label>
         <label class="checkbox">
-          <input type="checkbox" value="">
+          <input type="checkbox" value=""/>
           Appliances </label>
         <label class="checkbox">
-          <input type="checkbox" value="">
+          <input type="checkbox" value=""/>
           Buildings </label>
         <label class="checkbox">
-          <input type="checkbox" value="">
+          <input type="checkbox" value=""/>
           Clothing </label>
       </div>
       <div class="span3">
         <label class="checkbox">
-          <input type="checkbox" value="">
+          <input type="checkbox" value=""/>
           Food </label>
         <label class="checkbox">
-          <input type="checkbox" value="">
+          <input type="checkbox" value=""/>
           Furnishings </label>
         <label class="checkbox">
-          <input type="checkbox" value="">
+          <input type="checkbox" value=""/>
           Misc. Objects </label>
         <label class="checkbox">
-          <input type="checkbox" value="">
+          <input type="checkbox" value=""/>
           People </label>
         <label class="checkbox">
-          <input type="checkbox" value="">
+          <input type="checkbox" value=""/>
           Plants </label>
       </div>
       <div class="span4">
         <label class="checkbox">
-          <input type="checkbox" value="">
+          <input type="checkbox" value=""/>
           Robots </label>
         <label class="checkbox">
-          <input type="checkbox" value="">
+          <input type="checkbox" value=""/>
           Scenes/Worlds </label>
         <label class="checkbox">
-          <input type="checkbox" value="">
+          <input type="checkbox" value=""/>
           Textures </label>
         <label class="checkbox">
-          <input type="checkbox" value="">
+          <input type="checkbox" value=""/>
           Tools </label>
-        <form class="form-search">
-          <input type="text" class="input-medium" placeholder="Suggest a category...">
-          <button type="submit" class="btn btn-small">Submit</button>
-        </form>
+        <div class="form-search">
+          <input type="text" class="input-medium" placeholder="Suggest a category..."/>
+          <!--<button type="submit" class="btn btn-small">Submit</button>-->
+          </div>
       </div>
     </div>
   </div>
   <div class="upload_tags row">
     <div class="span12">
       <h2> Tags </h2>
-      <span> <strong>Separate tags with commas.</strong></span> </div>
+      <span> <strong>Separate tags with commas.</strong></span>
+    </div>
     <div class="span6">
-      <form>
-        <fieldset>
-          <input type="text" class="input-xxlarge" placeholder="ex) humanoid, bipedal, mobile manipulator">
-        </fieldset>
-      </form>
+      <fieldset>
+        <input type="text" class="input-xxlarge" placeholder="ex) humanoid, bipedal, mobile manipulator"/>
+      </fieldset>
     </div>
   </div>
   <hr style="border: 1px solid #E6E6E6;" />
@@ -107,12 +112,8 @@
     </div>
     <div class="span6 next_button"> 
       <!-- If the Next button is clicked but not all mandatory fields have been entered, show a pop-up prompting the user to fill in that missing info (eg The following fields are required: Description, Tags) --> 
-      <%= link_to "Next",
-        {:controller => "model", :action => "new", :step => "3"},
-        {:class=>("upload_buttons btn btn-primary")} %>
+        <%= f.submit "Next",:class => "upload_buttons btn btn-primary" %>
     </div>
   </div>
 </div>
-<br />
-<br />
-<br />
+<% end %>

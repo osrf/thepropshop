@@ -1,9 +1,11 @@
-GazeboModelDatabase::Application.routes.draw do
+PropShop::Application.routes.draw do
 
   get "pages/index"
   root "pages#index"
 
-  get "upload" => "upload#index"
+  get "pages/category" => "pages#category"
+
+  # get "upload" => "upload#index"
 
   get "about" => "pages#about"
   get "pages/about" => "pages#about"

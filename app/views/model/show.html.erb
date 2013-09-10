@@ -1,0 +1,88 @@
+<div class="container"> 
+  <!--Breadcrumbs always lead back to Home. If user is looking at a model, the next breadcrumb is for the model category. We may add sub-categories as our database grows. If the user gets to a model through their "Models I like" list, we do not show the category of the model in the breadcrumbs, and instead link them back to the Models I Like page. -->
+  <ul class="breadcrumb">
+    <li><a href="index.html">Home</a></li>
+    <li><span class="divider">/</span></li>
+    <li><a href="#">Category</a></li>
+  </ul>
+  <div class="headline"> 
+    <!--<div style="float: right;">Likes</div>--> 
+    <!--We display the uploader's user name and the date of the most recent upload (if there are multiple revisions) -->
+    <h1>Model Name <i class="icon-user like"></i></h1>
+    <h2>Uploaded by: Steffi Paepcke (Aug. 15, 2013)</h2>
+  </div>
+  <div class="model_details row">
+    <div class="span8">
+      <div class="hero-unit">
+        <%= image_tag "pr2.png", alt:"CAD model of the PR2 robot" %>
+      </div>
+      <div> 
+        <!--The # should be replaced with a link that causes the thumbnail to replace the big hero image when the thumbnail is clicked. Hovering over a thumnbnail should cause it to temporarily replace the hero image. We create a max of 5 images of the model. -->
+        <ul class="thumbnails">
+          <li class="span2"><a href="#">
+            <%= image_tag "pr2_2.jpg", alt:"PR2 robot head" %></a>
+          </li>
+          <li class="span2"><a href="#">
+            <%= image_tag "pr2_arm.jpg", alt:"PR2 robot arm" %></a></li>
+          <li class="span2"><a href="#">
+            <%= image_tag "pr2_2.jpg", alt:"PR2 robot head" %></a></li>
+          <li class="span2"><a href="#">
+            <%= image_tag "pr2_arm.jpg", alt:"PR2 robot arm" %></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="span4"> 
+      <!-- The model rating system should be like the Netflix system. The stars should be blue (#0971B3 or #08c (I need to play around with it)) and display the average star rating, with the number of reviews in parentheses after the stars (the numeral, not written out as it is now). When hovering over the stars, they should  highlight in yellow (#FFAE14) as the mouse moves over the stars. The stars that are not being hovered over should be transparent. Clicking a star locks in the user's rating. -->
+      <div class="rating"> Ratings: <span class="stars"> <span class="active">☆</span> <span class="active">☆</span> <span class="active">☆</span> <span>☆</span> <span>☆</span> </span> <span>(seven)</span> </div>
+      <div class="download">
+        <a class="btn btn-large btn-primary" href="#">Download Model</a>
+      </div>
+      <div class="tags span4"><span><strong>Tags</strong></span> 
+        <!-- Clicking on a tag should link the user to a search page displaying only results containing that tag. # is replaced with a link to the page --> 
+        <span> <a href="#" class="label label-info">Tag 1</a></span> <span> <a href="#" class="label label-info">Tag 2</a></span> <span> <a href="#" class="label label-info">Tag 3 is longer</a></span> <span> <a href="#" class="label label-info">Tag 4 also a tag</a></span> <span> <a href="#" class="label label-info">Tag 5</a></span> <span> <a href="#" class="label label-info">Tag 6</a></span> <span> <a href="#" class="label label-info">Tag 7</a></span> </div>
+    </div>
+  </div>
+  <div class="model_details row">
+    <div class="span8 description">
+      <div class="headline">
+        <h1>Description</h1>
+      </div>
+      <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a nisl risus. Nunc augue sem, ultricies at urna a, pharetra tempus neque. Aenean porttitor magna vel laoreet sagittis. Proin id metus vitae nisl consequat dignissim in sit amet massa. Quisque viverra ante nulla. Mauris a euismod dolor, in ultrices purus. Quisque auctor, nisl sed euismod fermentum, augue dui commodo nunc, sed auctor mauris libero sed enim. Nunc hendrerit, magna non tincidunt rutrum, ipsum quam ullamcorper lacus, et varius enim enim at justo. </p>
+      <div class="headline"> <br />
+        <!-- This section should only appear if there is more than one version. Newer versions are on top. Clicking Download immediately starts the download. -->
+        <h1>Older Versions</h1>
+      </div>
+      <table class="table table-striped">
+        <tr>
+          <td> June 1, 2013 </td>
+          <td class="download_link"><a href="#"> Download </a></td>
+        </tr>
+        <tr>
+          <td> May 3, 2013</td>
+          <td class="download_link"><a href="#">Download </a></td>
+        </tr>
+        <tr>
+          <td> January 17, 2013</td>
+          <td class="download_link"><a href="#"> Download </a></td>
+        </tr>
+      </table>
+    </div>
+    <div class="span4">
+      <div class="headline">
+        <h1>Other models by <i> username </i></h1>
+      </div>
+      <!-- If the user has uploaded other models, up to three of them appear in this box. The name should be truncated with "..." so that it doesn't extend past the width of the thumbnail. -->
+      <div class="other_models"> 
+        <!-- # is replaced with a link to that model's page -->
+        <ul class="thumbnails">
+          <li class="span"> <a href="#">
+            <%= image_tag "wall-e.jpg", alt:"Wall-e robot", :class=>"thumbnail" %> Wall-e</a></li>
+          <li class="span"> <a href="#">
+            <%= image_tag "wall-e.jpg", alt:"Wall-e robot", :class=>"thumbnail" %> Another</a></li>
+          <li class="span"> <a href="#"><%= image_tag "wall-e.jpg", alt:"Wall-e robot", :class=>"thumbnail" %> Wall-e</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+

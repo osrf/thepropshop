@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-GazeboModelDatabase::Application.load_tasks
+PropShop::Application.load_tasks
