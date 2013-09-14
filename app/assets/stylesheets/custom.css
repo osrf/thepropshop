@@ -292,7 +292,7 @@ a.dropdown-toggle {
 /* other models by the same user */
 
 .other_models {
-	border-style: solid;
+	/*border-style: solid;*/
 	border-color: #CCC;
 	border-width: 1px;
 	border-radius: 2px;

@@ -4,30 +4,10 @@
     <h1>Upload a Model</h1>
   </div>
 
-  <div class="guidelines row">
-    <div class="span12">
-      <h2> Guidelines </h2>
-    </div>
-    <div class="span6">
-      <ul class="guidelines">
-        <li> A model name and description are required. </li>
-        <li> At least one SDF file is required. </li>
-        <li> Select appropriated tags and categories. </li>
-      </ul>
-    </div>
-    <div class="span6">
-      <ul class="guidelines">
-        <li> None of the files uploaded can contain copyrighted material. </li>
-        <li> All materials will be licensed under <a href="http://creativecommons.org/licenses/by/3.0/" target="_blank">Creative Commons Attribution 3.0.</a></li>
-      </ul>
-    </div>
-  </div>
-
   <%= form_for :model, :url => {:action => :create} do |f| %>
-
-  <div class="guidelines row">
+  <div class="row">
     <div class="span6">
-      <h2> Name & Description </h2>
+      <h2> Properties </h2>
       <span><strong>Name</strong></span>
       <br/>
       <%= f.text_field :name,
@@ -75,16 +55,13 @@
           </div>
         <%end%>
       </div>
-    </div>
 
-    <div class="span6">
-      <h2> Upload Files </h2>
-      <span>Select model resources: SDF (.sdf, .urdf), textures (.png, .jpg) and meshes (.dae, .stl).</span>
+      <span><strong>Files</strong>(.sdf, .png, .jpg, .dae, .stl)</span>
       <br/>
 
       <span class="btn btn-success fileinput-button">
         <i class="icon-white icon-plus"></i>
-        <span>Add (.sdf, .urdf)</span>
+        <span>Add</span>
         <input type="file" id="select_files" name="select_files[]" multiple/>
       </span>
       <div style="margin-top: 5px">
@@ -92,7 +69,20 @@
           <tbody id="list"></tbody>
         </table>
       </div>
-     </div>
+
+    </div>
+
+    <div class="span4">
+      <h2> Guidelines </h2>
+      <ul class="guidelines">
+        <li> A model name and description are required. </li>
+        <li> At least one SDF file is required. </li>
+        <li> Select appropriated tags and categories. </li>
+        <li> None of the files uploaded can contain copyrighted material. </li>
+        <li> All materials will be licensed under <a href="http://creativecommons.org/licenses/by/3.0/" target="_blank">Creative Commons Attribution 3.0.</a></li>
+      </ul>
+    </div>
+
   </div>
 
   <hr style="border: 1px solid #E6E6E6;" />

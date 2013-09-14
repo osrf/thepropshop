@@ -6,50 +6,101 @@
     <li><a href="#">Category</a></li>
   </ul>
   <div class="headline"> 
-    <!--<div style="float: right;">Likes</div>--> 
     <!--We display the uploader's user name and the date of the most recent upload (if there are multiple revisions) -->
-    <h1>Model Name <i class="icon-user like"></i></h1>
-    <h2>Uploaded by: Steffi Paepcke (Aug. 15, 2013)</h2>
+    <h1 style="display: inline"><%= @model.name %></h1>
+
+    <!-- This button should only appear for models that the user has created -->
+    <button class="btn btn-mini" type="button" style="margin-bottom: 8px; margin-left: 5px">Edit</button>
+
+    <h2>Uploaded by:
+      <%if @creator%>
+        <%= @creator.username %>
+      <%else%>
+        anonymous 
+      <%end%>
+      (<%=@model.updated_at.strftime("%b %d, %Y")%>)</h2>
   </div>
-  <div class="model_details row">
-    <div class="span8">
-      <div class="hero-unit">
-        <%= image_tag "pr2.png", alt:"CAD model of the PR2 robot" %>
+
+  <div class="model_details row" style="position:relative;clear: left; float: left; width:100%; display:block">
+
+    <div class="span8"
+      style="float: left; position: relative; overflow:hidden;">
+
+      <div style="margin-bottom:5px; border: 1px solid #e6e6e6; position:relative">
+        <div style="position: absolute; top:10px; right: 10px;">
+          <button type="submit" style="border: 0px; background: transparent"
+            onMouseOver="this.getElementsByTagName('img')[0].src='/assets/like_heart.svg'"
+            onMouseOut="this.getElementsByTagName('img')[0].src='/assets/like_heart_grey.svg'">
+            <%= image_tag "like_heart_grey.svg", width:"18px", alt:"Heart" %>
+          </button>
+        </div>
+
+        <%= image_tag "/model/#{@model.id}/image/#{@model.image_1}",
+        alt:"Model image", id:"hero_image", style:"height:380px;" %>
       </div>
+
       <div> 
         <!--The # should be replaced with a link that causes the thumbnail to replace the big hero image when the thumbnail is clicked. Hovering over a thumnbnail should cause it to temporarily replace the hero image. We create a max of 5 images of the model. -->
         <ul class="thumbnails">
-          <li class="span2"><a href="#">
-            <%= image_tag "pr2_2.jpg", alt:"PR2 robot head" %></a>
-          </li>
-          <li class="span2"><a href="#">
-            <%= image_tag "pr2_arm.jpg", alt:"PR2 robot arm" %></a></li>
-          <li class="span2"><a href="#">
-            <%= image_tag "pr2_2.jpg", alt:"PR2 robot head" %></a></li>
-          <li class="span2"><a href="#">
-            <%= image_tag "pr2_arm.jpg", alt:"PR2 robot arm" %></a></li>
+          <% for i in 1..4 %>
+            <li class="span2">
+
+            <% if i == 1 %>
+              <%style = "width:130px;border-color: #404853"%>
+            <%else%>
+              <%style = "width:130px"%>
+            <%end%>
+
+            <%= image_tag "/model/#{@model.id}/image/#{i}",
+            alt:"model thumbnail", id:"#{i}", class:"thumbnail",
+              style:"#{style}",
+              onmouseover:"showHero(#{@model.id}, #{i});",
+              onmouseout:"setHero(#{i});",
+              onclick:"showHero(#{@model.id}, #{i});setHero(#{i});"
+            %>
+            </li>
+          <%end%>
         </ul>
       </div>
     </div>
-    <div class="span4"> 
-      <!-- The model rating system should be like the Netflix system. The stars should be blue (#0971B3 or #08c (I need to play around with it)) and display the average star rating, with the number of reviews in parentheses after the stars (the numeral, not written out as it is now). When hovering over the stars, they should  highlight in yellow (#FFAE14) as the mouse moves over the stars. The stars that are not being hovered over should be transparent. Clicking a star locks in the user's rating. -->
-      <div class="rating"> Ratings: <span class="stars"> <span class="active">☆</span> <span class="active">☆</span> <span class="active">☆</span> <span>☆</span> <span>☆</span> </span> <span>(seven)</span> </div>
+
+    <div class="span4" style="bottom:0; right:0; position:absolute; display: block; min-height: 100%"> 
+
+      <!-- The model rating system should be like the Netflix system. The stars should be yellow (#E8B107) and display the average star rating, with the number of reviews in parentheses after the stars. When hovering over the stars, they should  highlight in blue (#49728C) as the mouse moves over the stars. The stars that are not being hovered over should be transparent. Clicking a star locks in the user's rating. If they rate the model again, overwrite the previous rating -->
+      <div class="rating">
+        Rating:
+        <span id="star"></span>
+        <span>(Overall: <%= @model.rating %>)</span>
+      </div>
+
       <div class="download">
         <a class="btn btn-large btn-primary" href="#">Download Model</a>
       </div>
-      <div class="tags span4"><span><strong>Tags</strong></span> 
+      <div class="tags span4" style="position: absolute; left: 10px; bottom:28px">
+        <span><strong>Tags</strong></span> 
         <!-- Clicking on a tag should link the user to a search page displaying only results containing that tag. # is replaced with a link to the page --> 
-        <span> <a href="#" class="label label-info">Tag 1</a></span> <span> <a href="#" class="label label-info">Tag 2</a></span> <span> <a href="#" class="label label-info">Tag 3 is longer</a></span> <span> <a href="#" class="label label-info">Tag 4 also a tag</a></span> <span> <a href="#" class="label label-info">Tag 5</a></span> <span> <a href="#" class="label label-info">Tag 6</a></span> <span> <a href="#" class="label label-info">Tag 7</a></span> </div>
+
+        <% if @model.tags %>
+          <% @model.tags.split(',').each do |tag| %>
+            <span><a href="#" class="label label-info"><%=tag%></a></span>
+          <%end%>
+        <%end%>
+      </div>
     </div>
   </div>
+
+
   <div class="model_details row">
     <div class="span8 description">
       <div class="headline">
         <h1>Description</h1>
       </div>
-      <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a nisl risus. Nunc augue sem, ultricies at urna a, pharetra tempus neque. Aenean porttitor magna vel laoreet sagittis. Proin id metus vitae nisl consequat dignissim in sit amet massa. Quisque viverra ante nulla. Mauris a euismod dolor, in ultrices purus. Quisque auctor, nisl sed euismod fermentum, augue dui commodo nunc, sed auctor mauris libero sed enim. Nunc hendrerit, magna non tincidunt rutrum, ipsum quam ullamcorper lacus, et varius enim enim at justo. </p>
+      <p><%= @model.description %></p>
+
+      <!-- Older versions need to be implemented -->
+      <!-- This section should only appear if there is more than one version. Newer versions are on top. Clicking Download immediately starts the download. -->
+      <!--
       <div class="headline"> <br />
-        <!-- This section should only appear if there is more than one version. Newer versions are on top. Clicking Download immediately starts the download. -->
         <h1>Older Versions</h1>
       </div>
       <table class="table table-striped">
@@ -66,23 +117,74 @@
           <td class="download_link"><a href="#"> Download </a></td>
         </tr>
       </table>
+    -->
     </div>
+
+    <% if @creator and @otherModels.any? %>
     <div class="span4">
       <div class="headline">
-        <h1>Other models by <i> username </i></h1>
+        <h1>Other models by <i> <%= @creator.username %> </i></h1>
       </div>
       <!-- If the user has uploaded other models, up to three of them appear in this box. The name should be truncated with "..." so that it doesn't extend past the width of the thumbnail. -->
       <div class="other_models"> 
         <!-- # is replaced with a link to that model's page -->
         <ul class="thumbnails">
-          <li class="span"> <a href="#">
-            <%= image_tag "wall-e.jpg", alt:"Wall-e robot", :class=>"thumbnail" %> Wall-e</a></li>
-          <li class="span"> <a href="#">
-            <%= image_tag "wall-e.jpg", alt:"Wall-e robot", :class=>"thumbnail" %> Another</a></li>
-          <li class="span"> <a href="#"><%= image_tag "wall-e.jpg", alt:"Wall-e robot", :class=>"thumbnail" %> Wall-e</a></li>
+          <% @otherModels.each do |m| %>
+            <li class="span"> <a href="<%=m.id%>">
+            <%= image_tag "/model/#{m.id}/image/1", alt:"#{m.name}",
+            :class=>"thumbnail" %> <%= m.name %> </a></li>
+          <%end%>
         </ul>
       </div>
     </div>
+  <%end%>
+
   </div>
 </div>
+<script>
+  activeImg = "1";
+  function showHero(_modelId, _id)
+  {
+    document.getElementById('hero_image').src = _modelId.toString() + "/image/" + _id.toString();
 
+    if (activeImg != "")
+    {
+      document.getElementById(activeImg).style.cssText = "width:130px;";
+    }
+
+    document.getElementById(_id).style.cssText =
+      "width:130px;border-color: #404853";
+  }
+
+  function setHero(_id)
+  {
+    activeImg = _id;
+  }
+
+  // Set the initial rating score. Also send an ajax request to set the 
+  // score rating when clicked.
+  $('#star').raty({path: '/assets', halfShow: true,
+    <%if @rating%>
+      score: <%=@rating.score%>,
+    <%else%>
+      score: <%=@model.rating%>,
+      starOn: "star-on-red.png",
+      starHalf: "star-half-red.png",
+    <%end%>
+    mouseover: function(score, evt) {
+      if ($('#star').raty('starOn') == "star-on-red.png")
+      {
+        $('#star').raty('set',
+        {starOn: "star-on.png", starHalf: "star-half.png", score: score});
+      }
+    },
+    click: function(score, evt) {
+      $.ajax({type: "GET",
+        url: <%=raw "\"#{@model.id}/rate\""%>,
+        data: {score: score, user_id: 1},
+        success: function() {
+          $('#star').raty('set', {starOn: "star-on.png", starHalf: "star-half.png", score: score});
+        }
+    })}
+  });
+</script>

@@ -12,6 +12,10 @@ PropShop::Application.routes.draw do
 
   resources :model
 
+  get 'model/:id/image/:num' => 'model#image'
+  get 'model/:id/urdf' => 'model#urdf'
+  get 'model/:id/rate' => 'model#rate'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
