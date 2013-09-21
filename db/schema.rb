@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130912181509) do
+ActiveRecord::Schema.define(version: 20130920232312) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -19,23 +19,27 @@ ActiveRecord::Schema.define(version: 20130912181509) do
     t.datetime "updated_at"
   end
 
+  create_table "model_assets", force: true do |t|
+    t.string   "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "asset_file_name"
+    t.string   "asset_content_type"
+    t.integer  "asset_file_size"
+    t.datetime "asset_updated_at"
+  end
+
   create_table "models", force: true do |t|
     t.string   "name"
     t.text     "description"
-    t.integer  "category_1"
-    t.integer  "category_2"
-    t.integer  "category_3"
     t.string   "tags"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "creator"
     t.float    "rating"
     t.integer  "rating_count"
-    t.string   "image_1"
-    t.string   "image_2"
-    t.string   "image_3"
     t.string   "image_4"
-    t.text     "urdf"
+    t.string   "category"
   end
 
   create_table "ratings", force: true do |t|
@@ -48,10 +52,11 @@ ActiveRecord::Schema.define(version: 20130912181509) do
 
   create_table "users", force: true do |t|
     t.string   "username"
-    t.string   "fname"
-    t.string   "lname"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "identity_url"
+    t.string   "remember_token"
+    t.string   "email"
   end
 
 end

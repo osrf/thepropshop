@@ -23,6 +23,8 @@
 
   <div class="model_details row" style="position:relative;clear: left; float: left; width:100%; display:block">
 
+    <% metaPath = File.join(Rails.root, "app/assets/models", @model.id.to_s, "meta") %>
+
     <div class="span8"
       style="float: left; position: relative; overflow:hidden;">
 
@@ -35,33 +37,40 @@
           </button>
         </div>
 
-        <%= image_tag "/model/#{@model.id}/image/#{@model.image_1}",
-        alt:"Model image", id:"hero_image", style:"height:380px;" %>
+        <% if File.exists?(File.join(metaPath, "1.png")) %>
+          <%= image_tag "/model/#{@model.id}/image/1",
+          alt:"Model image", id:"hero_image", style:"height:380px;" %>
+        <%else%>
+          <%= image_tag "generating_images.png",
+          alt:"Model image", id:"hero_image", style:"height:380px;" %>
+        <%end%>
       </div>
 
-      <div> 
-        <!--The # should be replaced with a link that causes the thumbnail to replace the big hero image when the thumbnail is clicked. Hovering over a thumnbnail should cause it to temporarily replace the hero image. We create a max of 5 images of the model. -->
-        <ul class="thumbnails">
-          <% for i in 1..4 %>
-            <li class="span2">
+      <% if File.exists?(File.join(metaPath, "1.png")) %>
+        <div> 
+          <ul class="thumbnails">
+            <% for i in 1..4 %>
+              <li class="span2">
 
-            <% if i == 1 %>
-              <%style = "width:130px;border-color: #404853"%>
-            <%else%>
-              <%style = "width:130px"%>
+              <% if i == 1 %>
+                <%style = "width:130px;border-color: #404853"%>
+              <%else%>
+                <%style = "width:130px"%>
+              <%end%>
+
+              <%= image_tag "/model/#{@model.id}/image/#{i}",
+              alt:"model thumbnail", id:"#{i}", class:"thumbnail",
+                style:"#{style}",
+                onmouseover:"showHero(#{@model.id}, #{i});",
+                onmouseout:"setHero(#{i});",
+                onclick:"showHero(#{@model.id}, #{i});setHero(#{i});"
+              %>
+              </li>
             <%end%>
+          </ul>
+        </div>
+      <%end%>
 
-            <%= image_tag "/model/#{@model.id}/image/#{i}",
-            alt:"model thumbnail", id:"#{i}", class:"thumbnail",
-              style:"#{style}",
-              onmouseover:"showHero(#{@model.id}, #{i});",
-              onmouseout:"setHero(#{i});",
-              onclick:"showHero(#{@model.id}, #{i});setHero(#{i});"
-            %>
-            </li>
-          <%end%>
-        </ul>
-      </div>
     </div>
 
     <div class="span4" style="bottom:0; right:0; position:absolute; display: block; min-height: 100%"> 
@@ -70,17 +79,18 @@
       <div class="rating">
         Rating:
         <span id="star"></span>
-        <span>(Overall: <%= @model.rating %>)</span>
+        <span>(Overall: <%= @model.rating ? @model.rating : "n/a"%>)</span>
       </div>
 
       <div class="download">
-        <a class="btn btn-large btn-primary" href="#">Download Model</a>
+        <%= link_to "Download Model", "#{@model.id}/download",
+        {:class=>("btn btn-large btn-primary")} %>
       </div>
       <div class="tags span4" style="position: absolute; left: 10px; bottom:28px">
+        <% if @model.tags != "" %>
         <span><strong>Tags</strong></span> 
         <!-- Clicking on a tag should link the user to a search page displaying only results containing that tag. # is replaced with a link to the page --> 
 
-        <% if @model.tags %>
           <% @model.tags.split(',').each do |tag| %>
             <span><a href="#" class="label label-info"><%=tag%></a></span>
           <%end%>
@@ -167,7 +177,7 @@
     <%if @rating%>
       score: <%=@rating.score%>,
     <%else%>
-      score: <%=@model.rating%>,
+      score: <%=@model.rating ? @model.rating : 0.0%>,
       starOn: "star-on-red.png",
       starHalf: "star-half-red.png",
     <%end%>

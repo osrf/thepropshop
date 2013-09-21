@@ -4,35 +4,35 @@
     <h1>Upload a Model</h1>
   </div>
 
-  <%= form_for :model, :url => {:action => :create} do |f| %>
+  <%= form_for :model, :url => {:action => :create},
+    :html => {:onsubmit=>"return validateForm();", :multipart=>true,
+      :id=>"model_form"} do |f| %>
+
   <div class="row">
     <div class="span6">
       <h2> Properties </h2>
       <span><strong>Name</strong></span>
       <br/>
       <%= f.text_field :name,
-        {:class=>"model_text", :placeholder=>"Type model name here..."} %>
+        {:class=>"model_text", :placeholder=>"Type model name here...",
+          :required=>true} %>
       <br/>
 
       <span><strong>Description</strong></span>
       <br/>
       <%= f.text_area :description,
         {:class=>"field span6 upload",
-         :placeholder=>"Add a brief description of your model..."} %>
+          :placeholder=>"Add a brief description of your model...",
+          :required=>true} %>
 
       <br/>
-      <span><strong>Tags</strong></span> 
-
-      <%= f.text_field :tags,
-      {:class=>"model_text",
-       :placeholder=>"ex) humanoid, bipedal, mobile manipulator"} %>
-
+      <span> <strong>Categories:</strong></span>
+      <span style="color:#b94a48" id="category_help"></span>
       <br/>
 
-      <span> <strong>Categories:</strong> Pick up to 3</span>
-      <br/>
-
-      <div class="category_checkboxes row">
+      <div class="category_checkboxes row control-group">
+        <div class="control-group" id="category_div">
+        <fieldset>
         <% catCount=0 %>
         <% rowLimit=5 %>
         <% @categories.each do |cat| %>
@@ -40,8 +40,8 @@
             <div class="span3">
           <%end%>
 
-          <%= f.label cat.name, {:class=>"checkbox"} do%>
-            <%= f.check_box :name=>"cat.name"%>
+          <%= f.label cat.name, {:class=>"radio"} do%>
+            <%= f.radio_button :category, "#{cat.name}"%>
           <%= cat.name %>
           <%end%>
 
@@ -54,19 +54,34 @@
         <% if catCount % rowLimit != 0 %>
           </div>
         <%end%>
+        </fieldset>
       </div>
+      </div>
+      <span><strong>Tags</strong>(optional)</span> 
+
+      <%= f.text_field :tags,
+      {:class=>"model_text",
+       :placeholder=>"ex) humanoid, bipedal, mobile manipulator"} %>
+
+      <br/>
 
       <span><strong>Files</strong>(.sdf, .png, .jpg, .dae, .stl)</span>
+      <span style="color:#b94a48" id="file_help"></span>
       <br/>
 
       <span class="btn btn-success fileinput-button">
         <i class="icon-white icon-plus"></i>
         <span>Add</span>
-        <input type="file" id="select_files" name="select_files[]" multiple/>
+        <%= f.file_field :files, multiple:true, :id=>"select_files" %>
       </span>
       <div style="margin-top: 5px">
-        <table role="presentation" class="table table-striped">
+        <!--<table role="presentation" class="table table-striped">
           <tbody id="list"></tbody>
+        </table>
+        -->
+        <table class="table table-striped">
+          <tbody class="files" data-toggle="modal-gallery"
+            data-target="#modal-gallery" id="list"></tbody>
         </table>
       </div>
 
@@ -77,7 +92,7 @@
       <ul class="guidelines">
         <li> A model name and description are required. </li>
         <li> At least one SDF file is required. </li>
-        <li> Select appropriated tags and categories. </li>
+        <li> Select appropriate tags and categories. </li>
         <li> None of the files uploaded can contain copyrighted material. </li>
         <li> All materials will be licensed under <a href="http://creativecommons.org/licenses/by/3.0/" target="_blank">Creative Commons Attribution 3.0.</a></li>
       </ul>
@@ -108,6 +123,55 @@
 
   function validateForm()
   {
+    var name = document.forms["model_form"]["model[name]"].value;
+    var description = document.forms["model_form"]["model[description]"].value;
+    var category = ""
+
+    document.getElementById('category_help').innerHTML = "";
+    document.getElementById('category_div').className = "control-group";
+
+    document.getElementById('file_help').innerHTML = "";
+
+    var c = document.getElementsByName('model[category]')
+    for(var i = 0; i < c.length; i++)
+    {
+      if (c[i].checked)
+      {
+        category = c[i].value
+      }
+    }
+
+    if (category == "")
+    {
+      document.getElementById('category_div').className += " error";
+      document.getElementById('category_help').innerHTML = "Select a category";
+      return false;
+    }
+
+    var good = false;
+    for (var i=0; i < document.getElementById('list').childNodes.length; ++i)
+    {
+      var id = "filename_"+i.toString();
+      var filename = document.getElementById(id);
+      if (!filename)
+      {
+        break;
+      }
+
+      var parts = filename.innerHTML.split(".");
+      if (parts.length > 1 && parts[parts.length-1] == "sdf")
+      {
+        good = true;
+        break;
+      }
+    }
+
+    if (!good)
+    {
+      document.getElementById('file_help').innerHTML =
+      "Add one or more SDF files.";
+    }
+    return good;
   }
 
   function cancelFile(_id)
@@ -116,7 +180,10 @@
     elem.parentNode.removeChild(elem);
   }
 
-  function handleFileSelect(evt) {
+  function handleFileSelect(evt)
+  {
+    document.getElementById('file_help').innerHTML = "";
+
     // FileList object
     var files = evt.target.files;
     var offset = document.getElementById('list').childNodes.length;
@@ -125,10 +192,11 @@
     var output = [];
     for (var i = 0, f; f = files[i]; i++)
     {
-      output.push('<tr class="fade in" id="file',i+offset,'"><td><span class="preview"</span></td><td><p>', escape(f.name), '</p></td><td>', (f.size / 1024).toFixed(2), ' KB </td><td><button class="btn btn-warning" onclick="cancelFile(\'file',i+offset,'\')"><i class="icon-white icon-ban-circle"></i></button> <input type="hidden" name="file',i+offset,'" value="', escape(f.name),'"/></td></tr>');
+      output.push('<tr class="template-upload fade in" id="file',i+offset,'"><td class="preview"><span class="fade"</span></td><td><p id="filename_',i+offset,'">', escape(f.name), '</p></td><td>', (f.size / 1024).toFixed(2), ' KB </td><td><button class="btn btn-warning" onclick="cancelFile(\'file',i+offset,'\')"><i class="icon-white icon-ban-circle"></i></button> <input type="hidden" name="file',i+offset,'" value="', escape(f.name),'"/></td></tr>');
     }
     document.getElementById('list').innerHTML += output.join('');
   }
 
-  document.getElementById('select_files').addEventListener('change', handleFileSelect, false);
+  document.getElementById('select_files').addEventListener('change',
+    handleFileSelect, false);
 </script>

@@ -71,6 +71,12 @@ ul.nav-pills {
 	left: auto;
 	right: 0px;
 }
+.navigation .dropdown-menu img
+{
+  display: inline-block;
+  margin: 4px;
+}
+
 /*Background color of dropdown menus */
 .dropdown-menu {
 	background-color: #FFFFFF;

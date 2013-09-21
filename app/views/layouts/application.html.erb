@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>The Prop Shop</title>
+  <script src="http://code.jquery.com/jquery.js"></script> 
   <!--
   <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
   <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
@@ -17,19 +18,43 @@
   <div class="container">
     <%= link_to image_tag("white_logo.png", alt:"OSRF logo", size:"217x50"),
       root_path%>
+
     <div class="dropdown login">
       <div class="username_dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#"> Username </a>
-        <ul class="dropdown-menu">
-          <li><a href="ModelsLike.html">Models I Like <i class="icon-heart"></i></a></li>
-          <li><a href="ModelDownloads.html">My Downloads</a></li>
-          <li><a href="models_i_made.html">Models I Made</a></li>
-          <li><a href="#">Logout</a></li>
-        </ul>
+
+        <%if !signed_in?%>
+          <a class="dropdown-toggle"
+            data-toggle="dropdown" href="#"> Login | Signup </a>
+          <div class='dropdown-menu' style="padding: 10px">
+            <p>Sign in using:</p>
+            <%= link_to image_tag("google-icon-32.png", alt:"google"), 
+              {:controller=>"sessions", :action=>"new", :auth=>"google"}%>
+            <%= link_to image_tag("yahoo-icon-32.png", alt:"yahoo"),
+              {:controller=>"sessions", :action=>"new", :auth=>"yahoo"}%>
+            <%= link_to image_tag("openid-icon-32.png", alt:"openid"),
+              {:controller=>"sessions", :action=>"new", :auth=>"openid"}%>
+            <%= link_to image_tag("aol-icon-32.png", alt:"aol"),
+              {:controller=>"sessions", :action=>"new", :auth=>"aol"}%>
+          </div>
+        <%else%>
+          <a class="dropdown-toggle"
+            data-toggle="dropdown" href="#"><%= current_user.username%> </a>
+            <ul class="dropdown-menu">
+              <li><a href="ModelsLike.html">Models I Like 
+                <i class="icon-heart"></i></a></li>
+              <li><a href="ModelDownloads.html">My Downloads</a></li>
+              <li><a href="models_i_made.html">Models I Made</a></li>
+              <li><%= link_to "Log out",
+                {:controller=>"sessions", :action=>"destroy"},
+                :method=>:delete%>
+              </li>
+            </ul>
+        <%end%>
+
       </div>
     </div>
-    <ul class="nav nav-pills">
 
+    <ul class="nav nav-pills">
       <% if @post[:controller] == "pages" and @post[:action] == "index" %>
         <li class='active'>
       <% else %>
@@ -50,8 +75,8 @@
         <li>
       <% end %>
       <%= link_to "About", controller: "pages", action: "about"%></li>
-
     </ul>
+
   </div>
 </div>
 

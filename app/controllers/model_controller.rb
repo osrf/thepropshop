@@ -1,4 +1,5 @@
 class ModelController < ApplicationController
+
   @@modelPath ="#{Rails.root}/app/assets/models/"
 
   def index
@@ -12,9 +13,14 @@ class ModelController < ApplicationController
 
   # Create a new model in the database.
   def create
-    puts params
-    modelParams={name: params["name"], description: params["description"],
-      tags: params["tags"], category_1: 0, category_1: 1, category_2:2 }
+    modelParams=params["model"]
+    modelParams[:rating] = 0.0
+    printf("\n\n\nMODEL CREATE PARAMS\n\n\n")
+    p modelParams
+
+    #modelParams={name: params["name"], description: params["description"],
+    #  tags: params["tags"], category_1: 0, category_1: 1, category_2:2,
+    #  sdf: params["sdf"] }
 
     # Create a new model based on the passed in parameters.
     @model = Model.new(modelParams)
@@ -22,6 +28,61 @@ class ModelController < ApplicationController
     # Save the model to the database.
     # TODO: Add check to make sure model was saved.
     @model.save
+
+    # Create the new model path
+    newModelPath = File.join(@@modelPath, @model.id.to_s)
+    unless File.directory?(newModelPath)
+      # Create materials/textures directory
+      FileUtils.mkdir_p(File.join(newModelPath, "materials", "textures"))
+      # Create materials/scripts directory
+      FileUtils.mkdir_p(File.join(newModelPath, "materials", "scripts"))
+      # Create meshes directory
+      FileUtils.mkdir_p(File.join(newModelPath, "meshes"))
+      # Meta data directory
+      FileUtils.mkdir_p(File.join(newModelPath, "meta"))
+    end
+
+    # Process incoming files
+    modelParams[:files].each do |file|
+      filename = file.original_filename.downcase
+
+      # Make sure "model.sdf" is the name of the SDF file
+      if filename.include?(".sdf")
+        filename = "model.sdf"
+      elsif filename.include?(".jpg") || filename.include?(".png")
+        filename = File.join("materials", "textures", filename)
+      elsif filename.include?(".dae") || filename.include?(".stl")
+        filename = File.join("meshes", filename)
+      elsif filename.include?(".material")
+        filename = File.join("materials", "textures", filename)
+      else
+        filename = ""
+      end
+
+      if filename != ""
+        FileUtils.mv(file.path, File.join(newModelPath, filename))
+      end
+    end
+
+    # Create the model.config file
+    file = File.open(File.join(newModelPath, "model.config"), "w")
+    file.printf("<?xml version='1.0'?>\n<model>\n")
+    file.printf("  <name>%s</name>\n", @model.name)
+    file.printf("  <sdf>model.sdf</sdf>\n")
+    if User.exists?(id: @model.creator)
+      creator = User.find(@model.creator)
+      file.printf("  <author>\n")
+      file.printf("    <name>#{creator.username}</name>\n")
+      file.printf("    <email>#{creator.email}</name>\n")
+      file.printf("  </author>")
+    end
+    file.printf("  <description>\n")
+    file.printf("  %s\n", @model.description)
+    file.printf(" </description>\n")
+    file.printf("</model>\n")
+
+    file = File.open("/tmp/touch/#{@model.id}", "w")
+    file.close
 
     # Redirect to the show action
     redirect_to @model
@@ -72,34 +133,30 @@ class ModelController < ApplicationController
 
   ###############################################
   # \brief Output the URDF file for the model
-  def urdf
+  def sdf
     @model = Model.find(params[:id])
 
     response.headers['Cache-Control'] = "public, max-age=#{12.hours.to_i}"
     response.headers['Content-Type'] = 'text/xml'
     response.headers['Content-Disposition'] = 'inline'
-    render :text => open(@@modelPath + "#{@model.id}/model.sdf", "rb").read
+
+    render :text => File.open(
+      File.join(@@modelPath, "#{params[:id]}/model.sdf")).read
   end
 
   ###############################################
   # \brief Render on the model images
   def image
-    @model = Model.find(params[:id])
-
-    if params[:num].to_i == 1
-      @img = @model.image_1
-    elsif params[:num].to_i == 2
-      @img = @model.image_2
-    elsif params[:num].to_i == 3
-      @img = @model.image_3
-    else
-      @img = @model.image_4
-    end
-
     response.headers['Cache-Control'] = "public, max-age=#{12.hours.to_i}"
     response.headers['Content-Type'] = 'image/jpeg'
     response.headers['Content-Disposition'] = 'inline'
-    render :text => open(@@modelPath + "#{@model.id}/meta/#{@img}", "rb").read
+    render :text => open(@@modelPath +
+                         "#{params[:id]}/meta/#{params[:num]}.png", "rb").read
+  end
+
+  def download
+    @model = Model.find(params[:id])
+    send_file File.join(@@modelPath, "#{params[:id]}/#{params[:id]}.tar.gz"), :type => "application/x-gzip", :filename=>"#{params[:id]}.tar.gz"
   end
 
   private

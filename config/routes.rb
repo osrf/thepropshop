@@ -11,10 +11,14 @@ PropShop::Application.routes.draw do
   get "pages/about" => "pages#about"
 
   resources :model
+  resources :user
 
   get 'model/:id/image/:num' => 'model#image'
-  get 'model/:id/urdf' => 'model#urdf'
+  get 'model/:id/sdf' => 'model#sdf'
   get 'model/:id/rate' => 'model#rate'
+  get 'model/:id/download' => 'model#download'
+
+  resource :session, only: [:new, :create, :destroy]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
