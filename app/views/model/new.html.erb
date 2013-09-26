@@ -119,6 +119,36 @@
 
 <% end %>
 
+<!--This is the modal for signing up-->
+<div id="signin_modal" class="modal hide fade" tabindex="-1" role="dialog"
+  aria-labelledby="myModal" aria-hidden="true">
+
+  <div class="modal-header">
+    <h3 id="myModalLabel">Sign In</h3>
+    Sign in using:
+  </div>
+
+  <div class='modal-body' style="padding: 10px">
+    <%= link_to image_tag("google-icon-32.png", alt:"google"), 
+      {:controller=>"sessions", :action=>"new", :auth=>"google",
+       :redirect=>"#{request.original_url}"},
+      {:style=>"padding-right: 10px"}%>
+    <%= link_to image_tag("yahoo-icon-32.png", alt:"yahoo"),
+      {:controller=>"sessions", :action=>"new", :auth=>"yahoo",
+        :redirect=>"#{request.original_url}"},
+      {:style=>"padding-right: 10px"}%>
+    <%= link_to image_tag("openid-icon-32.png", alt:"openid"),
+      {:controller=>"sessions", :action=>"new", :auth=>"openid",
+       :redirect=>"#{request.original_url}"},
+      {:style=>"padding-right: 10px"}%>
+    <%= link_to image_tag("aol-icon-32.png", alt:"aol"),
+      {:controller=>"sessions", :action=>"new", :auth=>"aol",
+       :redirect=>"#{request.original_url}"},
+      {:style=>"padding-right: 10px"}%>
+  </div>
+</div>
+
+
 <script>
 
   function validateForm()
@@ -199,4 +229,9 @@
 
   document.getElementById('select_files').addEventListener('change',
     handleFileSelect, false);
+
+  <%if !current_user%>
+    $('#signin_modal').modal()
+  <%end%>
+
 </script>

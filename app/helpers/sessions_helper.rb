@@ -1,8 +1,9 @@
 module SessionsHelper
-  def sign_in(user)
+  def sign_in(user, redirect)
     cookies.permanent[:remember_token] = user.id
     self.current_user = user
-    redirect_to root_path
+    #redirect_to eval(redirect)
+    redirect_to redirect
   end
 
   def current_user=(user)

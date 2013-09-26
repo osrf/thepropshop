@@ -28,13 +28,17 @@
           <div class='dropdown-menu' style="padding: 10px">
             <p>Sign in using:</p>
             <%= link_to image_tag("google-icon-32.png", alt:"google"), 
-              {:controller=>"sessions", :action=>"new", :auth=>"google"}%>
+              {:controller=>"sessions", :action=>"new", :auth=>"google",
+                :redirect=>"#{request.original_url}"}%>
             <%= link_to image_tag("yahoo-icon-32.png", alt:"yahoo"),
-              {:controller=>"sessions", :action=>"new", :auth=>"yahoo"}%>
+              {:controller=>"sessions", :action=>"new", :auth=>"yahoo",
+                :redirect=>"#{request.original_url}"}%>
             <%= link_to image_tag("openid-icon-32.png", alt:"openid"),
-              {:controller=>"sessions", :action=>"new", :auth=>"openid"}%>
+              {:controller=>"sessions", :action=>"new", :auth=>"openid",
+                :redirect=>"#{request.original_url}" }%>
             <%= link_to image_tag("aol-icon-32.png", alt:"aol"),
-              {:controller=>"sessions", :action=>"new", :auth=>"aol"}%>
+              {:controller=>"sessions", :action=>"new", :auth=>"aol",
+                :redirect=>"#{request.original_url}"}%>
           </div>
         <%else%>
           <a class="dropdown-toggle"
@@ -82,5 +86,91 @@
 
 <%= yield %>
 
+<footer id="footer">
+ Except where otherwise noted, the WhatEverThisWebPageIs.org web pages are licensed under <a href="http://creativecommons.org/licenses/by/3.0/"> Creative Commons Attribution 3.0</a>
+</footer>
+
+<!--This is the modal for signing up-->
+<div id="signup_modal" class="modal hide fade" tabindex="-1" role="dialog"
+  aria-labelledby="myModal" aria-hidden="true">
+
+  <div class="modal-header">
+    <h3 id="myModalLabel">Pick a username</h3>
+    <p>Select a username to associate with your OpenID account.</p>
+  </div>
+
+  <div class="modal-body">
+    <%= form_for :user, :url => {:controller=>:user, :action => :create},
+      :html => {:onsubmit=>"return validateUsernameForm();",
+        :id=>"username_form"} do |f| %>
+
+        <%if current_user%>
+          <input type="hidden" name="id" value="<%=current_user.id%>"/>
+        <%end%>
+
+        <div class="control-group" id="username_div">
+          <label>Username*</label>
+          <div class="controls">
+            <%= f.text_field "username", {:placeholder=>"Pick a username...",
+              :required=>true}%>
+            <span class="help-inline" id="username_help"
+              style="padding-bottom:10px"></span>
+          </div>
+        </div>
+
+        <div class="control-group" id="confirm_div">
+          <label>Re-type username*</label>
+          <div class="controls">
+            <%= f.text_field "confirm", {:placeholder=>"Type if again...",
+              :required=>true}%>
+            <span class="help-inline" id="confirm_help"
+              style="padding-bottom:10px"></span>
+          </div>
+        </div>
+
+      <div class="signup-buttons pull-right">
+        <%= f.submit "Submit",:class => "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<script>
+  function validateUsernameForm()
+  {
+    var username = document.forms["username_form"]["user[username]"].value;
+    var username2 = document.forms["username_form"]["user[confirm]"].value;
+    document.getElementById('username_help').innerHTML = "";
+    document.getElementById('confirm_help').innerHTML = "";
+
+    document.getElementById('username_div').className = "control-group";
+    document.getElementById('confirm_div').className = "control-group";
+
+    if (username != null && username != "" && username == username2)
+    {
+      return true;
+    }
+    else
+    {
+      if (username == null || username == "")
+      {
+        document.getElementById('username_div').className += " error";
+        document.getElementById('username_help').innerHTML =
+        "Please choose a username";
+      }
+      else if (username != username2)
+      {
+        document.getElementById('confirm_div').className += " error";
+        document.getElementById('confirm_help').innerHTML =
+        "Username must match";
+      }
+      return false;
+    }
+  }
+
+  <%if current_user && !current_user.username%>
+    $('#signup_modal').modal()
+  <%end%>
+</script>
 </body>
 </html>

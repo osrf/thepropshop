@@ -15,12 +15,7 @@ class ModelController < ApplicationController
   def create
     modelParams=params["model"]
     modelParams[:rating] = 0.0
-    printf("\n\n\nMODEL CREATE PARAMS\n\n\n")
-    p modelParams
-
-    #modelParams={name: params["name"], description: params["description"],
-    #  tags: params["tags"], category_1: 0, category_1: 1, category_2:2,
-    #  sdf: params["sdf"] }
+    modelParams[:creator] = current_user.username
 
     # Create a new model based on the passed in parameters.
     @model = Model.new(modelParams)
@@ -69,6 +64,7 @@ class ModelController < ApplicationController
     file.printf("<?xml version='1.0'?>\n<model>\n")
     file.printf("  <name>%s</name>\n", @model.name)
     file.printf("  <sdf>model.sdf</sdf>\n")
+    file.printf("  <category>%s</category>\n", @model.category)
     if User.exists?(id: @model.creator)
       creator = User.find(@model.creator)
       file.printf("  <author>\n")

@@ -30,96 +30,14 @@
     </div>
 
     <ul class="thumbnails">
-      <li class="span3">
-      <%= link_to image_tag("wall-e.jpg", alt:"Wall-e robot"),
-        {controller: "pages", action: "category", category: "robots"},
-        {:class=>("thumbnail")} %> Robots</li>
-      <li class="span3"> <a href="#" class="thumbnail"> <%= image_tag "wall-e.jpg", alt:"Wall-e robot" %> </a> People/Animals </li>
-      <li class="span3"> <a href="#" class="thumbnail"> <%= image_tag "wall-e.jpg", alt:"Wall-e robot" %> </a> Buildings </li>
-      <li class="span3"> <a href="#" class="thumbnail"> <%= image_tag "wall-e.jpg", alt:"Wall-e robot" %> </a> Tools </li>
-      <li class="span3"> <a href="#" class="thumbnail"> <%= image_tag "wall-e.jpg", alt:"Wall-e robot" %> </a> Vehicles </li>
+      <% @categories.each do |cat| %>
+        <li class="span3">
+          <%= link_to image_tag("wall-e.jpg", alt:"Wall-e robot"),
+            {controller: "pages", action: "search", category: "#{cat.name}"},
+            {:class=>("thumbnail")} %> <%= cat.name.capitalize %>
+        </li>
+      <%end%>
     </ul>
+
   </div>
 </div>
-
-<!--This is the modal for signing up-->
-<div id="signup_modal" class="modal hide fade" tabindex="-1" role="dialog"
-  aria-labelledby="myModal" aria-hidden="true">
-
-  <div class="modal-header">
-    <h3 id="myModalLabel">Pick a username</h3>
-    <p>Select a username to associate with your OpenID account.</p>
-  </div>
-
-  <div class="modal-body">
-    <%= form_for :user, :url => {:controller=>:user, :action => :create},
-      :html => {:onsubmit=>"return validateForm();",
-        :id=>"username_form"} do |f| %>
-
-        <%if current_user%>
-          <input type="hidden" name="id" value="<%=current_user.id%>"/>
-        <%end%>
-
-        <div class="control-group" id="username_div">
-          <label>Username*</label>
-          <div class="controls">
-            <%= f.text_field "username", {:placeholder=>"Pick a username..."}%>
-            <span class="help-inline" id="username_help"
-              style="padding-bottom:10px"></span>
-          </div>
-        </div>
-
-        <div class="control-group" id="confirm_div">
-          <label>Re-type username*</label>
-          <div class="controls">
-            <%= f.text_field "confirm", {:placeholder=>"Type if again..."}%>
-            <span class="help-inline" id="confirm_help"
-              style="padding-bottom:10px"></span>
-          </div>
-        </div>
-
-      <div class="signup-buttons pull-right">
-        <%= f.submit "Submit",:class => "btn btn-primary" %>
-      </div>
-    <% end %>
-  </div>
-
-</div>
-
-<script>
-  function validateForm()
-  {
-    var username = document.forms["username_form"]["user[username]"].value;
-    var username2 = document.forms["username_form"]["user[confirm]"].value;
-    document.getElementById('username_help').innerHTML = "";
-    document.getElementById('confirm_help').innerHTML = "";
-
-    document.getElementById('username_div').className = "control-group";
-    document.getElementById('confirm_div').className = "control-group";
-
-    if (username != null && username != "" && username == username2)
-    {
-      return true;
-    }
-    else
-    {
-      if (username == null || username == "")
-      {
-        document.getElementById('username_div').className += " error";
-        document.getElementById('username_help').innerHTML =
-        "Please choose a username";
-      }
-      else if (username != username2)
-      {
-        document.getElementById('confirm_div').className += " error";
-        document.getElementById('confirm_help').innerHTML =
-        "Username must match";
-      }
-      return false;
-    }
-  }
-
-  <%if current_user && !current_user.username%>
-    $('#signup_modal').modal()
-  <%end%>
-</script>

@@ -15,16 +15,7 @@ class SessionsController < ApplicationController
         :required => [:nickname, :email, 'http://axschema.org/contact/email',
           'http://schema.openid.net/contact/email',
           'http://openid.net/schema/contact/email']) do |result, identity_url, registration|
-      puts "ID URL:"
-      puts identity_url
-      puts "RESULT:"
-      puts result.message
-      puts "Registration"
-      p registration.data
       ax_response = OpenID::AX::FetchResponse.from_success_response(request.env[Rack::OpenID::RESPONSE])
-
-      puts "AX"
-      p ax_response
 
       # Create array of all possible emails
       email = [registration['email'], 
@@ -41,8 +32,8 @@ class SessionsController < ApplicationController
           user.email = email
           user.save
         end
-        puts "Sign in user"
-        sign_in user
+
+        sign_in user, params[:redirect]
       else
         puts "Render new"
         render 'new'

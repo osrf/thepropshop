@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
   def index
     @post = params
+    @categories = Category.all
   end
 
   def about
@@ -8,6 +9,10 @@ class PagesController < ApplicationController
   end
 
   def category
+    @post = params
+  end
+
+  def search
     @post = params
   end
 
