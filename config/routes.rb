@@ -9,7 +9,8 @@ PropShop::Application.routes.draw do
 
   get "about" => "pages#about"
   get "pages/about" => "pages#about"
-  get "pages/search" => "pages#search"
+  post "pages/search" => "pages#search"
+  get "pages/browse/:category" => "pages#browse"
 
   resources :model
   resources :user
@@ -18,6 +19,11 @@ PropShop::Application.routes.draw do
   get 'model/:id/sdf' => 'model#sdf'
   get 'model/:id/rate' => 'model#rate'
   get 'model/:id/download' => 'model#download'
+  get 'model/:id/like/:user' => 'model#like'
+
+  get 'user/:id/downloads' => 'user#downloads'
+  get 'user/:id/created' => 'user#created'
+  get 'user/:id/likes' => 'user#likes'
 
   resource :session, only: [:new, :create, :destroy]
 

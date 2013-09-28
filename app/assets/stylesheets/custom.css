@@ -177,6 +177,63 @@ a.dropdown-toggle {
 	padding-bottom: 4px;
 	margin: 0;
 }
+
+.model_like_image
+{
+  background: url('like_heart_grey.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 18px;
+  height: 18px;
+  display:block;
+}
+.model_like_image:hover
+{
+  background: url('like_heart.svg');
+  background-size: contain; 
+  background-repeat: no-repeat;
+  width: 18px;
+  height: 18px;
+  display:block;
+}
+
+.model_dislike_image
+{
+  background: url('like_heart_broken.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 18px;
+  height: 18px;
+  display:block;
+}
+.model_dislike_image:hover
+{
+  background: url('like_heart.svg');
+  background-size: contain; 
+  background-repeat: no-repeat;
+  width: 18px;
+  height: 18px;
+  display:block;
+}
+
+.model_liked_image
+{
+  background: url('like_heart.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 18px;
+  height: 18px;
+  display:block;
+}
+.model_liked_image:hover
+{
+  background: url('like_heart_broken.svg');
+  background-size: contain; 
+  background-repeat: no-repeat;
+  width: 18px;
+  height: 18px;
+  display:block;
+}
 .headline h1 i.like {
 /*background-image: url('..');*/
 }

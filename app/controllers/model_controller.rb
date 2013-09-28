@@ -15,7 +15,7 @@ class ModelController < ApplicationController
   def create
     modelParams=params["model"]
     modelParams[:rating] = 0.0
-    modelParams[:creator] = current_user.username
+    modelParams[:creator] = current_user.id
 
     # Create a new model based on the passed in parameters.
     @model = Model.new(modelParams)
@@ -77,7 +77,8 @@ class ModelController < ApplicationController
     file.printf(" </description>\n")
     file.printf("</model>\n")
 
-    file = File.open("/tmp/touch/#{@model.id}", "w")
+    # Used to trigger image generation
+    file = File.open("/tmp/touch/#{@model.id}.#{@model.name}", "w")
     file.close
 
     # Redirect to the show action
@@ -105,6 +106,30 @@ class ModelController < ApplicationController
       end
     rescue Exception=>e
     end
+  end
+
+  ###############################################
+  # \brief Like/dislike a model
+  def like
+    result = "success"
+    if Likes.where(user_id: params[:user], model_id: params[:id]).first.blank?
+      like = Likes.new(user_id: params[:user],
+                       model_id: params[:id], value: true)
+      like.save
+      result = "like_heart.svg"
+    else
+      like = Likes.where(user_id: params[:user], model_id: params[:id]).first
+      like.value = !like.value
+      if like.value?
+        result = "like_heart.svg"
+      else
+        result = "like_heart_broken.svg"
+      end
+
+      like.save
+    end
+
+    render :text=>result
   end
 
   ###############################################
@@ -146,13 +171,34 @@ class ModelController < ApplicationController
     response.headers['Cache-Control'] = "public, max-age=#{12.hours.to_i}"
     response.headers['Content-Type'] = 'image/jpeg'
     response.headers['Content-Disposition'] = 'inline'
-    render :text => open(@@modelPath +
-                         "#{params[:id]}/meta/#{params[:num]}.png", "rb").read
+    metaPath = File.join(@@modelPath, "#{params[:id]}/meta")
+    if File.exists?(File.join(metaPath, "#{params[:num]}.png"))
+      render :text => open(
+        File.join(metaPath, "#{params[:num]}.png"), "rb").read
+    else
+      render :text => open(
+        "#{Rails.root}/app/assets/images/generating_images.png", "rb").read
+    end
   end
 
   def download
     @model = Model.find(params[:id])
-    send_file File.join(@@modelPath, "#{params[:id]}/#{params[:id]}.tar.gz"), :type => "application/x-gzip", :filename=>"#{params[:id]}.tar.gz"
+
+    # If the user is signed in, then update their download history
+    if signed_in?
+      user = current_user
+      if Downloads.where(:model_id => @model.id,
+                         :user_id => user.id).first.blank?
+        # Create a new entry in the dl database
+        dl = Downloads.new(:model_id => @model.id, :user_id => user.id)
+        dl.save
+      else
+        # Update the updated_at column
+        Downloads.where(:model_id => @model.id, :user_id => user.id).first.touch
+      end
+    end
+
+    send_file File.join(@@modelPath, "#{params[:id]}/#{@model.id}.tar.gz"), :type => "application/x-gzip", :filename=>"#{@model.id}.tar.gz"
   end
 
   private

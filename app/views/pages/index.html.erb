@@ -1,26 +1,25 @@
 <div class="container">
   <div class="headline search">
     <h1>Search for a model</h1>
-    <form class="form-search">
-      <input type="text" class="input-xlarge search-query" placeholder="Enter a search item...">
-      <select class="selectpicker">
-        <optgroup label="Category">
-          <option>All Categories</option>
-          <option>Robots</option>
-          <option>People/Animals</option>
-          <option>Buildings</option>
-          <option>Tools</option>
-          <option>Vehicles</option>
-        </optgroup>
-        <optgroup label="Other">
-          <option>Username</option>
-        </optgroup>
-      </select>
 
-      <!--Clicking Search takes user to search results page.
-      Search results remain in search bar --> 
-      <button type="submit" class="btn">Search</button>
-    </form>
+    <%= form_for :pages, :url => {:action => :search},
+      :html => {:class => "form-search"} do |f| %>
+
+      <%= f.text_field :search,
+        {:class=>"input-xlarge search-query",
+          :placeholder=>"Enter a search term...",
+          :required=>true} %>
+
+      <%= select_tag(:scope,
+          grouped_options_for_select([['Category', 
+          ['All Categories', 'Robots', 'People', 'Animals',
+          'Buildings', 'Vehicles']],
+          ['Other',
+            ['Username']]]), :class=>"selectpicker") %>
+
+      <%= f.submit "Submit", :class => "btn" %>
+
+    <%end%>
   </div>
 
   <div class="categories">
@@ -32,8 +31,10 @@
     <ul class="thumbnails">
       <% @categories.each do |cat| %>
         <li class="span3">
-          <%= link_to image_tag("wall-e.jpg", alt:"Wall-e robot"),
-            {controller: "pages", action: "search", category: "#{cat.name}"},
+          <%model = Model.where(category: cat.name).first%>
+          <%= link_to image_tag("/model/#{model.id}/image/1",
+                                alt: "#{model.name}"),
+            {controller: "pages", action: "browse", category: "#{cat.name}"},
             {:class=>("thumbnail")} %> <%= cat.name.capitalize %>
         </li>
       <%end%>

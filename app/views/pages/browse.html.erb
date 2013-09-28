@@ -1,0 +1,39 @@
+<div class="container">
+
+  <div class="headline models_downloaded">
+    <h1>Category Name</h1>
+  </div>
+
+  <%if !@models.empty?%>
+    <div class="categories">
+      <ul class="thumbnails_preferences thumbnail_margin_bottom">
+        <%@models.each do |model|%>
+          <li class="span2">
+            <%= link_to image_tag("/model/#{model.id}/image/1", alt: "#{model.name}"),
+              {controller: "model", action: "show", id:"#{model.id}"},
+              {:class=>"thumbnail"} %>
+
+            <div class="line_height">
+              <%= link_to "#{model.name}",
+                {controller: "model", action: "show", id:"#{model.id}"} %>
+            </div>
+
+            <span class="subtext">By:
+            <%if !model.creator%>
+              Anonymous
+            <%else%>
+              <%=User.find(model.creator).username%>
+            <%end%>
+            </span>
+
+            <br/>
+          </li>
+        <%end%>
+      </ul>
+    </div>
+
+  <%else%>
+    <p>Sorry, no models are in this category.</p>
+  <%end%>
+
+</div>
