@@ -28,17 +28,19 @@
       <br />
     </div>
 
-    <ul class="thumbnails">
-      <% @categories.each do |cat| %>
-        <li class="span3">
-          <%model = Model.where(category: cat.name).first%>
-          <%= link_to image_tag("/model/#{model.id}/image/1",
-                                alt: "#{model.name}"),
-            {controller: "pages", action: "browse", category: "#{cat.name}"},
-            {:class=>("thumbnail")} %> <%= cat.name.capitalize %>
-        </li>
-      <%end%>
-    </ul>
+    <%if !@categories.empty? %>
+      <ul class="thumbnails">
+        <% @categories.each do |cat| %>
+          <li class="span3">
+            <%model = Model.where(category: cat.name).first%>
+            <%= link_to image_tag("/model/#{model.id}/image/1",
+                                  alt: "#{model.name}"),
+              {controller: "pages", action: "browse", category: "#{cat.name}"},
+              {:class=>("thumbnail")} %> <%= cat.name.capitalize %>
+          </li>
+        <%end%>
+      </ul>
+    <%end%>
 
   </div>
 </div>

@@ -1,2 +1,4 @@
 tmp
 app/assets/models
+public/assets
+log/
