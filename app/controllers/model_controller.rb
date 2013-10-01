@@ -13,7 +13,8 @@ class ModelController < ApplicationController
     @categories = Category.all
   end
 
-  # Create a new model in the database.
+  ###############################################
+  # \brief Create a new model in the database.
   def create
     modelParams=params["model"]
     modelParams[:rating] = 0.0
@@ -57,10 +58,15 @@ class ModelController < ApplicationController
     file.printf(" </description>\n")
     file.printf("</model>\n")
 
+    cat = Category.where(:name=>@model.category).first
+    cat.model_count += 1
+    cat.save
+
     # Redirect to the show action
     redirect_to @model
   end
 
+  ###############################################
   def show
     @otherModels = []
 
