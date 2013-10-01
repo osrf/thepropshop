@@ -1,7 +1,25 @@
 <div class="container">
   <div class="headline search">
     <h1>Search for a model</h1>
+    <%= form_tag("/pages/search", :class => "form-search", :method=>'get') do%>
 
+      <%= text_field_tag(:search, "",
+        :class=>"input-xlarge search-query",
+        :placeholder=>"Enter a search term...",
+          :required=>true) %>
+
+      <%= select_tag(:scope,
+          grouped_options_for_select([['Category', 
+          ['All Categories', 'Robots', 'People', 'Animals',
+          'Buildings', 'Vehicles']],
+          ['Other',
+            ['Username']]]), :class=>"selectpicker") %>
+
+      <%= submit_tag("Submit", :class => "btn") %>
+
+    <%end%>
+
+    <!--
     <%= form_for :pages, :url => {:action => :search},
       :html => {:class => "form-search"} do |f| %>
 
@@ -20,6 +38,7 @@
       <%= f.submit "Submit", :class => "btn" %>
 
     <%end%>
+    -->
   </div>
 
   <div class="categories">

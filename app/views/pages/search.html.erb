@@ -2,13 +2,12 @@
   <div class="headline search">
     <h1>Search for a model</h1>
 
-    <%= form_for :pages, :url => {:action => :search},
-      :html => {:class => "form-search"} do |f| %>
+    <%= form_tag("/pages/search", :class => "form-search", :method=>'get') do%>
 
-      <%= f.text_field :search,
-        {:class=>"input-xlarge search-query",
-          :placeholder=>"Enter a search term...",
-          :required=>true} %>
+      <%= text_field_tag(:search, "",
+        :class=>"input-xlarge search-query",
+        :placeholder=>"Enter a search term...",
+        :required=>true) %>
 
       <%= select_tag(:scope,
           grouped_options_for_select([['Category', 
@@ -17,7 +16,7 @@
           ['Other',
             ['Username']]]), :class=>"selectpicker") %>
 
-      <%= f.submit "Submit", :class => "btn" %>
+      <%= submit_tag("Submit", :class => "btn") %>
 
     <%end%>
   </div>
@@ -26,7 +25,7 @@
   	<div class="search_results_data">
       <ul class="search_restrictions">
         <li>
-          <%= @post[:pages][:search] %>
+          <%= @post[:search] %>
           <span class="count"><%=@models.size%> items</span>
         </li>
 

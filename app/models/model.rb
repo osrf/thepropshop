@@ -4,4 +4,5 @@ class Model < ActiveRecord::Base
   attr_accessible :tags
   attr_accessible :category
   attr_accessible :rating
+  attr_accessible :creator
 end

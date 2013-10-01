@@ -14,15 +14,16 @@ class PagesController < ApplicationController
 
   def search
     @post = params
+
     if params[:scope] == "All Categories"
       @models = Model.where("name LIKE ? OR description LIKE ? OR tags like ?",
-                            params[:pages][:search], params[:pages][:search],
-                            params[:pages][:search])
+                            params[:search], params[:search],
+                            params[:search])
     else
       @models = Model.where(
         "(name LIKE ? OR description LIKE ? OR tags LIKE ?) AND category = ?",
-                            params[:pages][:search], params[:pages][:search],
-                            params[:pages][:search], params[:scope].singularize)
+                            params[:search], params[:search],
+                            params[:search], params[:scope].singularize)
     end
   end
 

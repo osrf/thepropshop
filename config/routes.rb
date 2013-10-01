@@ -10,6 +10,7 @@ PropShop::Application.routes.draw do
   get "about" => "pages#about"
   get "pages/about" => "pages#about"
   post "pages/search" => "pages#search"
+  get "pages/search" => "pages#search"
   get "pages/browse/:category" => "pages#browse"
 
   resources :model

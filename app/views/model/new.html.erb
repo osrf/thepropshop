@@ -65,14 +65,16 @@
 
       <br/>
 
-      <span><strong>Files</strong>(.sdf, .png, .jpg, .dae, .stl)</span>
+      <span><strong>Model Tarball</strong></span>
       <span style="color:#b94a48" id="file_help"></span>
+      <br/>
+      Select the [model_name].tar.gz file created by the <tt>gzprop</tt> program.
       <br/>
 
       <span class="btn btn-success fileinput-button">
         <i class="icon-white icon-plus"></i>
         <span>Add</span>
-        <%= f.file_field :files, multiple:true, :id=>"select_files" %>
+        <%= f.file_field :files, :id=>"select_files" %>
       </span>
 
       <div style="margin-top: 5px">
@@ -190,7 +192,7 @@
       }
 
       var parts = filename.innerHTML.split(".");
-      if (parts.length > 1 && parts[parts.length-1] == "sdf")
+      if (parts.length > 1 && parts[parts.length-1] == "gz")
       {
         good = true;
         break;
@@ -200,7 +202,7 @@
     if (!good)
     {
       document.getElementById('file_help').innerHTML =
-      "Add one or more SDF files.";
+      "Add a model.tar.gz file.";
     }
     return good;
   }
@@ -225,7 +227,7 @@
     {
       output.push('<tr class="template-upload fade in" id="file',i+offset,'"><td class="preview"><span class="fade"</span></td><td><p id="filename_',i+offset,'">', escape(f.name), '</p></td><td>', (f.size / 1024).toFixed(2), ' KB </td><td><button class="btn btn-warning" onclick="cancelFile(\'file',i+offset,'\')"><i class="icon-white icon-ban-circle"></i></button> <input type="hidden" name="file',i+offset,'" value="', escape(f.name),'"/></td></tr>');
     }
-    document.getElementById('list').innerHTML += output.join('');
+    document.getElementById('list').innerHTML = output.join('');
   }
 
   document.getElementById('select_files').addEventListener('change',

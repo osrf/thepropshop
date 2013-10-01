@@ -28,7 +28,8 @@
     <div class="span8"
       style="float: left; position: relative; overflow:hidden;">
 
-      <div style="margin-bottom:5px; border: 1px solid #e6e6e6; position:relative">
+      <div
+        style="margin-bottom:5px; border: 1px solid #e6e6e6; position:relative">
 
         <%if signed_in? %>
           <div style="position: absolute; top:10px; right: 10px;"
@@ -50,7 +51,7 @@
         <%end%>
 
         <%= image_tag "/model/#{@model.id}/image/1",
-        alt:"Model image", id:"hero_image", style:"height:380px;" %>
+        alt:"Model image", id:"hero_image" %>
       </div>
 
       <% if File.exists?(File.join(metaPath, "1.png")) %>
@@ -60,9 +61,9 @@
               <li class="span2">
 
               <% if i == 1 %>
-                <%style = "width:130px;border-color: #404853"%>
+                <%style = "width:160px;border-color: #404853"%>
               <%else%>
-                <%style = "width:130px"%>
+                <%style = "width:160px;"%>
               <%end%>
 
               <%= image_tag "/model/#{@model.id}/image/#{i}",
@@ -86,7 +87,7 @@
       <div class="rating">
         Rating:
         <span id="star"></span>
-        <span>(Overall: <%= @model.rating ? @model.rating : "n/a"%>)</span>
+        <span>(Overall: <span id='overall'><%= @model.rating ? @model.rating : "n/a"%></span>)</span>
       </div>
 
       <div class="download">
@@ -96,10 +97,13 @@
       <div class="tags span4" style="position: absolute; left: 10px; bottom:28px">
         <% if @model.tags != "" %>
         <span><strong>Tags</strong></span> 
-        <!-- Clicking on a tag should link the user to a search page displaying only results containing that tag. # is replaced with a link to the page --> 
 
           <% @model.tags.split(',').each do |tag| %>
-            <span><a href="#" class="label label-info"><%=tag%></a></span>
+            <span>
+              <%= link_to tag, {:controller=>'pages', :action=>'search',
+                :scope=>'All Categories', :search=>"#{tag}"},
+                {:class=>"label label-info"} %>
+            </span>
           <%end%>
         <%end%>
       </div>
@@ -166,11 +170,11 @@
 
     if (activeImg != "")
     {
-      document.getElementById(activeImg).style.cssText = "width:130px;";
+      document.getElementById(activeImg).style.cssText = "width:160px;";
     }
 
     document.getElementById(_id).style.cssText =
-      "width:130px;border-color: #404853";
+      "width:160px;border-color: #404853";
   }
 
   function setHero(_id)
@@ -228,14 +232,17 @@
       $('#star').raty('set',
       {starOn: "star-on.png", starHalf: "star-half.png", score: g_score});
     },
+    <%if signed_in? %>
     click: function(score, evt) {
       $.ajax({type: "GET",
         url: <%=raw "\"#{@model.id}/rate\""%>,
-        data: {score: score, user_id: 1},
-        success: function() {
+        data: {score: score, user_id: <%=current_user.id%>},
+        success: function(_overall) {
           g_score = score;
           $('#star').raty('set', {starOn: "star-on.png", starHalf: "star-half.png", score: score});
+          document.getElementById('overall').innerHTML = _overall.toString();
         }
     })}
+  <%end%>
   });
 </script>

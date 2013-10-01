@@ -1,3 +1,4 @@
+require 'tmpdir'
 class ModelController < ApplicationController
 
   @@modelPath ="#{Rails.root}/app/assets/models/"
@@ -26,38 +27,16 @@ class ModelController < ApplicationController
 
     # Create the new model path
     newModelPath = File.join(@@modelPath, @model.id.to_s)
-    unless File.directory?(newModelPath)
-      # Create materials/textures directory
-      FileUtils.mkdir_p(File.join(newModelPath, "materials", "textures"))
-      # Create materials/scripts directory
-      FileUtils.mkdir_p(File.join(newModelPath, "materials", "scripts"))
-      # Create meshes directory
-      FileUtils.mkdir_p(File.join(newModelPath, "meshes"))
-      # Meta data directory
-      FileUtils.mkdir_p(File.join(newModelPath, "meta"))
-    end
 
-    # Process incoming files
-    modelParams[:files].each do |file|
-      filename = file.original_filename.downcase
+    Dir.mktmpdir { |dir|
+      `tar xvf #{modelParams[:files].path} -C #{dir}`
 
-      # Make sure "model.sdf" is the name of the SDF file
-      if filename.include?(".sdf")
-        filename = "model.sdf"
-      elsif filename.include?(".jpg") || filename.include?(".png")
-        filename = File.join("materials", "textures", filename)
-      elsif filename.include?(".dae") || filename.include?(".stl")
-        filename = File.join("meshes", filename)
-      elsif filename.include?(".material")
-        filename = File.join("materials", "textures", filename)
-      else
-        filename = ""
-      end
+      # \todo Validate the uploaded data here.
 
-      if filename != ""
-        FileUtils.mv(file.path, File.join(newModelPath, filename))
-      end
-    end
+      `mv #{dir}/* #{newModelPath}`
+      FileUtils.mv(modelParams[:files].path,
+                   File.join(newModelPath, @model.id.to_s + ".tar.gz"))
+    }
 
     # Create the model.config file
     file = File.open(File.join(newModelPath, "model.config"), "w")
@@ -77,10 +56,6 @@ class ModelController < ApplicationController
     file.printf(" </description>\n")
     file.printf("</model>\n")
 
-    # Used to trigger image generation
-    file = File.open("/tmp/touch/#{@model.id}.#{@model.name}", "w")
-    file.close
-
     # Redirect to the show action
     redirect_to @model
   end
@@ -92,9 +67,10 @@ class ModelController < ApplicationController
 
     @model = Model.find(params[:id]) rescue render_404
 
-    # \todo: Replace "1" with session user_id.
-    @rating = Rating.where("model_id = ? AND user_id = ?",
-                           params[:id], 1).first
+    if signed_in?
+      @rating = Rating.where("model_id = ? AND user_id = ?",
+                             params[:id], current_user.id).first
+    end
 
     begin
       @creator = User.find(@model.creator)
@@ -149,7 +125,17 @@ class ModelController < ApplicationController
     end
     row.save
 
-    render :text=>"success"
+    total = 0
+    # Update model rating
+    rows = Rating.where(:model_id=>params[:id])
+    rows.each do |r|
+      total += r.score
+    end
+    model = Model.find(params[:id])
+    model.rating = (total / rows.size).round(1)
+    model.save
+
+    render :text=>model.rating
   end
 
   ###############################################
