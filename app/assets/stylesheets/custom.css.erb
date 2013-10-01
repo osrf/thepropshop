@@ -173,7 +173,7 @@ a.dropdown-toggle {
 
 .model_like_image
 {
-  background: url('like_heart_grey.svg');
+  background: url(<%= asset_path 'like_heart_grey.svg' %>);
   background-size: contain;
   background-repeat: no-repeat;
   width: 18px;
@@ -182,7 +182,7 @@ a.dropdown-toggle {
 }
 .model_like_image:hover
 {
-  background: url('like_heart.svg');
+  background: url(<%= asset_path 'like_heart.svg' %>);
   background-size: contain; 
   background-repeat: no-repeat;
   width: 18px;
@@ -192,7 +192,7 @@ a.dropdown-toggle {
 
 .model_dislike_image
 {
-  background: url('like_heart_broken.svg');
+  background: url(<%= asset_path 'like_heart_broken.svg'%>);
   background-size: contain;
   background-repeat: no-repeat;
   width: 18px;
@@ -201,7 +201,7 @@ a.dropdown-toggle {
 }
 .model_dislike_image:hover
 {
-  background: url('like_heart.svg');
+  background: url(<%= asset_path 'like_heart.svg'%>);
   background-size: contain; 
   background-repeat: no-repeat;
   width: 18px;
@@ -211,7 +211,7 @@ a.dropdown-toggle {
 
 .model_liked_image
 {
-  background: url('like_heart.svg');
+  background: url(<%= asset_path 'like_heart.svg'%>);
   background-size: contain;
   background-repeat: no-repeat;
   width: 18px;
@@ -220,7 +220,7 @@ a.dropdown-toggle {
 }
 .model_liked_image:hover
 {
-  background: url('like_heart_broken.svg');
+  background: url(<%= asset_path 'like_heart_broken.svg'%>);
   background-size: contain; 
   background-repeat: no-repeat;
   width: 18px;
@@ -600,8 +600,4 @@ border-left: 1px solid #c3c3c3;
   font-size: 23px;
   direction: ltr;
   cursor: pointer;
-}
-
-.glyphw{
-    background-image: url(/assets/glyphicons-halflings-white.png);
 }

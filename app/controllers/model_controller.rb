@@ -1,7 +1,8 @@
 require 'tmpdir'
 class ModelController < ApplicationController
 
-  @@modelPath ="#{Rails.root}/app/assets/models/"
+  @@modelPath = "/data/models"
+  #@@modelPath ="#{Rails.root}/app/assets/models/"
 
   def index
     @post = params
@@ -66,6 +67,7 @@ class ModelController < ApplicationController
     @post = params
 
     @model = Model.find(params[:id]) rescue render_404
+    @modelPath = @@modelPath
 
     if signed_in?
       @rating = Rating.where("model_id = ? AND user_id = ?",

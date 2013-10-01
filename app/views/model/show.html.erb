@@ -23,7 +23,7 @@
 
   <div class="model_details row" style="position:relative;clear: left; float: left; width:100%; display:block">
 
-    <%metaPath = File.join(Rails.root, "app/assets/models", @model.id.to_s, "meta") %>
+    <%metaPath = File.join(@modelPath, @model.id.to_s, "meta") %>
 
     <div class="span8"
       style="float: left; position: relative; overflow:hidden;">
@@ -213,24 +213,34 @@
 
   // Set the initial rating score. Also send an ajax request to set the 
   // score rating when clicked.
-  $('#star').raty({path: '/assets', halfShow: true,
+  $('#star').raty({halfShow: true,
     <%if @rating%>
       score: <%=@rating.score%>,
     <%else%>
       score: <%=@model.rating ? @model.rating : 0.0%>,
-      starOn: "star-on-red.png",
-      starHalf: "star-half-red.png",
+      starOn: '<%= asset_path "star-on-red.png" %>',
+      starHalf: '<%= asset_path "star-half-red.png" %>',
     <%end%>
     mouseover: function(score, evt) {
-      if ($('#star').raty('starOn') == "star-on-red.png")
+      if ($('#star').raty('starOn') == '<%= asset_path "star-on-red.png" %>')
       {
         $('#star').raty('set',
-        {starOn: "star-on.png", starHalf: "star-half.png", score: score});
+        {starOn: '<%= asset_path "star-on.png"%>',
+         starHalf: '<%= asset_path "star-half.png" %>', score: score});
       }
     },
     mouseout: function(score, evt) {
-      $('#star').raty('set',
-      {starOn: "star-on.png", starHalf: "star-half.png", score: g_score});
+      <%if @rating%>
+        $('#star').raty('set',
+        {starOn:  '<%= asset_path "star-on.png" %>',
+         starHalf: '<%= asset_path "star-half.png" %>',
+         score: g_score});
+      <%else%>
+        $('#star').raty('set',
+        {starOn:  '<%= asset_path "star-on-red.png" %>',
+         starHalf: '<%= asset_path "star-half-red.png" %>',
+         score: g_score});
+      <%end%>
     },
     <%if signed_in? %>
     click: function(score, evt) {
@@ -239,7 +249,9 @@
         data: {score: score, user_id: <%=current_user.id%>},
         success: function(_overall) {
           g_score = score;
-          $('#star').raty('set', {starOn: "star-on.png", starHalf: "star-half.png", score: score});
+          $('#star').raty('set',
+            {starOn: '<%= asset_path "star-on.png"%>',
+             starHalf: '<%= asset_path "star-half.png"%>', score: score});
           document.getElementById('overall').innerHTML = _overall.toString();
         }
     })}
