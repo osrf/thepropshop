@@ -185,21 +185,23 @@
   <%if signed_in? %>
   function like(_id)
   {
+    var likeParent = document.getElementById('heart_parent_div');
+    var likeDiv = document.getElementById('like_div');
+   
+    if (likeDiv.className == "model_dislike_image")
+    {
+      likeParent.onmouseout = function() {
+        likeDiv.className = "model_liked_image"; };
+    }
+    else
+    {
+      likeParent.onmouseout = function() {
+        likeDiv.className = "model_dislike_image"; };
+    }
+
     $.ajax({type: "GET",
       url: _id.toString() + "/like/" + <%="\"#{current_user.id}\"".html_safe%>, 
       success: function(_like) {
-        if (_like == "like_heart.svg")
-        {
-          document.getElementById('heart_parent_div').onmouseout = function() {
-            document.getElementById('like_div').className = "model_liked_image";
-          };
-        }
-        else
-        {
-          document.getElementById('heart_parent_div').onmouseout = function() {
-            document.getElementById('like_div').className = "model_dislike_image";
-          };
-        }
       }
     });
   }

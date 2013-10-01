@@ -94,14 +94,14 @@ class ModelController < ApplicationController
       like = Likes.new(user_id: params[:user],
                        model_id: params[:id], value: true)
       like.save
-      result = "like_heart.svg"
+      result = "1"
     else
       like = Likes.where(user_id: params[:user], model_id: params[:id]).first
       like.value = !like.value
       if like.value?
-        result = "like_heart.svg"
+        result = "1"
       else
-        result = "like_heart_broken.svg"
+        result = "0"
       end
 
       like.save
