@@ -1,114 +1,106 @@
-<div class="container"> 
-  <!--Breadcrumbs always lead back to Home. If user is looking at a model, the next breadcrumb is for the model category. We may add sub-categories as our database grows. If the user gets to a model through their "Models I like" list, we do not show the category of the model in the breadcrumbs, and instead link them back to the Models I Like page. -->
-  <ul class="breadcrumb">
-    <li><a href="index.html">Home</a></li>
-    <li><span class="divider">/</span></li>
-    <li><a href="#">Category</a></li>
-  </ul>
-  <div class="headline"> 
-    <!--We display the uploader's user name and the date of the most recent upload (if there are multiple revisions) -->
-    <h1 style="display: inline"><%= @model.name %></h1>
+<div class="headline"> 
+  <h1 style="display: inline"><%= @model.name %></h1>
 
-    <!-- This button should only appear for models that the user has created -->
-    <button class="btn btn-mini" type="button" style="margin-bottom: 8px; margin-left: 5px">Edit</button>
+  <!-- This button should only appear for models that the user has created -->
+  <button class="btn btn-mini" type="button" style="margin-bottom: 8px; margin-left: 5px">Edit</button>
 
-    <h2>Uploaded by:
-      <%if @creator%>
-        <%= @creator.username %>
-      <%else%>
-        anonymous 
-      <%end%>
-      (<%=@model.updated_at.strftime("%b %d, %Y")%>)</h2>
-  </div>
+  <h2>Uploaded by:
+    <%if @creator%>
+      <%= @creator.username %>
+    <%else%>
+      anonymous 
+    <%end%>
+    (<%=@model.updated_at.strftime("%b %d, %Y")%>)</h2>
+</div>
 
-  <div class="model_details row" style="position:relative;clear: left; float: left; width:100%; display:block">
+<div class="model_details row" style="position:relative;clear: left; float: left; width:100%; display:block">
 
-    <%metaPath = File.join(@modelPath, @model.id.to_s, "meta") %>
+  <%metaPath = File.join(@modelPath, @model.id.to_s, "meta") %>
 
-    <div class="span8"
-      style="float: left; position: relative; overflow:hidden;">
+  <div class="span8"
+    style="float: left; position: relative; overflow:hidden;">
 
-      <div
-        style="margin-bottom:5px; border: 1px solid #e6e6e6; position:relative">
+    <div
+      style="margin-bottom:5px; border: 1px solid #e6e6e6; position:relative">
 
-        <%if signed_in? %>
-          <div style="position: absolute; top:10px; right: 10px;"
-            id="heart_parent_div">
-              <button type="submit" style="border: 0px; background: transparent"
-                id="like_button" onclick="like(<%=@model.id%>);">
+      <%if signed_in? %>
+        <div style="position: absolute; top:10px; right: 10px;"
+          id="heart_parent_div">
+            <button type="submit" style="border: 0px; background: transparent"
+              id="like_button" onclick="like(<%=@model.id%>);">
 
-              <%like = Likes.where(model_id:@model.id, user_id: current_user.id).first%>
-              <%if !like%>
-                <div class="model_like_image" id="like_div"></div>
-              <%elsif like.value?%>
-                <div class="model_liked_image" id="like_div"></div>
-              <%else%>
-                <div class="model_dislike_image" id="like_div"></div>
-              <%end%>
-
-            </button>
-          </div>
-        <%end%>
-
-        <%= image_tag "/model/#{@model.id}/image/1",
-        alt:"Model image", id:"hero_image" %>
-      </div>
-
-      <% if File.exists?(File.join(metaPath, "1.png")) %>
-        <div> 
-          <ul class="thumbnails">
-            <% for i in 1..4 %>
-              <li class="span2">
-
-              <% if i == 1 %>
-                <%style = "width:160px;border-color: #404853"%>
-              <%else%>
-                <%style = "width:160px;"%>
-              <%end%>
-
-              <%= image_tag "/model/#{@model.id}/image/#{i}",
-              alt:"model thumbnail", id:"#{i}", class:"thumbnail",
-                style:"#{style}",
-                onmouseover:"showHero(#{@model.id}, #{i});",
-                onmouseout:"setHero(#{i});",
-                onclick:"showHero(#{@model.id}, #{i});setHero(#{i});"
-              %>
-              </li>
+            <%like = Likes.where(model_id:@model.id, user_id: current_user.id).first%>
+            <%if !like%>
+              <div class="model_like_image" id="like_div"></div>
+            <%elsif like.value?%>
+              <div class="model_liked_image" id="like_div"></div>
+            <%else%>
+              <div class="model_dislike_image" id="like_div"></div>
             <%end%>
-          </ul>
+
+          </button>
         </div>
       <%end%>
 
+      <%= image_tag "/model/#{@model.id}/image/1",
+      alt:"Model image", id:"hero_image" %>
     </div>
 
-    <div class="span4" style="bottom:0; right:0; position:absolute; display: block; min-height: 100%"> 
+    <% if File.exists?(File.join(metaPath, "1.png")) %>
+      <div> 
+        <ul class="thumbnails">
+          <% for i in 1..4 %>
+            <li class="span2">
 
-      <!-- The model rating system should be like the Netflix system. The stars should be yellow (#E8B107) and display the average star rating, with the number of reviews in parentheses after the stars. When hovering over the stars, they should  highlight in blue (#49728C) as the mouse moves over the stars. The stars that are not being hovered over should be transparent. Clicking a star locks in the user's rating. If they rate the model again, overwrite the previous rating -->
-      <div class="rating">
-        Rating:
-        <span id="star"></span>
-        <span>(Overall: <span id='overall'><%= @model.rating ? @model.rating : "n/a"%></span>)</span>
-      </div>
+            <% if i == 1 %>
+              <%style = "width:160px;border-color: #404853"%>
+            <%else%>
+              <%style = "width:160px;"%>
+            <%end%>
 
-      <div class="download">
-        <%= link_to "Download Model", "#{@model.id}/download",
-        {:class=>("btn btn-large btn-primary")} %>
-      </div>
-      <div class="tags span4" style="position: absolute; left: 10px; bottom:28px">
-        <% if @model.tags != "" %>
-        <span><strong>Tags</strong></span> 
-
-          <% @model.tags.split(',').each do |tag| %>
-            <span>
-              <%= link_to tag, {:controller=>'pages', :action=>'search',
-                :tag=>"#{tag}", :search=>"#{tag}"},
-                {:class=>"label label-info"} %>
-            </span>
+            <%= image_tag "/model/#{@model.id}/image/#{i}",
+            alt:"model thumbnail", id:"#{i}", class:"thumbnail",
+              style:"#{style}",
+              onmouseover:"showHero(#{@model.id}, #{i});",
+              onmouseout:"setHero(#{i});",
+              onclick:"showHero(#{@model.id}, #{i});setHero(#{i});"
+            %>
+            </li>
           <%end%>
-        <%end%>
+        </ul>
       </div>
+    <%end%>
+
+  </div>
+
+  <div class="span4" style="bottom:0; right:0; position:absolute; display: block; min-height: 100%"> 
+
+    <!-- The model rating system should be like the Netflix system. The stars should be yellow (#E8B107) and display the average star rating, with the number of reviews in parentheses after the stars. When hovering over the stars, they should  highlight in blue (#49728C) as the mouse moves over the stars. The stars that are not being hovered over should be transparent. Clicking a star locks in the user's rating. If they rate the model again, overwrite the previous rating -->
+    <div class="rating">
+      Rating:
+      <span id="star"></span>
+      <span>(Overall: <span id='overall'><%= @model.rating ? @model.rating : "n/a"%></span>)</span>
+    </div>
+
+    <div class="download">
+      <%= link_to "Download Model", "#{@model.id}/download",
+      {:class=>("btn btn-large btn-primary")} %>
+    </div>
+    <div class="tags span4" style="position: absolute; left: 10px; bottom:28px">
+      <% if @model.tags != "" %>
+      <span><strong>Tags</strong></span> 
+
+        <% @model.tags.split(',').each do |tag| %>
+          <span>
+            <%= link_to tag, {:controller=>'pages', :action=>'search',
+              :tag=>"#{tag}", :search=>"#{tag}"},
+              {:class=>"label label-info"} %>
+          </span>
+        <%end%>
+      <%end%>
     </div>
   </div>
+</div>
 
 
   <div class="model_details row">
@@ -161,7 +153,7 @@
   <%end%>
 
   </div>
-</div>
+
 <script>
   activeImg = "1";
   function showHero(_modelId, _id)

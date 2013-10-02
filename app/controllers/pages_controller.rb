@@ -1,19 +1,18 @@
 class PagesController < ApplicationController
+
   def index
     @post = params
     @categories = Category.where("model_count > 0")
   end
 
   def about
-    @post = params
-  end
-
-  def category
+    add_breadcrumb "About", about_path()
     @post = params
   end
 
   def search
     @post = params
+    add_breadcrumb "Search", "pages/search/#{params}"
 
     if params[:category]
       if params[:category] == "All Categories"
@@ -38,11 +37,9 @@ class PagesController < ApplicationController
   end
 
   def browse
+    add_breadcrumb params[:category], "pages/browse/#{params[:category]}"
     @post = params
     @models = Model.where(category: params[:category])
   end
 
-  #def upload
-  #  @post = params
-  #end
 end

@@ -2,7 +2,6 @@ require 'tmpdir'
 class ModelController < ApplicationController
 
   @@modelPath = "/data/models"
-  #@@modelPath ="#{Rails.root}/app/assets/models/"
 
   def index
     @post = params
@@ -11,6 +10,7 @@ class ModelController < ApplicationController
   def new
     @post = params
     @categories = Category.all
+    add_breadcrumb "Upload", new_model_path()
   end
 
   ###############################################
@@ -22,6 +22,7 @@ class ModelController < ApplicationController
 
     # Create a new model based on the passed in parameters.
     @model = Model.new(modelParams)
+    add_breadcrumb "Create", new_model_path(@model)
 
     # Save the model to the database.
     # TODO: Add check to make sure model was saved.
@@ -74,6 +75,8 @@ class ModelController < ApplicationController
 
     @model = Model.find(params[:id]) rescue render_404
     @modelPath = @@modelPath
+
+    add_breadcrumb @model.name, model_path(@model)
 
     if signed_in?
       @rating = Rating.where("model_id = ? AND user_id = ?",

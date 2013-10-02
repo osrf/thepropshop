@@ -1,45 +1,43 @@
-<div class="container">
-  <div class="headline search">
-    <h1>Search for a model</h1>
-    <%= form_tag("/pages/search", :class => "form-search", :method=>'get') do%>
+<div class="headline search">
+  <h1>Search for a model</h1>
+  <%= form_tag("/pages/search", :class => "form-search", :method=>'get') do%>
 
-      <%= text_field_tag(:search, "",
-        :class=>"input-xlarge search-query",
-        :placeholder=>"Enter a search term...",
-          :required=>true) %>
+    <%= text_field_tag(:search, "",
+      :class=>"input-xlarge search-query",
+      :placeholder=>"Enter a search term...",
+        :required=>true) %>
 
-      <%= select_tag(:category,
-          grouped_options_for_select([['Category', 
-          ['All Categories', 'Robots', 'People', 'Animals',
-          'Buildings', 'Vehicles']],
-          ['Other',
-            ['Username']]]), :class=>"selectpicker") %>
+    <%= select_tag(:category,
+        grouped_options_for_select([['Category', 
+        ['All Categories', 'Robots', 'People', 'Animals',
+        'Buildings', 'Vehicles']],
+        ['Other',
+          ['Username']]]), :class=>"selectpicker") %>
 
-      <%= submit_tag("Submit", :class => "btn") %>
+    <%= submit_tag("Submit", :class => "btn") %>
 
-    <%end%>
+  <%end%>
 
+</div>
+
+<div class="categories">
+  <div class="headline">
+    <h1>Browse by Category</h1>
+    <br />
   </div>
 
-  <div class="categories">
-    <div class="headline">
-      <h1>Browse by Category</h1>
-      <br />
-    </div>
+  <%if !@categories.empty? %>
+    <ul class="thumbnails">
+      <% @categories.each do |cat| %>
+        <li class="span3">
+          <%model = Model.where(category: cat.name).first%>
+          <%= link_to image_tag("/model/#{model.id}/image/1",
+                                alt: "#{model.name}"),
+            {controller: "pages", action: "browse", category: "#{cat.name}"},
+            {:class=>("thumbnail")} %> <%= cat.name.capitalize %>
+        </li>
+      <%end%>
+    </ul>
+  <%end%>
 
-    <%if !@categories.empty? %>
-      <ul class="thumbnails">
-        <% @categories.each do |cat| %>
-          <li class="span3">
-            <%model = Model.where(category: cat.name).first%>
-            <%= link_to image_tag("/model/#{model.id}/image/1",
-                                  alt: "#{model.name}"),
-              {controller: "pages", action: "browse", category: "#{cat.name}"},
-              {:class=>("thumbnail")} %> <%= cat.name.capitalize %>
-          </li>
-        <%end%>
-      </ul>
-    <%end%>
-
-  </div>
 </div>

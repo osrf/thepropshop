@@ -3,8 +3,6 @@ PropShop::Application.routes.draw do
   get "pages/index"
   root "pages#index"
 
-  get "pages/category" => "pages#category"
-
   # get "upload" => "upload#index"
 
   get "about" => "pages#about"

@@ -8,55 +8,56 @@
     :html => {:onsubmit=>"return validateForm();", :multipart=>true,
       :id=>"model_form"} do |f| %>
 
-  <div class="row">
-    <div class="span6">
-      <h2> Properties </h2>
-      <span><strong>Name</strong></span>
-      <br/>
-      <%= f.text_field :name,
-        {:class=>"model_text span6", :placeholder=>"Type model name here...",
-          :required=>true} %>
-      <br/>
+    <div class="row">
+      <div class="span6">
+        <h2> Properties </h2>
+        <span><strong>Name</strong></span>
+        <br/>
+        <%= f.text_field :name,
+          {:class=>"model_text span6", :placeholder=>"Type model name here...",
+           :required=>true} %>
 
-      <span><strong>Description</strong></span>
-      <br/>
-      <%= f.text_area :description,
-        {:class=>"field span6 upload",
-          :placeholder=>"Add a brief description of your model...",
-          :required=>true} %>
+        <br/>
+        <span><strong>Description</strong></span>
+        <br/>
+        <%= f.text_area :description,
+          {:class=>"field span6 upload",
+            :placeholder=>"Add a brief description of your model...",
+            :required=>true} %>
 
-      <br/>
-      <span> <strong>Categories:</strong></span>
-      <span style="color:#b94a48" id="category_help"></span>
-      <br/>
+        <br/>
+        <span> <strong>Categories:</strong></span>
+        <span style="color:#b94a48" id="category_help"></span>
+        <br/>
 
-      <div class="category_checkboxes row control-group">
-        <div class="control-group" id="category_div">
-        <fieldset>
-        <% catCount=0 %>
-        <% rowLimit=5 %>
-        <% @categories.each do |cat| %>
-          <% if catCount % rowLimit == 0 %>
-            <div class="span3">
-          <%end%>
+        <div class="category_checkboxes row control-group">
+          <div class="control-group" id="category_div">
+          <fieldset>
+            <% catCount=0 %>
+            <% rowLimit=5 %>
+            <% @categories.each do |cat| %>
+              <% if catCount % rowLimit == 0 %>
+                <div class="span3">
+              <%end%>
 
-          <%= f.label cat.name, {:class=>"radio"} do%>
-            <%= f.radio_button :category, "#{cat.name}"%>
-          <%= cat.name %>
-          <%end%>
+              <%= f.label cat.name, {:class=>"radio"} do%>
+                <%= f.radio_button :category, "#{cat.name}"%>
+              <%= cat.name %>
+              <%end%>
 
-          <% if (catCount+1) % rowLimit == 0 %>
-            </div>
-          <%end%>
-          <% catCount += 1 %>
-        <%end%>
+              <% if (catCount+1) % rowLimit == 0 %>
+                </div>
+              <%end%>
+              <% catCount += 1 %>
+            <%end%>
 
-        <% if catCount % rowLimit != 0 %>
-          </div>
-        <%end%>
-        </fieldset>
+            <% if catCount % rowLimit != 0 %>
+              </div>
+            <%end%>
+          </fieldset>
+        </div>
       </div>
-      </div>
+
       <span><strong>Tags</strong>(optional)</span> 
 
       <%= f.text_field :tags,
@@ -64,9 +65,9 @@
        :placeholder=>"ex) humanoid, bipedal, mobile manipulator"} %>
 
       <br/>
-
       <span><strong>Model Tarball</strong></span>
       <span style="color:#b94a48" id="file_help"></span>
+
       <br/>
       Select the [model_name].tar.gz file created by the <b>gzprop</b> program.
       <br/>
@@ -98,7 +99,6 @@
         <li> All materials will be licensed under <a href="http://creativecommons.org/licenses/by/3.0/" target="_blank">Creative Commons Attribution 3.0.</a></li>
       </ul>
     </div>
-
   </div>
 
   <hr style="border: 1px solid #E6E6E6;" />
@@ -106,17 +106,14 @@
   <!--Upload/Cancel/Next buttons -->
   <div class="upload_buttons row">
     <div class="span6"> 
-      <!-- Clicking Cancel button should pop up a confirmation window stating: "Are you sure you want to cancel? Your model will not be uploaded to the model database" --> 
       <%= link_to "Cancel", root_path,
         {:class=>("btn")} %>
-      </div>
-      <div class="span6 next_button"> 
-        <!-- If the Next button is clicked but not all mandatory fields have been entered, show a pop-up prompting the user to fill in that missing info (eg Please upload the SDF file) --> 
-          <%= f.submit "Submit",:class => "upload_buttons btn btn-primary" %>
-        </div>
-      </div>
+    </div>
+    <div class="span6 next_button"> 
+      <%= f.submit "Submit",:class => "upload_buttons btn btn-primary" %>
     </div>
   </div>
+</div>
 
 <% end %>
 
