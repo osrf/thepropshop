@@ -9,7 +9,7 @@
         :placeholder=>"Enter a search term...",
         :required=>true) %>
 
-      <%= select_tag(:scope,
+      <%= select_tag(:category,
           grouped_options_for_select([['Category', 
           ['All Categories', 'Robots', 'People', 'Animals',
           'Buildings', 'Vehicles']],
@@ -24,22 +24,36 @@
   <div class="categories">
   	<div class="search_results_data">
       <ul class="search_restrictions">
-        <li>
-          <%= @post[:search] %>
-          <span class="count"><%=@models.size%> items</span>
-        </li>
+        <%if @post[:category]%>
+          <li>
+            <%= @post[:search] %>
+            <span class="count"><%=@models.size%> items</span>
+          </li>
 
-        <li>
-          <%if @post[:scope] == "Username"%>
-            <span class="category_username">
-              Username: username
-            </span>
-          <%else%>
-            <span class="category_username">
-              Category: <%= @post[:scope] %>
-            </span>
-          <%end%>
-        </li>
+          <li>
+            <%if @post[:category] == "Username"%>
+              <span class="category_username">
+                Username: username
+              </span>
+            <%else%>
+              <span class="category_username">
+                Category: <%= @post[:category] %>
+              </span>
+            <%end%>
+          </li>
+        <%else%>
+          <li>
+            <span style="float: left; padding-right: 6px; line-height: 24px;">Models tagged with:</span>
+            <div style="float: right" class="tag_search">
+              <div class="label label-info"><%= @post[:tag] %></div>
+            </div>
+          </li>
+
+          <li>
+            <span style="clear: both; float: left; padding-right: 6px; line-height: 24px;" class="count tagged_with"> (<%=@models.size%>) items</span>
+          </li>
+
+        <%end%>
       </ul>
     </div>
 

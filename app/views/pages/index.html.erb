@@ -8,7 +8,7 @@
         :placeholder=>"Enter a search term...",
           :required=>true) %>
 
-      <%= select_tag(:scope,
+      <%= select_tag(:category,
           grouped_options_for_select([['Category', 
           ['All Categories', 'Robots', 'People', 'Animals',
           'Buildings', 'Vehicles']],
@@ -19,26 +19,6 @@
 
     <%end%>
 
-    <!--
-    <%= form_for :pages, :url => {:action => :search},
-      :html => {:class => "form-search"} do |f| %>
-
-      <%= f.text_field :search,
-        {:class=>"input-xlarge search-query",
-          :placeholder=>"Enter a search term...",
-          :required=>true} %>
-
-      <%= select_tag(:scope,
-          grouped_options_for_select([['Category', 
-          ['All Categories', 'Robots', 'People', 'Animals',
-          'Buildings', 'Vehicles']],
-          ['Other',
-            ['Username']]]), :class=>"selectpicker") %>
-
-      <%= f.submit "Submit", :class => "btn" %>
-
-    <%end%>
-    -->
   </div>
 
   <div class="categories">
