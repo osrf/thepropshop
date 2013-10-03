@@ -42,4 +42,24 @@ class PagesController < ApplicationController
     @models = Model.where(category: params[:category])
   end
 
+  def contact
+    @post = params
+    add_breadcrumb "Contact", "pages/contact"
+  end
+
+  def email
+    @post = params
+    add_breadcrumb "Contact", "pages/contact"
+  end
+
+  def api
+    @post = params
+    add_breadcrumb "API", "pages/api"
+  end
+
+  def deploy
+    @post = params
+    add_breadcrumb "Deploy", "pages/deploy"
+  end
+
 end

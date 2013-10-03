@@ -95,7 +95,16 @@
 </div>
 
 <footer id="footer">
- Except where otherwise noted, the thepropshop.org web pages are licensed under <a href="http://creativecommons.org/licenses/by/3.0/"> Creative Commons Attribution 3.0</a>
+  <section class="footer-body">
+  <ul>
+    <li><%= link_to "Contact", contact_path() %></li>
+    <li><%= link_to "API", api_path()%></li>
+    <li><%= link_to "Deploy", controller: "pages", action: "deploy"%></li>
+  </ul>
+  </section>
+  <%= link_to image_tag("byosrf.svg", alt: "by osrf"), "http://osrfoundation.org" %>
+  <br/>
+  <br/>
 </footer>
 
 <!--This is the modal for signing up-->

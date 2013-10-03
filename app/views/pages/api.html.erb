@@ -1,0 +1,30 @@
+<div class="headline">
+  <h1>API</h1>
+  <p>A REST interface to ThePropShop</p>
+</div>
+
+<div class="span10">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Resource</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>GET <tt>model/:id/sdf</tt></td>
+        <td>Retrieve the SDF for the model specified by :id.</td>
+      </tr>
+      <tr>
+        <td>GET <tt>model/:id/image/:num</tt></td>
+        <td>Get a preview image for a model. The model is specified by :id, and the image number by :num (1-4).</td>
+      </tr>
+      <tr>
+        <td>GET <tt>model/:id/download</tt></td>
+        <td>Download a tarball of model :id.</td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>

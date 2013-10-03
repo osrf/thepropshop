@@ -5,10 +5,17 @@ PropShop::Application.routes.draw do
 
   # get "upload" => "upload#index"
 
+  get "api" => "pages#api"
+  get "contact" => "pages#contact"
+  get "deploy" => "pages#deploy"
+
   get "about" => "pages#about"
   get "pages/about" => "pages#about"
   post "pages/search" => "pages#search"
   get "pages/search" => "pages#search"
+  get "pages/contact" => "pages#contact"
+  post "pages/email" => "pages#email"
+  get "pages/api" => "pages#api"
   get "pages/browse/:category" => "pages#browse"
 
   resources :model

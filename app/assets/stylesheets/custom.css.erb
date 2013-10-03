@@ -428,6 +428,7 @@ padding-top:10px;
 .progressbar img {
 	margin-left: -8px;
 }
+
 #footer {
 	background-color: #404853;
 	position: fixed;
@@ -438,13 +439,39 @@ padding-top:10px;
 	font-size: small;
 	font-weight: normal;
 }
+
 #footer a {
 	color: #eee;
-	text-decoration: underline;
+	text-decoration: none;
 }
 #footer a:hover {
-	color: #0074d9;
+	text-decoration: underline;
 }
+
+#footer .footer-body
+{
+  text-align: center;
+  margin-top: 10px;
+}
+
+#footer .footer-body > ul {
+  display: block;
+  list-style: none;
+  padding:0px;
+}
+#footer .footer-body > ul > li {
+  display: inline-block;
+  white-space: nowrap
+}
+#footer .footer-body > ul > li:after {
+  content: "\b7";
+  margin-left: 10px;
+  speak: none;
+}
+#footer .footer-body > ul > li:last-child:after {
+  display: none;
+}
+
 /* Formatting the space between the guideline list items */
 .guidelines li {
 	padding-bottom: 5px;

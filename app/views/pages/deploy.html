@@ -1,0 +1,52 @@
+<div class="headline">
+  <h1>Deploy</h1>
+  <p>Create your own propshop</p>
+</div>
+
+<div class="span10">
+  <p>Good news, the code that runs this website is open-source. This means you can deploy a public or private propshop on a server of your choice.</p>
+
+  <p><strong>Guide</strong></p>
+  <ol>
+    <li>
+    Install Ruby, nginx, and passenger
+    <br/>
+    <p>There are numerous tutorials on other sites that describe the process setting up Ruby, nginx, and passenger. 
+    </p>
+    </li>
+    <li>
+      Clone the repository
+      <pre>hg clone https://bitbucket.org/osrf/thepropshop</pre>
+    </li>
+    <li>
+      Setup thepropshop
+      <p><pre>
+      cd thepropshop
+      sudo bundle install
+      RAILS_ENV=production rake db:seed 
+      RAILS_ENV=production rake db:migrate
+      RAILS_ENV=production rake assets:precompile
+      </pre></p>
+    </li>
+
+    <li>
+    Point nginx to thepropshop code. Below is an example for nginx.
+    <pre>
+      server {
+        listen       80;
+        server_name  localhost;
+        root /home/ubuntu/thepropshop/public;
+        passenger_enabled on;
+
+        location / {
+          rack_env production;
+          passenger_enabled on;
+          root /home/ubuntu/thepropshop/public;
+          try_files $uri $uri/ /index.html;
+        }
+      }</pre>
+    </li>
+    <li>Restart nginx: <pre>sudo service nginx restart</pre></li>
+    <li>And you're done. Point a browswer to your propshop, and enjoy.</li>
+  </ol>
+</div>

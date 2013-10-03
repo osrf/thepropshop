@@ -1,0 +1,32 @@
+<div class="headline">
+  <h1>Contact Us</h1>
+  <p>We're here to help with any comments, questions, or concerns.</p>
+</div>
+
+<div class="span6">
+
+  <%= form_for :pages, :url => {:action => :email} do |f| %>
+    <div class="controls controls-row">
+      <%= f.text_field :name,
+        {:class=>"span3", :placeholder=>"Name", :required=>true} %>
+      <%= f.text_field :email,
+          {:class=>"span3", :placeholder=>"Email address", :required=>true} %>
+    </div>
+
+    <div class="controls">
+      <%= f.text_field :subject,
+          {:class=>"span6", :placeholder=>"Subject", :required=>true} %>
+    </div>
+
+    <div class="controls">
+      <%= f.text_area :message,
+        {:class=>"span6", :placeholder=>"Your message", :required=>true,
+          :rows=>5} %>
+    </div>
+
+    <div class="controls">
+      <%= f.submit "Send",
+        :class => "btn btn-primary input-medium pull-right" %>
+    </div>
+  <%end%>
+</div>
