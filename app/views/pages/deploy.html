@@ -1,17 +1,17 @@
 <div class="headline">
   <h1>Deploy</h1>
-  <p>Create your own propshop</p>
+  <p>Create your own Prop Shop</p>
 </div>
 
 <div class="span10">
-  <p>Good news, the code that runs this website is open-source. This means you can deploy a public or private propshop on a server of your choice.</p>
+  <p>Good news, the code that runs this website is open-source. This means you can deploy a public or private Prop Shop on a server of your choice.</p>
 
   <p><strong>Guide</strong></p>
   <ol>
     <li>
     Install Ruby, nginx, and passenger
     <br/>
-    <p>There are numerous tutorials on other sites that describe the process setting up Ruby, nginx, and passenger. 
+    <p>There are numerous tutorials on other sites that describe the process of setting up <%= link_to "Ruby", "https://www.ruby-lang.org/en/" %>, <%= link_to "Rails", "http://rubyonrails.org" %>, <%= link_to "Nginx", "http://wiki.nginx.org" %> , and <%= link_to "Passenger", "http://www.phusionpassenger.com/" %>. 
     </p>
     </li>
     <li>
@@ -19,7 +19,7 @@
       <pre>hg clone https://bitbucket.org/osrf/thepropshop</pre>
     </li>
     <li>
-      Setup thepropshop
+      Setup The Prop Shop
       <p><pre>
       cd thepropshop
       sudo bundle install
@@ -30,7 +30,7 @@
     </li>
 
     <li>
-    Point nginx to thepropshop code. Below is an example for nginx.
+    Point nginx to The Prop Shop code. Below is an example for nginx.
     <pre>
       server {
         listen       80;
@@ -47,6 +47,6 @@
       }</pre>
     </li>
     <li>Restart nginx: <pre>sudo service nginx restart</pre></li>
-    <li>And you're done. Point a browswer to your propshop, and enjoy.</li>
+    <li>And you're done. Point a browswer to your The Prop Shop, and enjoy.</li>
   </ol>
 </div>
