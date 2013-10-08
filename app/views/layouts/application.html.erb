@@ -94,22 +94,25 @@
   </div>
 </div>
 
-<div class="container">
+<div class="container" style="min-height:100%">
   <%= render_breadcrumbs %>
-  <%= yield %>
+  <div style="margin-bottom:45px">
+    <%= yield %>
+  </div>
 </div>
 </div>
 
 <footer id="footer">
   <section class="footer-body">
-  <%= link_to image_tag("byosrf.svg", alt: "by osrf"), "http://osrfoundation.org", :style=>"float: left; padding-left: 4px" %>
-  <ul>
+  <%= link_to image_tag("byosrf.svg", alt: "by osrf", size:"150x20"), "http://osrfoundation.org", :style=>"float: right; padding-right: 4px; padding-top:5px" %>
+  <ul style="text-align:center; padding-left: 150px">
     <li><%= link_to "Contact", contact_path() %></li>
     <li><%= link_to "API", api_path()%></li>
     <li><%= link_to "Deploy", controller: "pages", action: "deploy"%></li>
   </ul>
   </section>
 </footer>
+
 
 <!--This is the modal for signing up-->
 <div id="signup_modal" class="modal hide fade" tabindex="-1" role="dialog"
@@ -198,9 +201,11 @@
   {
     $.ajax({
       url: "/session",
-      method: "DELETE"
+      method: "DELETE",
+      success: function() {
+        document.location = "/";
+      }
     });
-    document.location = "/";
   }
 
   <%if current_user && !current_user.username%>
