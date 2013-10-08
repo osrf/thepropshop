@@ -25,7 +25,7 @@
             :placeholder=>"Add a brief description of your model...",
             :required=>true} %>
         <br/>
-        <span> <strong>Categories:</strong></span>
+        <span> <strong>Category:</strong></span>
         <span style="color:#b94a48" id="category_help"></span>
         <br/>
 
@@ -57,19 +57,21 @@
         </div>
       </div>
 
-      <span><strong>Tags</strong>(optional)</span> 
+      <div class="control-group">
+        <label for="tags"><strong>Tags</strong> (optional)</label> 
+        <span class="controls">
+          <%= f.text_field :tags,
+            {:class=>"model_text",
+             :placeholder=>"ex) humanoid, bipedal, mobile manipulator"} %>
+        </span>
+      </div>
 
-      <%= f.text_field :tags,
-      {:class=>"model_text",
-       :placeholder=>"ex) humanoid, bipedal, mobile manipulator"} %>
-
-      <br/>
       <span><strong>Model Tarball</strong></span>
       <span style="color:#b94a48" id="file_help"></span>
 
-      <br/>
-      Select the [model_name].tar.gz file created by the <b>gzprop</b> program.
-      <br/>
+      <div style="margin-top: 0px; margin-bottom: 4px">
+        Select the [model_name].tar.gz file created by the <b>gzprop</b> program.
+      </div>
 
       <span class="btn btn-success fileinput-button">
         <i class="icon-white icon-plus"></i>
@@ -93,6 +95,7 @@
         <li> Select a tarball (.tar.gz file) created by <b>gzprop</b>
         <ul>
           <li> Gazebo must be <a href="http://gazebosim.org/wiki/install">installed</a> on your personal computer.</li>
+          <li> Run <b>gzprop &lt;model_directory&gt;</b> to generate a tarball for upload.</li>
           <li> For help, run <b>man gzprop</b> in a terminal.</li>
         </ul>
         <li> All materials will be licensed under <a href="http://creativecommons.org/licenses/by/3.0/" target="_blank">Creative Commons Attribution 3.0.</a></li>

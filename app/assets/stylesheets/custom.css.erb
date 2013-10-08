@@ -1,5 +1,10 @@
 @charset "UTF-8";
-/* Background image is from http://subtlepatterns.com. We need to acknowledge them somewhere in the code.  */
+html, body
+{
+  margin: 0;
+  height: 100%;
+}
+
 h1 {
 	color: #555;
 	font-family: Arial, Helvetica, sans-serif;
@@ -430,9 +435,10 @@ padding-top:10px;
 }
 
 #footer {
+  margin: 0px;
+  padding: 0px;
 	background-color: #404853;
-	position: fixed;
-	bottom: 0;
+  height: 40px;
 	width: 100%;
 	text-align: center;
 	color: #eee;
@@ -451,13 +457,12 @@ padding-top:10px;
 #footer .footer-body
 {
   text-align: center;
-  margin-top: 10px;
+  padding-top: 5px;
 }
 
 #footer .footer-body > ul {
   display: block;
   list-style: none;
-  padding:0px;
 }
 #footer .footer-body > ul > li {
   display: inline-block;
@@ -606,11 +611,6 @@ hr {
 	padding: 10px;
 	padding-right: 40px;
 }
-
-/*.modeldetails_stats table tr td:not(:first-child) {
-border-left: 1px solid #c3c3c3;
-}*/
-
 
 .fileinput-button {
   position: relative;
