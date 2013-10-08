@@ -25,9 +25,7 @@ class SessionsController < ApplicationController
       email = email[email.find_index{|x| not x.nil? and not x.empty?}][0]
 
       if result.successful?
-        puts "Authentication successful"
         unless user = User.find_by_identity_url(identity_url)
-          puts "Create new user"
           user = User.create(identity_url: identity_url)
           user.email = email
           user.save
@@ -35,7 +33,6 @@ class SessionsController < ApplicationController
 
         sign_in user, params[:redirect]
       else
-        puts "Render new"
         render 'new'
       end
     end

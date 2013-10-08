@@ -1,10 +1,37 @@
 class UserController < ApplicationController
+
+  ###############################################
+  # \brief Get information about the user
+  def index
+    if signed_in?
+      user = current_user
+      render :json=>{:username=>user.username}
+    else
+      render :json=>{:username=>"anonymous"}
+    end
+  end
+
+  ###############################################
+  # \brief Create a new user
   def create
     @post = params
-    user = User.find(params[:id])
-    user.username = params[:user][:username]
-    user.save
-    redirect_to root_path
+    user = User.where(username: params[:user][:username]).first
+    msg = ""
+    status = ""
+
+    if user
+      status = "failure"
+      msg = "Username already exists. Please try again."
+    else
+      user = User.find(params[:id])
+      user.username = params[:user][:username]
+      user.save
+
+      msg = params[:user][:username]
+      status = "success"
+    end
+
+    render :json=>{:status=> status, :message => msg}
   end
 
   ###############################################

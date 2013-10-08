@@ -42,8 +42,11 @@
                 :redirect=>"#{request.original_url}"}%>
           </div>
         <%else%>
-          <a class="dropdown-toggle"
-            data-toggle="dropdown" href="#"><%= current_user.username%> </a>
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <span id="current_username">
+              <%= current_user.username%>
+            </span>&nbsp;
+          </a>
             <ul class="dropdown-menu">
               <li><%= link_to 'Models I Like <i class="icon-heart"></i>'.html_safe,
                 {:controller=>"user", :action=>"likes",
@@ -118,9 +121,9 @@
   </div>
 
   <div class="modal-body">
-    <%= form_for :user, :url => {:controller=>:user, :action => :create},
-      :html => {:onsubmit=>"return validateUsernameForm();",
-        :id=>"username_form"} do |f| %>
+    <%= form_for :user, remote:true,
+      :url => {:controller=>:user, :action => :create},
+      :html => {:id=>"username_form"} do |f| %>
 
         <%if current_user%>
           <input type="hidden" name="id" value="<%=current_user.id%>"/>
@@ -146,8 +149,13 @@
           </div>
         </div>
 
+      <div class="signup-buttons pull-left">
+        <%= f.button "Cancel", :class => "btn btn-default",
+          :onclick => "logout();" %>
+      </div>
+
       <div class="signup-buttons pull-right">
-        <%= f.submit "Submit",:class => "btn btn-primary" %>
+        <%= f.submit "Submit", :class => "btn btn-primary" %>
       </div>
     <% end %>
   </div>
@@ -186,9 +194,52 @@
     }
   }
 
+  function logout()
+  {
+    $.ajax({
+      url: "/session",
+      method: "DELETE"
+    });
+    document.location = "/";
+  }
+
   <%if current_user && !current_user.username%>
-    $('#signup_modal').modal()
+    /* Don't all the user to exit the modal using ESC or clicking away */
+    $('#signup_modal').modal({
+      backdrop: 'static',
+      keyboard: false
+    });
   <%end%>
+
+  $('#username_form').submit(function() {
+    if (validateUsernameForm())
+    {
+      var valuesToSubmit = $(this).serialize();
+
+      $.ajax({
+        url: $(this).attr('action'),
+        data: valuesToSubmit,
+        type: 'POST',
+        dataType: 'JSON',
+        success: function(_json) {
+
+          if (_json["status"] == "success")
+          {
+            document.getElementById("current_username").innerHTML =
+            _json["message"];
+            $('#signup_modal').modal('hide');
+          }
+          else 
+          {
+            document.getElementById('username_help').innerHTML =
+            _json["message"];
+          }
+        }
+      });
+    }
+    return false;
+  });
+
 </script>
 </body>
 </html>

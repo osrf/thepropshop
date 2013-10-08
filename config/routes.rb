@@ -27,6 +27,7 @@ PropShop::Application.routes.draw do
   get 'model/:id/download' => 'model#download'
   get 'model/:id/like/:user' => 'model#like'
 
+  get 'user' => 'user#index'
   get 'user/:id/downloads' => 'user#downloads'
   get 'user/:id/created' => 'user#created'
   get 'user/:id/likes' => 'user#likes'
