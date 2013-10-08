@@ -15,7 +15,7 @@
 </head>
 <body>
 
-<div style="min-height: 100%; height: auto !important; margin: 0 auto -40px">
+<div style="min-height: 100%; height: auto !important; margin: 0 auto -70px">
 <div class="navigation">
   <div class="container">
     <%= link_to image_tag("propshop_logo.svg", alt:"OSRF logo"),
@@ -96,7 +96,7 @@
 
 <div class="container" style="min-height:100%">
   <%= render_breadcrumbs %>
-  <div style="margin-bottom:45px">
+  <div style="margin-bottom:75px">
     <%= yield %>
   </div>
 </div>
@@ -104,12 +104,12 @@
 
 <footer id="footer">
   <section class="footer-body">
-  <%= link_to image_tag("byosrf.svg", alt: "by osrf", size:"150x20"), "http://osrfoundation.org", :style=>"float: right; padding-right: 4px; padding-top:5px" %>
-  <ul style="text-align:center; padding-left: 150px">
+  <ul style="text-align:center">
     <li><%= link_to "Contact", contact_path() %></li>
     <li><%= link_to "API", api_path()%></li>
     <li><%= link_to "Deploy", controller: "pages", action: "deploy"%></li>
   </ul>
+  <%= link_to image_tag("byosrf.svg", alt: "by osrf"), "http://osrfoundation.org", :style=>"" %>
   </section>
 </footer>
 
