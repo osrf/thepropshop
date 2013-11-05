@@ -39,10 +39,6 @@ ActiveRecord::Schema.define(version: 20131105172548) do
     t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "asset_file_name"
-    t.string   "asset_content_type"
-    t.integer  "asset_file_size"
-    t.datetime "asset_updated_at"
   end
 
   create_table "models", force: true do |t|
@@ -54,7 +50,6 @@ ActiveRecord::Schema.define(version: 20131105172548) do
     t.integer  "creator"
     t.float    "rating"
     t.integer  "rating_count"
-    t.string   "image_4"
     t.string   "category"
     t.boolean  "delete_request"
     t.integer  "version"

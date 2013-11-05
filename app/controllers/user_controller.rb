@@ -50,7 +50,7 @@ class UserController < ApplicationController
   def downloads
     @post = params
     @downloads = Downloads.where(:user_id=>current_user.id)
-    add_breadcrumb "Downloads", "/user/#{current_user.id}/downloads"
+    addBreadcrumb "Downloads", "/user/#{current_user.id}/downloads"
   end
 
   ###############################################
@@ -58,7 +58,7 @@ class UserController < ApplicationController
   def created
     @post = params
     @models = Model.where(:creator=>current_user.id)
-    add_breadcrumb "Created", "/user/#{current_user.id}/created"
+    addBreadcrumb "Created", "/user/#{current_user.id}/created"
   end
 
   ###############################################
@@ -66,7 +66,7 @@ class UserController < ApplicationController
   def likes
     @post = params
     @likes = Likes.where(:user_id=>current_user.id, :value=>true)
-    add_breadcrumb "Likes", "/user/#{current_user.id}/likes"
+    addBreadcrumb "Likes", "/user/#{current_user.id}/likes"
   end
 
 end

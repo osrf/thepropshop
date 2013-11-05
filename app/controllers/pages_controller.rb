@@ -106,13 +106,11 @@ class PagesController < ApplicationController
 
   def api
     @post = params
-    add_breadcrumb "API", "pages/api"
     addBreadcrumb "API", "pages/api"
   end
 
   def deploy
     @post = params
-    add_breadcrumb "Deploy", "pages/deploy"
   end
 
 end
