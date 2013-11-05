@@ -1,0 +1,13 @@
+<ul class="breadcrumb">
+  <% min_index = crumbs.size > 10 ? crumbs.size - 10 : 0%>
+  <%crumbs.each_with_index do |crumb, index|%>
+    <% if index >= min_index %>
+      <% if index < crumbs.size - 1%>
+        <li><%= link_to(crumb[:name], crumb[:url], :title=>crumb[:name]) %></li>
+        <span class="divider">/</span>
+      <%else%>
+        <li class="active"><%= crumb[:name]%></li>
+      <%end%>
+    <%end%>
+  <%end%>
+</ul>

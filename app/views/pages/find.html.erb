@@ -1,0 +1,47 @@
+<div class="headline search">
+  <h1>Search for a model</h1>
+  <%= form_tag("/pages/search", :class => "form-search", :method=>'get') do%>
+
+    <%= text_field_tag(:search, "",
+      :class=>"input-xlarge search-query",
+      :placeholder=>"Enter a search term...",
+        :required=>true) %>
+
+    <select class="selectpicker" id="category" name="category">
+      <optgroup label="Category">
+        <option value="All Categories">All Categories</option>
+        <% @allCategories.each do |cat|%>
+          <option value=<%="#{cat.name.capitalize}"%>><%=cat.name.capitalize%></option>
+        <%end%>
+      </optgroup>
+      <optgroup label="Other">
+        <option value="Username">Username</option>
+      </optgroup>
+    </select>
+
+    <%= submit_tag("Search", :class => "btn") %>
+
+  <%end%>
+
+</div>
+
+<div class="categories">
+  <div class="headline">
+    <h1>Browse by Category</h1>
+    <br />
+  </div>
+
+  <%if !@categories.empty? %>
+    <ul class="thumbnails">
+      <% @categories.each do |cat| %>
+        <li class="span3">
+          <%model = Model.where(category: cat.name).first%>
+          <%= link_to image_tag("/model/#{model.id}/image/1",
+                                alt: "#{model.name}"),
+            {controller: "pages", action: "browse", category: "#{cat.name}"},
+            {:class=>("thumbnail")} %> <%= cat.name.capitalize %>
+        </li>
+      <%end%>
+    </ul>
+  <%end%>
+</div>
