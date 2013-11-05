@@ -51,6 +51,8 @@ gem 'open_id_authentication'
 # gem 'paperclip'
 gem 'protected_attributes'
 
+gem 'capistrano', '~> 3.0.1'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
