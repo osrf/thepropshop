@@ -11,6 +11,17 @@ class UserController < ApplicationController
     end
   end
 
+  def destroy
+    printf("\n\n\n\n\n\n DELETE USER\n\n\n\n\n\n")
+    if User.find(params[:id])
+      if signed_in? and current_user.id == params[:id]
+        logout
+      end
+      User.destroy(params[:id])
+    end
+    render :json=>{:status => "success"}
+  end
+
   ###############################################
   # \brief Create a new user
   def create

@@ -1,60 +1,113 @@
 class PagesController < ApplicationController
 
   def index
+    addBreadcrumb "Home", :root
     @post = params
     @categories = Category.where("model_count > 0")
+    @allCategories = Category.all
   end
 
   def about
-    add_breadcrumb "About", about_path()
+    addBreadcrumb "About", about_path()
     @post = params
   end
 
+  def find
+    addBreadcrumb "Find", request.original_url
+    @post = params
+    @categories = Category.where("model_count > 0")
+    @allCategories = Category.all
+  end
+
+
   def search
     @post = params
-    add_breadcrumb "Search", "pages/search/#{params}"
+    @allCategories = Category.all
+    addBreadcrumb "Search", request.original_url 
 
-    if params[:category]
+    @models = []
+
+    if params[:tag]
+      @models = Model.where("tags LIKE ?", "%#{params[:tag]}%")
+    elsif params[:category]
       if params[:category] == "All Categories"
         @models = Model.where(
           "name LIKE ? OR description LIKE ? OR tags like ?",
           "%#{params[:search]}%",
           "%#{params[:search]}%",
           "%#{params[:search]}%")
-      else
+      elsif params[:category] != "Username"
         @models = Model.where(
           "(name LIKE ? OR description LIKE ? OR tags LIKE ?) AND category = ?",
           "%#{params[:search]}%",
           "%#{params[:search]}%",
           "%#{params[:search]}%",
           params[:category].singularize)
+      else
+        users = User.where("username LIKE ?", "%#{params[:search]}%")
+        users.each do |user|
+          @models += Model.where("creator == ?", user.id)
+        end
       end
-    elsif params[:tag]
-        @models = Model.where("tags LIKE ?", "%#{params[:tag]}%")
     else
-      @model = []
+      @models = Model.where(
+        "name LIKE ? OR description LIKE ? OR tags LIKE ? OR category LIKE ?",
+        "%#{params[:search]}%",
+        "%#{params[:search]}%",
+        "%#{params[:search]}%",
+        "%#{params[:search]}%")
+
+      users = User.where("username LIKE ?", "%#{params[:search]}%")
+      users.each do |user|
+        @models += Model.where("creator == ?", user.id)
+      end
     end
+
+    #if params[:category]
+    #  if params[:category] == "All Categories"
+    #    @models = Model.where(
+    #      "name LIKE ? OR description LIKE ? OR tags like ?",
+    #      "%#{params[:search]}%",
+    #      "%#{params[:search]}%",
+    #      "%#{params[:search]}%")
+    #  elsif params[:category] != "Username"
+    #    @models = Model.where(
+    #      "(name LIKE ? OR description LIKE ? OR tags LIKE ?) AND category = ?",
+    #      "%#{params[:search]}%",
+    #      "%#{params[:search]}%",
+    #      "%#{params[:search]}%",
+    #      params[:category].singularize)
+    #  else
+    #    users = User.where("username LIKE ?", "%#{params[:search]}%")
+    #    users.each do |user|
+    #      @models += Model.where("creator == ?", user.id)
+    #    end
+    #  end
+    #elsif params[:tag]
+    #    @models = Model.where("tags LIKE ?", "%#{params[:tag]}%")
+    #end
   end
 
   def browse
-    add_breadcrumb params[:category], "pages/browse/#{params[:category]}"
+    addBreadcrumb params[:category], request.original_url
     @post = params
     @models = Model.where(category: params[:category])
   end
 
   def contact
     @post = params
-    add_breadcrumb "Contact", "pages/contact"
+    addBreadcrumb "Contact", request.original_url 
   end
 
   def email
     @post = params
-    add_breadcrumb "Contact", "pages/contact"
+    addBreadcrumb "Contact", request.original_url
   end
 
   def api
     @post = params
     add_breadcrumb "API", "pages/api"
+    addBreadcrumb "API", "pages/api"
   end
 
   def deploy

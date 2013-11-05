@@ -1,8 +1,18 @@
 <div class="headline">
-  <h1>Upload a Model</h1>
+  <%if @post[:action] == "edit"%>
+    <h1>Edit Model: <%=@modelName%></h1>
+  <%else%>
+    <h1>Upload a Model</h1>
+  <%end%>
 </div>
 
-<%= form_for :model, :url => {:action => :create},
+<%if @post[:action] == "edit"
+  form_action = {:action=>:modify}
+else
+  form_action = {:action=>:create}
+end%>
+
+<%= form_for :model, :url => form_action,
     :html => {:onsubmit=>"return validateForm();", :multipart=>true,
       :id=>"model_form"} do |f| %>
 
@@ -11,15 +21,23 @@
       <h2> Properties </h2>
       <span><strong>Name</strong></span>
       <br/>
+      <%nameValue=""
+        if !@modelName.nil?
+          nameValue = @modelName
+        end%>
       <%= f.text_field :name,
-        {:class=>"model_text span6", :placeholder=>"Type model name here...",
-         :required=>true} %>
+        {:class=>"field model_text span6",:value=>"#{nameValue}", :placeholder=>"Type model name here...", :required=>true, :"data-toggle"=>"tooltip", :"data-trigger"=>"manual", :"data-placement"=>"top", :"data-original-title"=>"Name already exists. Please choose a different name.", :onclick=>"$('#model_name').tooltip('hide');"} %>
 
       <br/>
       <span><strong>Description</strong></span>
       <br/>
+      <%descValue=""
+        if !@modelDesc.nil?
+          descValue = @modelDesc
+        end%>
+
       <%= f.text_area :description,
-          {:class=>"field span6 upload",
+        {:class=>"field span6 upload",:value=>"#{descValue}",
             :placeholder=>"Add a brief description of your model...",
             :required=>true} %>
       <br/>
@@ -27,7 +45,7 @@
       <span style="color:#b94a48" id="category_help"></span>
       <br/>
 
-      <div class="category_checkboxes row control-group">
+      <div class="row">
         <div class="control-group" id="category_div">
           <fieldset>
             <% catCount=0 %>
@@ -38,7 +56,11 @@
               <%end%>
 
               <%= f.label "category_#{cat.name.downcase}", {:class=>"radio"} do%>
-                <%= f.radio_button :category, "#{cat.name}"%>
+                <%if @modelCat.nil? or @modelCat != cat.name%>
+                  <%= f.radio_button :category, "#{cat.name}"%>
+                <%else%>
+                  <%= f.radio_button :category, "#{cat.name}", :checked=>true%>
+                <%end%>
                 <%= cat.name %>
               <%end%>
 
@@ -58,9 +80,10 @@
       <div class="control-group">
         <label><strong>Tags</strong> (optional)</label> 
         <span class="controls">
+
           <%= f.text_field :tags,
-            {:class=>"model_text",
-             :placeholder=>"ex) humanoid, bipedal, mobile manipulator"} %>
+            {:class=>"tm-input",
+             :placeholder=>"ex) comma, separated, tags"} %>
         </span>
       </div>
 
@@ -73,7 +96,7 @@
 
       <span class="btn btn-success fileinput-button">
         <i class="icon-white icon-plus"></i>
-        <span>Add</span>
+        <span id="add_button">Add</span>
         <%= f.file_field :files, :id=>"select_files" %>
       </span>
 
@@ -89,11 +112,12 @@
       <h2> Guidelines </h2>
       <ul class="guidelines">
         <li> A model name and description are required. </li>
-        <li> Select appropriate tags and categories. </li>
+        <li> Select appropriate category and tags. </li>
         <li> Select a tarball (.tar.gz file) created by <b>gzprop</b>
         <ul>
           <li> Gazebo must be <a href="http://gazebosim.org/wiki/install">installed</a> on your personal computer.</li>
           <li> Run <b>gzprop &lt;model_directory&gt;</b> to generate a tarball for upload.</li>
+          <li> Make sure the tarball is not in a hidden directory, such as <tt>~/.gazebo</tt></li>
           <li> For help, run <b>man gzprop</b> in a terminal.</li>
         </ul>
         <li> All materials will be licensed under <a href="http://creativecommons.org/licenses/by/3.0/" target="_blank">Creative Commons Attribution 3.0.</a></li>
@@ -104,15 +128,22 @@
   <hr style="border: 1px solid #E6E6E6;" />
 
   <!--Upload/Cancel/Next buttons -->
-  <div class="row" style="">
-    <div class="span6"> 
+  <div class="row">
+    <div class="span2"> 
+      <span>
       <%= link_to "Cancel", root_path,
         {:class=>("btn")} %>
-    </div>
-    <div class="span6 next_button"> 
-      <%= f.submit "Submit",:class => "upload_buttons btn btn-primary" %>
+      </span>
+      <span class="next_button">
+        <%if @post[:action] == "edit"%>
+          <%= f.submit "Modify",:class => "upload_buttons btn btn-primary" %>
+        <%else%>
+          <%= f.submit "Submit",:class => "upload_buttons btn btn-primary" %>
+        <%end%>
+      </span>
     </div>
   </div>
+  <br/>
 <% end %>
 
 <!--This is the modal for signing up-->
@@ -146,10 +177,9 @@
 
 
 <script>
-
   function validateForm()
   {
-    var name = document.forms["model_form"]["model[name]"].value;
+    var modelName = document.forms["model_form"]["model[name]"].value;
     var description = document.forms["model_form"]["model[description]"].value;
     var category = ""
 
@@ -195,8 +225,29 @@
     if (!good)
     {
       document.getElementById('file_help').innerHTML =
-      "Add a model.tar.gz file.";
+      "<b>Add a model.tar.gz file.</b>";
     }
+
+    // Make sure the name doesn't exist. It's okay if the name exists and
+    //  matches the model being edited 
+    $.ajax({
+      url: "/model/exists/"+modelName,
+      type: 'GET',
+      dataType: 'JSON',
+      async: false,
+      success: function(_json) {
+        <%if !@post[:id].nil?%>
+          if (_json["exists"] && _json["model_id"] != <%="#{@post[:id]}"%>)
+        <%else%>
+          if (_json["exists"])
+        <%end%>
+        {
+          $('#model_name').tooltip('show');
+          good = false;
+        }
+      }
+    });
+
     return good;
   }
 
@@ -204,6 +255,18 @@
   {
     var elem = document.getElementById(_id);
     elem.parentNode.removeChild(elem);
+
+    // Only one file is allowed, so we can just clear the value
+    document.getElementById('select_files').value = "";
+    document.getElementById('add_button').innerHTML="Add";
+  }
+
+  function addFile(_filename, _filesize, _pos)
+  {
+    var str = '<tr class="template-upload fade in" id="file';
+    str = str.concat(_pos,'"><td class="preview"><span class="fade"</span></td><td><p id="filename_',_pos,'">', _filename, '</p></td><td>', _filesize, ' </td><td><button class="btn btn-danger" onclick="cancelFile(\'file',_pos,'\')"><i class="icon-white icon-remove-sign"></i></button> <input type="hidden" name="file',_pos,'" value="', _filename,'"/></td></tr>');
+
+    document.getElementById('list').innerHTML += str; 
   }
 
   function handleFileSelect(evt)
@@ -214,13 +277,27 @@
     var files = evt.target.files;
     var offset = document.getElementById('list').childNodes.length;
 
+    if (files.length < 1)
+    {
+      if (document.getElementById('list').innerHTML == "") 
+      {
+        document.getElementById('add_button').innerHTML="Add";
+      }
+      return;
+    }
+    else
+    {
+      document.getElementById('add_button').innerHTML="Replace";
+    }
+
+    document.getElementById('list').innerHTML = "";
+
     // files is a FileList of File objects. List some properties.
     var output = [];
     for (var i = 0, f; f = files[i]; i++)
     {
-      output.push('<tr class="template-upload fade in" id="file',i+offset,'"><td class="preview"><span class="fade"</span></td><td><p id="filename_',i+offset,'">', escape(f.name), '</p></td><td>', (f.size / 1024).toFixed(2), ' KB </td><td><button class="btn btn-warning" onclick="cancelFile(\'file',i+offset,'\')"><i class="icon-white icon-ban-circle"></i></button> <input type="hidden" name="file',i+offset,'" value="', escape(f.name),'"/></td></tr>');
+      addFile(escape(f.name), (f.size / 1024).toFixed(2).toString() + " KB", i);
     }
-    document.getElementById('list').innerHTML = output.join('');
   }
 
   document.getElementById('select_files').addEventListener('change',
@@ -232,6 +309,26 @@
       window.history.back();
     });
 
+  <%end%>
+
+  <!-- Create the the tags manageer -->
+  jQuery(".tm-input").tagsManager();
+
+  <!-- Add all tags from a model that is being edited -->
+  <%
+  if !@modelTags.nil?
+    @modelTags.split(",").each do |tag|%>
+     <%= "jQuery('.tm-input').tagsManager('pushTag',\"#{tag}\");".html_safe%>
+  <%
+   end
+  end
+  %>
+
+  <!-- Add the model file, if it's been set -->
+  <%if !@modelFilename.nil?%>
+    addFile(<%="'#{@modelFilename}'".html_safe%>,
+            <%="'#{@modelFilesize}'".html_safe%>, 0);
+    document.getElementById("add_button").innerHTML = "Replace";
   <%end%>
 
 </script>

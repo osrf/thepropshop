@@ -3,14 +3,13 @@ PropShop::Application.routes.draw do
   get "pages/index"
   root "pages#index"
 
-  # get "upload" => "upload#index"
-
   get "api" => "pages#api"
   get "contact" => "pages#contact"
   get "deploy" => "pages#deploy"
 
   get "about" => "pages#about"
   get "pages/about" => "pages#about"
+  get "pages/find" => "pages#find"
   post "pages/search" => "pages#search"
   get "pages/search" => "pages#search"
   get "pages/contact" => "pages#contact"
@@ -23,9 +22,12 @@ PropShop::Application.routes.draw do
 
   get 'model/:id/image/:num' => 'model#image'
   get 'model/:id/sdf' => 'model#sdf'
+  get 'model/:id/edit' => 'model#edit'
   get 'model/:id/rate' => 'model#rate'
   get 'model/:id/download' => 'model#download'
   get 'model/:id/like/:user' => 'model#like'
+  get 'model/exists/:name' => 'model#exists'
+  post 'model/:id/modify' => 'model#modify'
 
   get 'user' => 'user#index'
   get 'user/:id/downloads' => 'user#downloads'

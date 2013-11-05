@@ -5,4 +5,5 @@ class Model < ActiveRecord::Base
   attr_accessible :category
   attr_accessible :rating
   attr_accessible :creator
+  attr_accessible :version
 end

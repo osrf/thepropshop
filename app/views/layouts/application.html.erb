@@ -15,91 +15,144 @@
 </head>
 <body>
 
-<div style="min-height: 100%; height: auto !important; margin: 0 auto -70px">
-<div class="navigation">
-  <div class="container">
-    <%= link_to image_tag("propshop_logo.svg", alt:"OSRF logo"),
-      root_path%>
+<div style="min-height: 100%; width: 100%; height: auto !important; margin: 0 0 -70px 0; padding: 0;">
 
-    <div class="dropdown login">
-      <div class="username_dropdown">
+<div class="navbar navbar-static-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="btn btn-navbar" style="margin-top:20px" data-toggle="collapse"
+        data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
 
-        <%if !signed_in?%>
-          <a class="dropdown-toggle"
-            data-toggle="dropdown" href="#"> Login | Signup </a>
-          <div class='dropdown-menu' style="padding: 10px">
-            <p>Sign in using:</p>
-            <%= link_to image_tag("google-icon-32.png", alt:"google"), 
-              {:controller=>"sessions", :action=>"new", :auth=>"google",
-                :redirect=>"#{request.original_url}"}%>
-            <%= link_to image_tag("yahoo-icon-32.png", alt:"yahoo"),
-              {:controller=>"sessions", :action=>"new", :auth=>"yahoo",
-                :redirect=>"#{request.original_url}"}%>
-            <%= link_to image_tag("openid-icon-32.png", alt:"openid"),
-              {:controller=>"sessions", :action=>"new", :auth=>"openid",
-                :redirect=>"#{request.original_url}" }%>
-            <%= link_to image_tag("aol-icon-32.png", alt:"aol"),
-              {:controller=>"sessions", :action=>"new", :auth=>"aol",
-                :redirect=>"#{request.original_url}"}%>
-          </div>
-        <%else%>
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <span id="current_username">
-              <%= current_user.username%>
-            </span>&nbsp;
-          </a>
-            <ul class="dropdown-menu">
-              <li><%= link_to 'Models I Like <i class="icon-heart"></i>'.html_safe,
-                {:controller=>"user", :action=>"likes",
-                :id=>current_user.id}%></li>
-              <li><%= link_to "My Downloads", 
-                {:controller=>"user", :action=>"downloads",
-                  :id=>current_user.id} %></li>
-              <li> <%= link_to "Models I Made", 
-                {:controller=>"user", :action=>"created",
-                  :id=>current_user.id} %></li>
-              <li><%= link_to "Log out",
-                {:controller=>"sessions", :action=>"destroy"},
-                :method=>:delete%>
-              </li>
-            </ul>
-        <%end%>
+      <span class="nav">
+      <%= link_to image_tag("propshop_logo.svg",
+                            alt:"OSRF logo", :class=>"brand"), root_path%>
+      </span>
 
+      <div class="nav-collapse collapse">
+        <ul class="nav navbar-nav nav-pills">
+          <% if @post[:controller] == "pages" and @post[:action] == "find" %>
+            <li class='active'>
+          <% else %>
+            <li>
+          <% end %>
+            <%= link_to "Find", pages_find_path%></li>
+
+          <% if @post[:controller] == "model" and @post[:action] == "new" %>
+            <li class='active'>
+          <% else %>
+            <li>
+          <% end %>
+            <%= link_to "Upload", controller: "model", action: "new"%></li>
+
+          <% if @post[:controller] == "pages" and @post[:action] == "about" %>
+            <li class='active'>
+          <% else %>
+            <li>
+          <% end %>
+          <%= link_to "About", controller: "pages", action: "about"%></li>
+
+        </ul>
+
+
+        <span class="nav">
+          <%= form_tag("/pages/search",
+                       :class => "nav-search", :method=>"get") do%>
+  
+            <%= text_field_tag(:search, "",
+                         :class=>"input-xlarge nav-search-input",
+                         :placeholder=>"Search",
+                         :value => "#{@post[:search]}",
+                         :required=>true) %>
+          <%end%>
+        </span>
+
+        <ul class="nav pull-right" style="margin-top: 10px">
+          <li class="dropdown">
+            <%if !signed_in?%>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Login | Sign up
+              </a>
+              <ul class='dropdown-menu' style="text-align: left">
+                <li>
+                  <%= link_to "#{image_tag('google-icon-32.png', alt:"google")} Google".html_safe, {:controller=>"sessions", :action=>"new", :auth=>"google", :redirect=>"#{request.original_url}"}%>
+                </li>
+
+                <li>
+                  <%= link_to "#{image_tag('yahoo-icon-32.png', alt:"yahoo")} Yahoo".html_safe, {:controller=>"sessions", :action=>"new", :auth=>"yahoo", :redirect=>"#{request.original_url}"}%>
+                </li>
+
+                <li>
+                  <%= link_to "#{image_tag('openid-icon-32.png', alt:"openid")} OpenID".html_safe, {:controller=>"sessions", :action=>"new", :auth=>"openid", :redirect=>"#{request.original_url}"}%>
+                </li>
+
+                <li>
+                  <%= link_to "#{image_tag('aol-icon-32.png')} AOL".html_safe,
+                      {:controller=>"sessions", :action=>"new", :auth=>"aol",
+                        :redirect=>"#{request.original_url}"}%>
+                </li>
+              </ul>
+            <%else%>
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <span id="current_username">
+                  <%= current_user.username%>
+                </span>&nbsp;
+              </a>
+              <ul class="dropdown-menu" style="text-align: left">
+                <li>
+                  <%= link_to 'Models I Like <i class="icon-heart"></i>'.html_safe, {:controller=>"user", :action=>"likes", :id=>current_user.id}%>
+                </li>
+                <li>
+                  <%= link_to "My Downloads", 
+                        {:controller=>"user", :action=>"downloads",
+                          :id=>current_user.id} %>
+                </li>
+                <li>
+                  <%= link_to "Models I Made", 
+                        {:controller=>"user", :action=>"created",
+                          :id=>current_user.id} %>
+                </li>
+                <li>
+                  <%= link_to "Log out",
+                        {:controller=>"sessions", :action=>"destroy"},
+                        :method=>:delete%>
+                </li>
+              </ul>
+            <%end%>
+          </li>
+        </ul>
       </div>
     </div>
-
-    <ul class="nav nav-pills">
-      <% if @post[:controller] == "pages" and @post[:action] == "index" %>
-        <li class='active'>
-      <% else %>
-        <li>
-      <% end %>
-      <%= link_to "Find", root_path%></li>
-
-      <% if @post[:controller] == "model" and @post[:action] == "new" %>
-        <li class='active'>
-      <% else %>
-        <li>
-      <% end %>
-      <%= link_to "Upload", controller: "model", action: "new"%></li>
-
-      <% if @post[:controller] == "pages" and @post[:action] == "about" %>
-        <li class='active'>
-      <% else %>
-        <li>
-      <% end %>
-      <%= link_to "About", controller: "pages", action: "about"%></li>
-    </ul>
-
   </div>
 </div>
+   <%if @post[:controller] == "pages" and @post[:action] == "index" %>
+    <div class="hero-unit" style="margin-top:-1px; border-radius:0px">
+      <div class="container" style="padding:40px">
+	
+  
+        <div style="background-color: rgba(64,72,83,0.8);width: 420px;padding:12px;border-radius: 4px; color: #ffffff ">
+          <h3 style="font-family:Helvetica; font-size:150%;">Welcome to The Prop Shop</h3>
+          <p>Help us build a diverse open source marketplace for 3D models!  Download models for free and use them in simulation environments like <a href="http://gazebosim.org" target="_blank" style="color: orange">Gazebo</a>. Upload your own work so everyone can join in the fun. </p>
+        </div>
+      </div>
+    </div>
+  <%end%>
 
-<div class="container" style="min-height:100%">
-  <%= render_breadcrumbs %>
-  <div style="margin-bottom:75px">
-    <%= yield %>
+  <div class="container">
+    <% if @post[:controller] != "pages" ||
+      (@post[:controller] == "pages" and @post[:action] != "index") %>
+      <%= breadcrumbs %>
+    <%end%>
+    
+    <div style="margin-bottom:75px">
+
+
+      <%= yield %>
+    </div>
   </div>
-</div>
 </div>
 
 <footer id="footer">
@@ -153,8 +206,7 @@
         </div>
 
       <div class="signup-buttons pull-left">
-        <%= f.button "Cancel", :class => "btn btn-default",
-          :onclick => "logout();" %>
+        <button class="btn btn-default" name="button" onclick="deleteUser();" >Cancel</button>
       </div>
 
       <div class="signup-buttons pull-right">
@@ -197,11 +249,28 @@
     }
   }
 
+  function deleteUser()
+  {
+    <%if signed_in? %>
+    $.ajax({
+      url: <%= "\"/user/#{current_user.id.to_s}\"".html_safe %>,
+      type: "DELETE",
+      async: false,
+      success: function() {
+      }
+    });
+    $("#signup_modal").modal("hide");
+    location.reload();
+  <%end%>
+
+  }
+
   function logout()
   {
     $.ajax({
       url: "/session",
       method: "DELETE",
+      async: false,
       success: function() {
         document.location = "/";
       }

@@ -1,7 +1,15 @@
 <div class="headline"> 
   <h1 style="display: inline"><%= @model.name %></h1>
 
-  <button class="btn btn-mini" type="button" style="margin-bottom: 8px; margin-left: 5px">Edit</button>
+  <% if @creator and signed_in? and @creator.id == current_user.id %>
+  <button class="btn btn-mini" type="button"
+  style="margin-bottom: 8px; margin-left: 5px"
+  onclick=<%="location.href='/model/#{@model.id}/edit'"%>>Edit</button>
+
+  <button class="btn btn-mini" type="button"
+    onclick="$('#delete_modal').modal('show');"
+    style="margin-bottom: 8px; margin-left: 5px">Delete</button>
+  <%end%>
 
   <h2>Uploaded by:
     <%if @creator%>
@@ -41,7 +49,7 @@
         </div>
       <%end%>
 
-      <%= image_tag "/model/#{@model.id}/image/1",
+      <%= image_tag "/model/#{@model.id}/image/1?#{@model.version}",
       alt:"Model image", id:"hero_image" %>
     </div>
 
@@ -57,12 +65,12 @@
               <%style = "width:160px;"%>
             <%end%>
 
-            <%= image_tag "/model/#{@model.id}/image/#{i}",
+            <%= image_tag "/model/#{@model.id}/image/#{i}?#{@model.version}",
             alt:"model thumbnail", id:"#{i}", class:"thumbnail",
               style:"#{style}",
-              onmouseover:"showHero(#{@model.id}, #{i});",
+              onmouseover:"showHero(#{@model.id}, #{i}, #{@model.version});",
               onmouseout:"setHero(#{i});",
-              onclick:"showHero(#{@model.id}, #{i});setHero(#{i});"
+              onclick:"showHero(#{@model.id}, #{i}, #{@model.version});setHero(#{i});"
             %>
             </li>
           <%end%>
@@ -75,15 +83,26 @@
   <div class="span4" style="bottom:0; right:0; position:absolute; display: block; min-height: 100%"> 
 
     <!-- The model rating system should be like the Netflix system. The stars should be yellow (#E8B107) and display the average star rating, with the number of reviews in parentheses after the stars. When hovering over the stars, they should  highlight in blue (#49728C) as the mouse moves over the stars. The stars that are not being hovered over should be transparent. Clicking a star locks in the user's rating. If they rate the model again, overwrite the previous rating -->
-    <div class="rating">
-      Rating:
+    <div class="rating" data-toggle="tooltip" data-placement="top" title data-original-title="Please log in to rate models" data-trigger="hover">
+      <%if @rating%>
+        Your Rating:
+      <%else%>
+        Rating:
+      <%end%>
       <span id="star"></span>
       <span>(Overall: <span id='overall'><%= @model.rating ? @model.rating : "n/a"%></span>)</span>
     </div>
 
     <div class="download">
-      <%= link_to "Download Model", "#{@model.id}/download",
-      {:class=>("btn btn-large btn-primary")} %>
+      <div>
+        <%= link_to "Download Model", "#{@model.id}/download",
+          {:class=>("btn btn-large btn-primary")} %>
+        <!--%= link_to "Download Model", "#{@model.id}/download",
+          {:class=>("btn btn-large btn-primary")} %>-->
+      </div>
+      <div>
+        <%=@filesize%>
+    </div>
     </div>
     <div class="tags span4" style="position: absolute; left: 10px; bottom:28px">
       <% if @model.tags != "" %>
@@ -153,11 +172,42 @@
 
   </div>
 
+<!--This is the modal for deleting a model -->
+<div id="delete_modal" class="modal hide fade" tabindex="-1" role="dialog"
+  aria-labelledby="delete_modal" aria-hidden="true">
+
+  <div class="modal-header">
+    <h3 id="deleteModalLabel">Delete Model Request</h3>
+  </div>
+
+  <div class="modal-body">
+    <%= form_for :model, remote:true,
+      :url => {:controller=>:model, :action => :destroy},
+      :html => {:id=>"delete_model_form"} do |f| %>
+
+    <p>A model can be removed only by a system administrator.</p>
+    <p>Direct model deletion is prevented because other models may use resources provided by this model.</p>
+    <p>By submitting this request, an administrator will review the model and delete the model after fixing any problems.</p>
+
+      <div class="delete-model-buttons pull-left">
+        <%= f.button "Cancel", :class => "btn btn-default",
+          :onclick => "$('#delete_modal').modal('hide');" %>
+      </div>
+
+      <div class="delete-model-buttons pull-right">
+        <%= f.submit "Submit", :class => "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
 <script>
   activeImg = "1";
-  function showHero(_modelId, _id)
+  function showHero(_modelId, _id, _version)
   {
-    document.getElementById('hero_image').src = _modelId.toString() + "/image/" + _id.toString();
+    document.getElementById('hero_image').src =
+    _modelId.toString() + "/image/" + _id.toString() + "?" + _version;
 
     if (activeImg != "")
     {
@@ -179,12 +229,13 @@
     var likeParent = document.getElementById('heart_parent_div');
     var likeDiv = document.getElementById('like_div');
    
-    if (likeDiv.className == "model_dislike_image")
+    if (likeDiv.className == "model_dislike_image" || 
+        likeDiv.className == "model_like_image")
     {
       likeParent.onmouseout = function() {
         likeDiv.className = "model_liked_image"; };
     }
-    else
+    else if (likeDiv.className == "model_liked_image")
     {
       likeParent.onmouseout = function() {
         likeDiv.className = "model_dislike_image"; };
@@ -199,10 +250,11 @@
   <%end%>
 
   <%if @rating%>
-  g_score = <%=@rating.score%>;
+    g_score = <%=@rating.score%>;
   <%else%>
     g_score = <%=@model.rating ? @model.rating : 0.0%>,
   <%end%>
+
 
   // Set the initial rating score. Also send an ajax request to set the 
   // score rating when clicked.
@@ -248,6 +300,34 @@
           document.getElementById('overall').innerHTML = _overall.toString();
         }
     })}
+  <%else%>
+    click: function(score, evt) {
+      $('.rating').tooltip('show');
+    }
   <%end%>
   });
+
+  $('#delete_model_form').submit(function() {
+    var valuesToSubmit = $(this).serialize();
+
+    $.ajax({
+      url: $(this).attr('action'),
+      data: valuesToSubmit,
+      type: 'DELETE',
+      dataType: 'JSON',
+      success: function(_json) {
+
+        if (_json["status"] == "success")
+        {
+          $('#delete_modal').modal('hide');
+        }
+        else 
+        {
+          alert(_json["message"]);
+        }
+      }
+    });
+
+  });
+
 </script>

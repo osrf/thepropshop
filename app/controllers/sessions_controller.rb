@@ -45,7 +45,6 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    puts "\n\n DESTROY...logout \n\n"
     logout
     redirect_to root_path
   end

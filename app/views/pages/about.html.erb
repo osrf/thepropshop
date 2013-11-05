@@ -8,36 +8,64 @@
       <%= image_tag("osrf_logo_only.png", alt:"OSRF Logo") %>
     </div>
   
-    <div class="about_text span9 offset1">
-      <p>The Prop Shop is brought to you by the <a href="httlp://osrfoundation.org" target="_blank">Open Source Robotics Foundation </a>(OSRF). The Prop Shop is a place for you to share your 3D models for use in simulation environments like <a href="http://gazebosim.org" target="_blank">Gazebo</a>. Share anything from a complex, high degree of freedom robot, to a model of a building, a tool, or a tree. By providing a database for freely-available 3D models, we hope to advance the state of robotic simulation by decreasing the barrier to entry for simulating a robot in a "realistic" simulation environment.</p>
+    <div class="about_text span8 offset1">
+      <p>The Prop Shop is brought to you by the <a href="http://osrfoundation.org" target="_blank">Open Source Robotics Foundation </a>(OSRF). The Prop Shop is a place for you to share your 3D models for use in simulation environments like <a href="http://gazebosim.org" target="_blank">Gazebo</a>. Share anything from a complex, high degree of freedom robot, to a model of a building, a tool, or a tree. By providing a database for freely-available 3D models, we hope to advance the state of robotic simulation by decreasing the barrier to entry for simulating a robot in a "realistic" simulation environment.</p>
     </div>
   </div>
 </div>
 
 <div class="about_columns row">
   <div class="creative_commons span6">
-    <div class="cc_row">
-      <div class="headline">
-        <h1>Creative Commons License 3.0</h1>
+    <div>
+      <div class="cc_row">
+        <div class="headline">
+          <h1>Creative Commons License 3.0</h1>
+        </div>
+
+        <p> All models on this website are available to anyone for free under the <a href="http://creativecommons.org/licenses/by/3.0/us/" target="_blank">Creative Commons 3.0 license</a>. If appropriate attribution is made, you may share and adapt the models and/or make commercial use of the work. You can find more information <a href="http://creativecommons.org/licenses/by/3.0/us/" target="_blank">here</a>.
+        </p>
       </div>
 
-      <p> All models on this website are available to anyone for free under the <a href="http://creativecommons.org/licenses/by/3.0/us/" target="_blank">Creative Commons 3.0 license</a>. If appropriate attribution is made, you may share and adapt the models and/or make commercial use of the work. You can find more information <a href="http://creativecommons.org/licenses/by/3.0/us/" target="_blank">here</a>.
-      </p>
+      <div class="cc_row">
+        <div class="headline">
+          <h1>Using Downloaded Models with Gazebo</h1>
+        </div>
+        <p>The contents of a downloaded model must be placed in a location that Gazebo can find. The following steps assume you're using Linux. </p>
+        <ol>
+          <li>Download a model</li>
+          <li><tt>$ tar xvf &lt;path_to_model&gt; -C ~/.gazebo/models</tt></li>
+          <li><tt>$ gazebo</tt></li>
+          <li>Select the Insert tab in Gazebo</li>
+          <li>Select the model, and click in the main window.</li>
+        </ol>
+      </div>
 
     </div>
   </div>
 
   <div class="contributing span6">
-  	<div class="contributing_row">
+  	<div class="cc_row">
+      <div class="contributing_row">
       <div class="headline">
         <h1>Contributing Models</h1>
-        <p> We encourage you to give back to the community by uploading your own models! We kindly ask that you adhere to the following guidelines:
+        <p> We encourage you to give back to the community by uploading your own models. We kindly ask that you adhere to the following guidelines:
         </p>
-        <ul class="guidelines">
-          <li> Login to The Prop Shop. </li>
-          <li> Visit the Upload page to submit a new model. </li>
+
+      <ul class="guidelines">
+        <li>Only upload models if you are the creator, or have obtained the explicit approval of the creator to upload the model."
+        <li> All materials will be licensed under <a href="http://creativecommons.org/licenses/by/3.0/" target="_blank">Creative Commons Attribution 3.0.</a></li>
+        <li> A model name and description are required. </li>
+        <li> Select appropriate category and tags. </li>
+        <li> Select a tarball (.tar.gz file) created by <b>gzprop</b>
+        <ul>
+          <li> Gazebo must be <a href="http://gazebosim.org/wiki/install">installed</a> on your personal computer.</li>
+          <li> Run <b>gzprop &lt;model_directory&gt;</b> to generate a tarball for upload.</li>
+          <li> For help, run <b>man gzprop</b> in a terminal.</li>
         </ul>
+      </ul>
+
       </div>
+    </div>
     </div>
   </div>
 </div>

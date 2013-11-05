@@ -26,6 +26,7 @@ end
 gem "therubyracer"
 
 gem 'less-rails'
+gem 'less-rails-bootstrap'
 gem 'less-rails-fontawesome'
 
 #group :assets do
@@ -38,7 +39,7 @@ gem 'less-rails-fontawesome'
   # Use Uglifier as compressor for JavaScript assets
   gem 'uglifier', '>= 1.3.0'
 
-  gem 'twitter-bootstrap-rails'
+  gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 
   gem 'font-awesome-rails'
 #end
