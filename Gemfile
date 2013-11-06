@@ -23,13 +23,14 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-gem "therubyracer"
+group :production do
+  gem "therubyracer"
+end
 
-gem 'less-rails'
-gem 'less-rails-bootstrap'
-gem 'less-rails-fontawesome'
+#gem 'less-rails-bootstrap'
+#gem 'less-rails-fontawesome'
 
-#group :assets do
+group :assets do
   # Use SCSS for stylesheets
   gem 'sass-rails', '~> 4.0.0'
 
@@ -38,11 +39,15 @@ gem 'less-rails-fontawesome'
 
   # Use Uglifier as compressor for JavaScript assets
   gem 'uglifier', '>= 1.3.0'
+end
 
-  gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 
-  gem 'font-awesome-rails'
-#end
+gem 'font-awesome-rails'
+#gem 'bootstrap'
+#gem 'less-rails'
+gem 'less-rails-bootstrap'
+#gem 'twitter-bootstrap'
+gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 
 gem 'tzinfo'
 
