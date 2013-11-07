@@ -45,7 +45,7 @@ end
 gem 'font-awesome-rails'
 #gem 'bootstrap'
 #gem 'less-rails'
-gem 'less-rails-bootstrap'
+#gem 'less-rails-bootstrap'
 #gem 'twitter-bootstrap'
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 
