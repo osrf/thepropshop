@@ -84,11 +84,13 @@
 
     <!-- The model rating system should be like the Netflix system. The stars should be yellow (#E8B107) and display the average star rating, with the number of reviews in parentheses after the stars. When hovering over the stars, they should  highlight in blue (#49728C) as the mouse moves over the stars. The stars that are not being hovered over should be transparent. Clicking a star locks in the user's rating. If they rate the model again, overwrite the previous rating -->
     <div class="rating" data-toggle="tooltip" data-placement="top" title data-original-title="Please log in to rate models" data-trigger="hover">
+      <span id="ratingLabel">
       <%if @rating%>
         Your Rating:
       <%else%>
         Rating:
       <%end%>
+      </span>
       <span id="star"></span>
       <span>(Overall: <span id='overall'><%= @model.rating ? @model.rating : "n/a"%></span>)</span>
     </div>
@@ -298,6 +300,7 @@
             {starOn: '<%= asset_path "star-on.png"%>',
              starHalf: '<%= asset_path "star-half.png"%>', score: score});
           document.getElementById('overall').innerHTML = _overall.toString();
+          document.getElementById('ratingLabel').innerHTML = "Your Rating:";
         }
     })}
   <%else%>
