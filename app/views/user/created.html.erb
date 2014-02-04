@@ -27,7 +27,10 @@
             <span class="subtext"></span>
             <br/>
 
-            <a class="btn btn-mini" href="#"> Edit</a>
+            <button class="btn btn-mini" type="button"
+              style="margin-bottom: 8px; margin-left: 5px"
+              onclick=<%="location.href='/model/#{model.id}/edit'"%>>Edit</button>
+
           </li>
         <%end%>
 

@@ -92,7 +92,14 @@
       <%end%>
       </span>
       <span id="star"></span>
-      <span>(Overall: <span id='overall'><%= @model.rating ? @model.rating : "n/a"%></span>)</span>
+      <div>
+        <span>Overall: <span id='overall'>
+        <%= @model.rating ? @model.rating : "n/a"%></span></span>
+      </div>
+      <div>
+        <span>Reviews:<span id='overall'>
+        <%= @model.rating_count ? @model.rating_count : "0"%></span></span>
+      </div>
     </div>
 
     <div class="download">

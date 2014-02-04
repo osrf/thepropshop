@@ -36,6 +36,12 @@ class PagesController < ApplicationController
           "%#{params[:search]}%",
           "%#{params[:search]}%",
           "%#{params[:search]}%")
+
+        # Add in models that match a username
+        users = User.where("username LIKE ?", "%#{params[:search]}%")
+        users.each do |user|
+          @models += Model.where("creator == ?", user.id)
+        end
       elsif params[:category] != "Username"
         @models = Model.where(
           "(name LIKE ? OR description LIKE ? OR tags LIKE ?) AND category = ?",
@@ -91,7 +97,14 @@ class PagesController < ApplicationController
   def browse
     addBreadcrumb params[:category], request.original_url
     @post = params
-    @models = Model.where(category: params[:category])
+    @models = []
+    if params[:category] == "all"
+      @models = Model.find(:all)
+    else
+      @models = Model.where(category: params[:category])
+    end
+
+    @models.sort!{|a,b| a.name.downcase <=> b.name.downcase}
   end
 
   def contact
